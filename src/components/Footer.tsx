@@ -34,10 +34,10 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-bold mb-6">Dịch vụ</h4>
           <ul className="space-y-4 text-gray-400 text-sm">
-            <li><Link href="#services" className="hover:text-white transition-colors">Web Logistics có sẵn</Link></li>
-            <li><Link href="#services" className="hover:text-white transition-colors">App Quản lý vận tải</Link></li>
-            <li><Link href="#services" className="hover:text-white transition-colors">Phần mềm kho bãi (WMS)</Link></li>
-            <li><Link href="#services" className="hover:text-white transition-colors">Thiết kế theo yêu cầu</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">Web Logistics có sẵn</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">App Quản lý vận tải</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">Phần mềm kho bãi (WMS)</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">Thiết kế theo yêu cầu</Link></li>
           </ul>
         </div>
 
@@ -45,10 +45,10 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-bold mb-6">Liên kết nhanh</h4>
           <ul className="space-y-4 text-gray-400 text-sm">
-            <li><Link href="#home" className="hover:text-white transition-colors">Trang chủ</Link></li>
-            <li><Link href="#about" className="hover:text-white transition-colors">Về chúng tôi</Link></li>
-            <li><Link href="#solutions" className="hover:text-white transition-colors">Giải pháp All-in-One</Link></li>
-            <li><Link href="#contact" className="hover:text-white transition-colors">Báo giá dịch vụ</Link></li>
+            <li><Link href="/" className="hover:text-white transition-colors">Trang chủ</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors">Về chúng tôi</Link></li>
+            <li><Link href="/solutions" className="hover:text-white transition-colors">Giải pháp All-in-One</Link></li>
+            <li><Link href="/contact" className="hover:text-white transition-colors">Báo giá dịch vụ</Link></li>
           </ul>
         </div>
 

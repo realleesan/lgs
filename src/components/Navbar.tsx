@@ -18,11 +18,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Trang chủ", href: "#home" },
-    { name: "Dịch vụ", href: "#services" },
-    { name: "Giải pháp", href: "#solutions" },
-    { name: "Về chúng tôi", href: "#about" },
-    { name: "Liên hệ", href: "#contact" },
+    { name: "Trang chủ", href: "/" },
+    { name: "Dịch vụ", href: "/services" },
+    { name: "Giải pháp", href: "/solutions" },
+    { name: "Về chúng tôi", href: "/about" },
+    { name: "Liên hệ", href: "/contact" },
   ];
 
   return (
@@ -60,7 +60,7 @@ const Navbar = () => {
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/contact"
             className="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-accent transition-all shadow-lg shadow-primary/20"
           >
             Nhận tư vấn
@@ -91,7 +91,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/contact"
               className="bg-primary text-white text-center py-3 rounded-lg font-bold"
               onClick={() => setIsMobileMenuOpen(false)}
             >
