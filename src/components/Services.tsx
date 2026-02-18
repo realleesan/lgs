@@ -11,6 +11,7 @@ const services = [
     icon: <Layout className="w-8 h-8" />,
     features: ["Tra cứu Tracking", "Bảng giá tự động", "CMS dễ sử dụng"],
     color: "bg-blue-500",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop&q=80",
   },
   {
     title: "App & Phần mềm quản lý",
@@ -18,6 +19,7 @@ const services = [
     icon: <Smartphone className="w-8 h-8" />,
     features: ["Quản lý đơn hàng", "Điều phối xe", "Báo cáo doanh thu"],
     color: "bg-indigo-600",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=300&fit=crop&q=80",
   },
   {
     title: "Thiết kế theo yêu cầu",
@@ -25,6 +27,7 @@ const services = [
     icon: <Settings className="w-8 h-8" />,
     features: ["Phân tích nghiệp vụ", "UI/UX độc quyền", "Khả năng mở rộng"],
     color: "bg-accent",
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=300&fit=crop&q=80",
   },
 ];
 
@@ -50,11 +53,20 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-primary/20 transition-all group"
+              className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-primary/20 transition-all group overflow-hidden"
             >
-              <div className={`w-16 h-16 ${service.color} text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform`}>
-                {service.icon}
+              {/* Image */}
+              <div className="h-40 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
+              <div className="p-8">
+                <div className={`w-16 h-16 ${service.color} text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
+                  {service.icon}
+                </div>
               <h4 className="text-2xl font-bold text-dark mb-4">{service.title}</h4>
               <p className="text-gray-600 leading-relaxed mb-8 min-h-[80px]">
                 {service.description}
@@ -67,6 +79,7 @@ const Services = () => {
                   </li>
                 ))}
               </ul>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -75,8 +75,13 @@ const Hero = () => {
         >
           {/* Mockup / Abstract Illustration */}
           <div className="relative z-10 bg-white rounded-3xl shadow-2xl border border-gray-100 p-4 overflow-hidden group">
-            <div className="aspect-[4/3] bg-slate-900 rounded-2xl flex items-center justify-center text-white/10 text-9xl font-black">
-              LGS
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+              <img 
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=800&fit=crop&q=80" 
+                alt="Logistics Warehouse"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
             </div>
             
             {/* Overlay Cards */}
