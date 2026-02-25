@@ -3,21 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
 
 @theme {
-  /* Blue & White Color Palette */
-  --color-primary: #0056b3;
-  --color-primary-dark: #004494;
-  --color-primary-light: #e6f0fa;
-  --color-accent: #007bff;
-  --color-accent-light: #e6f0ff;
+  /* Only 2 Colors: Blue #356df1 and White #ffffff */
+  --color-primary: #356df1;
+  --color-primary-dark: #2a5ad9;
+  --color-primary-light: #e8eefc;
   
   --color-white: #ffffff;
   --color-background: #ffffff;
-  --color-surface: #f8f9fa;
-  --color-surface-light: #f0f4f8;
+  --color-surface: #ffffff;
   
-  --color-text-dark: #1a1a1a;
-  --color-text-medium: #4a5568;
-  --color-text-light: #718096;
+  --color-text-dark: #ffffff;
+  --color-text-medium: #ffffff;
+  --color-text-light: #ffffff;
   
   /* Font families */
   --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
@@ -28,9 +25,8 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1a1a1a;
-  --primary: #0056b3;
-  --accent: #007bff;
+  --foreground: #356df1;
+  --primary: #356df1;
 }
 
 body {
@@ -46,12 +42,12 @@ h1, h2, h3, h4, h5, h6 {
 
 @layer base {
   * {
-    @apply border-gray-200;
+    @apply border-white;
   }
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply text-gray-700;
+    @apply text-white;
   }
 }
