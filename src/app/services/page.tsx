@@ -12,7 +12,7 @@ const services = [
     subtitle: "Website giới thiệu doanh nghiệp vận tải chuyên nghiệp",
     description: "Hệ thống website giới thiệu công ty vận tải, logistics chuyên nghiệp với giao diện chuẩn ngành, tối ưu SEO, tích hợp tra cứu vận đơn real-time.",
     icon: <Layout className="w-8 h-8" />,
-    color: "bg-blue-500",
+    color: "bg-primary",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80",
     features: [
       "Giao diện chuẩn Logistics, hiện đại",
@@ -33,7 +33,7 @@ const services = [
     subtitle: "TMS, WMS - Giải pháp quản lý vận hành",
     description: "Giải pháp quản lý vận tải (TMS), quản lý kho (WMS) giúp tự động hóa quy trình, giảm sai sót và tối ưu chi phí vận hành.",
     icon: <Smartphone className="w-8 h-8" />,
-    color: "bg-indigo-600",
+    color: "bg-accent",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop&q=80",
     features: [
       "Quản lý đơn hàng tập trung (OMS)",
@@ -54,7 +54,7 @@ const services = [
     subtitle: "Giải pháp phần mềm Custom riêng biệt",
     description: "Tư vấn và phát triển các tính năng chuyên biệt dựa trên quy trình đặc thù của doanh nghiệp. Cá nhân hóa trải nghiệm 100%.",
     icon: <Settings className="w-8 h-8" />,
-    color: "bg-accent",
+    color: "bg-primary",
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop&q=80",
     features: [
       "Phân tích nghiệp vụ chuyên sâu",
@@ -75,13 +75,13 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-[#f0f4f8]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl lg:text-6xl font-extrabold text-dark mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 font-[family-name:var(--font-heading)]">
               Dịch vụ của chúng tôi
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed font-[family-name:var(--font-body)]">
               Từ website giới thiệu đến hệ thống quản lý phức tạp, 
               chúng tôi cung cấp giải pháp công nghệ toàn diện cho ngành Logistics.
             </p>
@@ -91,7 +91,7 @@ export default function ServicesPage() {
 
       {/* Services List */}
       {services.map((service, index) => (
-        <section key={service.id} id={service.id} className={`py-24 ${index % 2 === 1 ? 'bg-slate-50' : 'bg-white'}`}>
+        <section key={service.id} id={service.id} className={`py-24 ${index % 2 === 1 ? 'bg-[#f0f4f8]' : 'bg-white'}`}>
           <div className="max-w-7xl mx-auto px-6">
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
               {/* Content */}
@@ -106,14 +106,14 @@ export default function ServicesPage() {
                 </div>
                 
                 <div>
-                  <p className="text-primary font-semibold mb-2">{service.subtitle}</p>
-                  <h2 className="text-4xl font-extrabold text-dark mb-4">{service.title}</h2>
-                  <p className="text-lg text-gray-600 leading-relaxed">{service.description}</p>
+                  <p className="text-primary font-semibold mb-2 font-[family-name:var(--font-body)]">{service.subtitle}</p>
+                  <h2 className="text-4xl font-bold text-[#1a1a1a] mb-4 font-[family-name:var(--font-heading)]">{service.title}</h2>
+                  <p className="text-lg text-gray-600 leading-relaxed font-[family-name:var(--font-body)]">{service.description}</p>
                 </div>
 
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-700">
+                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-700 font-[family-name:var(--font-body)]">
                       <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
                       {feature}
                     </li>
@@ -123,7 +123,7 @@ export default function ServicesPage() {
                 <div className="flex gap-4 pt-4">
                   <Link 
                     href="/contact"
-                    className={`${service.color} text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-all`}
+                    className={`${service.color} text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:opacity-90 transition-all font-[family-name:var(--font-body)]`}
                   >
                     Tư vấn ngay <ArrowRight size={20} />
                   </Link>
@@ -151,8 +151,8 @@ export default function ServicesPage() {
                       <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-3">
                         {benefit.icon}
                       </div>
-                      <h4 className="font-bold text-dark text-sm mb-1">{benefit.title}</h4>
-                      <p className="text-xs text-gray-500">{benefit.desc}</p>
+                      <h4 className="font-bold text-[#1a1a1a] text-sm mb-1 font-[family-name:var(--font-heading)]">{benefit.title}</h4>
+                      <p className="text-xs text-gray-500 font-[family-name:var(--font-body)]">{benefit.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -165,15 +165,15 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="py-24 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-extrabold mb-6">
+          <h2 className="text-4xl font-bold mb-6 font-[family-name:var(--font-heading)]">
             Bạn cần giải pháp tùy chỉnh?
           </h2>
-          <p className="text-xl text-white/80 mb-8">
+          <p className="text-xl text-white/80 mb-8 font-[family-name:var(--font-body)]">
             Liên hệ ngay để được tư vấn miễn phí về giải pháp phù hợp nhất với doanh nghiệp của bạn.
           </p>
           <Link 
             href="/contact"
-            className="bg-white text-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2 hover:bg-gray-100 transition-all"
+            className="bg-white text-primary px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2 hover:bg-gray-100 transition-all font-[family-name:var(--font-body)]"
           >
             Liên hệ tư vấn <ArrowRight size={20} />
           </Link>

@@ -17,11 +17,11 @@ const Solution = () => {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <h2 className="text-primary font-bold tracking-wider uppercase text-sm">Giải pháp All-in-One</h2>
-              <h3 className="text-4xl lg:text-5xl font-extrabold text-dark leading-tight">
+              <h2 className="text-primary font-bold tracking-wider uppercase text-sm font-[family-name:var(--font-body)]">Giải pháp All-in-One</h2>
+              <h3 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] leading-tight font-[family-name:var(--font-heading)]">
                 Xóa bỏ rào cản từ <br /> các phần mềm rời rạc
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-gray-600 text-lg leading-relaxed font-[family-name:var(--font-body)]">
                 Nhiều doanh nghiệp Logistics đang mệt mỏi với việc quản lý dữ liệu phân tán trên nhiều nền tảng khác nhau. Misty LGS mang đến một hệ sinh thái duy nhất, đồng bộ và cá nhân hóa.
               </p>
             </div>
@@ -44,13 +44,13 @@ const Solution = () => {
                   icon: <Users className="w-6 h-6 text-primary" />,
                 },
               ].map((item, index) => (
-                <div key={index} className="flex gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                <div key={index} className="flex gap-4 p-4 rounded-2xl hover:bg-[#f0f4f8] transition-colors border border-transparent hover:border-slate-100">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-dark">{item.title}</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    <h4 className="text-lg font-bold text-[#1a1a1a] font-[family-name:var(--font-heading)]">{item.title}</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed font-[family-name:var(--font-body)]">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -64,14 +64,14 @@ const Solution = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="bg-slate-900 rounded-[2.5rem] p-8 lg:p-12 text-white shadow-2xl relative z-10">
+            <div className="bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-12 text-white shadow-2xl relative z-10">
               <div className="flex items-center gap-4 mb-10">
                 <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
                   <Zap className="w-6 h-6 text-white" fill="white" />
                 </div>
                 <div>
-                  <div className="text-xs text-white/50 font-bold uppercase tracking-widest">Hệ sinh thái</div>
-                  <div className="text-xl font-bold">Misty LGS Platform</div>
+                  <div className="text-xs text-white/50 font-bold uppercase tracking-widest font-[family-name:var(--font-body)]">Hệ sinh thái</div>
+                  <div className="text-xl font-bold font-[family-name:var(--font-heading)]">Misty LGS Platform</div>
                 </div>
               </div>
 
@@ -94,13 +94,13 @@ const Solution = () => {
                     <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center shrink-0">
                       <Check className="w-3 h-3 text-white" strokeWidth={4} />
                     </div>
-                    <span className="text-sm font-medium text-white/90">{feature}</span>
+                    <span className="text-sm font-medium text-white/90 font-[family-name:var(--font-body)]">{feature}</span>
                   </motion.div>
                 ))}
               </div>
 
               <div className="mt-10 p-6 rounded-2xl bg-primary/20 border border-primary/30 text-center">
-                <p className="text-primary-foreground/80 text-sm italic">
+                <p className="text-white/80 text-sm italic font-[family-name:var(--font-body)]">
                   "Chuyển đổi từ 5 phần mềm rời rạc sang 1 hệ thống duy nhất giúp doanh nghiệp tiết kiệm 40% chi phí vận hành."
                 </p>
               </div>

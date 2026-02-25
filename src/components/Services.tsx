@@ -10,7 +10,7 @@ const services = [
     description: "Hệ thống website giới thiệu công ty vận tải, logistics chuyên nghiệp. Giao diện chuẩn ngành, tối ưu SEO, tích hợp tra cứu vận đơn.",
     icon: <Layout className="w-8 h-8" />,
     features: ["Tra cứu Tracking", "Bảng giá tự động", "CMS dễ sử dụng"],
-    color: "bg-blue-500",
+    color: "bg-primary",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop&q=80",
   },
   {
@@ -18,7 +18,7 @@ const services = [
     description: "Giải pháp quản lý vận tải (TMS), quản lý kho (WMS). Giúp tự động hóa quy trình, giảm sai sót và tối ưu chi phí vận hành.",
     icon: <Smartphone className="w-8 h-8" />,
     features: ["Quản lý đơn hàng", "Điều phối xe", "Báo cáo doanh thu"],
-    color: "bg-indigo-600",
+    color: "bg-accent",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=300&fit=crop&q=80",
   },
   {
@@ -33,14 +33,14 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 bg-slate-50">
+    <section id="services" className="py-24 bg-[#f0f4f8]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-primary font-bold tracking-wider uppercase text-sm">Dịch vụ cốt lõi</h2>
-          <h3 className="text-4xl lg:text-5xl font-extrabold text-dark leading-tight">
+          <h2 className="text-primary font-bold tracking-wider uppercase text-sm font-[family-name:var(--font-body)]">Dịch vụ cốt lõi</h2>
+          <h3 className="text-4xl lg:text-5xl font-bold text-[#1a1a1a] leading-tight font-[family-name:var(--font-heading)]">
             Giải pháp công nghệ <br /> dành riêng cho Logistics
           </h3>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-lg font-[family-name:var(--font-body)]">
             Chúng tôi tập trung vào việc giải quyết các bài toán vận hành phức tạp bằng giao diện đơn giản và tính năng mạnh mẽ.
           </p>
         </div>
@@ -67,18 +67,18 @@ const Services = () => {
                 <div className={`w-16 h-16 ${service.color} text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
                   {service.icon}
                 </div>
-              <h4 className="text-2xl font-bold text-dark mb-4">{service.title}</h4>
-              <p className="text-gray-600 leading-relaxed mb-8 min-h-[80px]">
-                {service.description}
-              </p>
-              <ul className="space-y-3">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                    <CheckCircle2 className="w-5 h-5 text-primary" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+                <h4 className="text-2xl font-bold text-[#1a1a1a] mb-4 font-[family-name:var(--font-heading)]">{service.title}</h4>
+                <p className="text-gray-600 leading-relaxed mb-8 min-h-[80px] font-[family-name:var(--font-body)]">
+                  {service.description}
+                </p>
+                <ul className="space-y-3">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm font-medium text-gray-700 font-[family-name:var(--font-body)]">
+                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}

@@ -4,7 +4,7 @@ import { Facebook, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white pt-20 pb-10">
+    <footer className="bg-[#1a1a1a] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Brand Info */}
         <div className="space-y-6">
@@ -12,11 +12,11 @@ const Footer = () => {
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">
               M
             </div>
-            <span className="text-2xl font-bold tracking-tight">
+            <span className="text-2xl font-bold tracking-tight font-[family-name:var(--font-heading)]">
               Misty <span className="text-accent">LGS</span>
             </span>
           </Link>
-          <p className="text-gray-400 text-sm leading-relaxed">
+          <p className="text-gray-400 text-sm leading-relaxed font-[family-name:var(--font-body)]">
             Đơn vị tiên phong trong lĩnh vực chuyển đổi số cho ngành Logistics. 
             Chúng tôi cung cấp giải pháp công nghệ toàn diện, tối ưu hóa quy trình vận hành và quản lý.
           </p>
@@ -32,8 +32,8 @@ const Footer = () => {
 
         {/* Services */}
         <div>
-          <h4 className="text-lg font-bold mb-6">Dịch vụ</h4>
-          <ul className="space-y-4 text-gray-400 text-sm">
+          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Dịch vụ</h4>
+          <ul className="space-y-4 text-gray-400 text-sm font-[family-name:var(--font-body)]">
             <li><Link href="/services" className="hover:text-white transition-colors">Web Logistics có sẵn</Link></li>
             <li><Link href="/services" className="hover:text-white transition-colors">App Quản lý vận tải</Link></li>
             <li><Link href="/services" className="hover:text-white transition-colors">Phần mềm kho bãi (WMS)</Link></li>
@@ -43,8 +43,8 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-bold mb-6">Liên kết nhanh</h4>
-          <ul className="space-y-4 text-gray-400 text-sm">
+          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Liên kết nhanh</h4>
+          <ul className="space-y-4 text-gray-400 text-sm font-[family-name:var(--font-body)]">
             <li><Link href="/" className="hover:text-white transition-colors">Trang chủ</Link></li>
             <li><Link href="/about" className="hover:text-white transition-colors">Về chúng tôi</Link></li>
             <li><Link href="/solutions" className="hover:text-white transition-colors">Giải pháp All-in-One</Link></li>
@@ -54,8 +54,8 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h4 className="text-lg font-bold mb-6">Liên hệ</h4>
-          <ul className="space-y-4 text-gray-400 text-sm">
+          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Liên hệ</h4>
+          <ul className="space-y-4 text-gray-400 text-sm font-[family-name:var(--font-body)]">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-accent shrink-0" />
               <span>TP. Hồ Chí Minh, Việt Nam</span>
@@ -72,7 +72,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/10 text-center text-gray-500 text-xs">
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/10 text-center text-gray-500 text-xs font-[family-name:var(--font-body)]">
         <p>© {new Date().getFullYear()} Misty LGS. All rights reserved. Designed for Logistics Excellence.</p>
       </div>
     </footer>

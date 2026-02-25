@@ -1,24 +1,47 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
 @theme {
+  /* Blue & White Color Palette */
   --color-primary: #0056b3;
-  --color-secondary: #f8f9fa;
+  --color-primary-dark: #004494;
+  --color-primary-light: #e6f0fa;
   --color-accent: #007bff;
-  --color-dark: #1a1a1a;
+  --color-accent-light: #e6f0ff;
   
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-white: #ffffff;
+  --color-background: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-light: #f0f4f8;
+  
+  --color-text-dark: #1a1a1a;
+  --color-text-medium: #4a5568;
+  --color-text-light: #718096;
+  
+  /* Font families */
+  --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-body: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  
+  --font-sans: var(--font-body);
 }
 
 :root {
   --background: #ffffff;
   --foreground: #1a1a1a;
   --primary: #0056b3;
+  --accent: #007bff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-body);
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 @layer base {
@@ -27,5 +50,8 @@ body {
   }
   html {
     scroll-behavior: smooth;
+  }
+  body {
+    @apply text-gray-700;
   }
 }

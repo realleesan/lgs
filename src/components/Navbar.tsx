@@ -41,7 +41,7 @@ const Navbar = () => {
             M
           </div>
           <span className={cn(
-            "text-2xl font-bold tracking-tight",
+            "text-2xl font-bold tracking-tight font-[family-name:var(--font-heading)]",
             isScrolled ? "text-primary" : "text-primary"
           )}>
             Misty <span className="text-accent">LGS</span>
@@ -54,14 +54,14 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors font-[family-name:var(--font-body)]"
             >
               {link.name}
             </Link>
           ))}
           <Link
             href="/contact"
-            className="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-accent transition-all shadow-lg shadow-primary/20"
+            className="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-accent transition-all shadow-lg shadow-primary/20 font-[family-name:var(--font-body)]"
           >
             Nhận tư vấn
           </Link>
@@ -84,7 +84,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium text-gray-800 border-b pb-2"
+                className="text-lg font-medium text-gray-800 border-b pb-2 font-[family-name:var(--font-body)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
@@ -92,7 +92,7 @@ const Navbar = () => {
             ))}
             <Link
               href="/contact"
-              className="bg-primary text-white text-center py-3 rounded-lg font-bold"
+              className="bg-primary text-white text-center py-3 rounded-lg font-bold font-[family-name:var(--font-body)]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Nhận tư vấn ngay

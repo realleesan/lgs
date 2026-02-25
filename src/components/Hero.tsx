@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 -z-10 skew-x-[-12deg] translate-x-1/4" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#f0f4f8] -z-10 skew-x-[-12deg] translate-x-1/4" />
       <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
       
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -19,7 +19,7 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide uppercase">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -27,25 +27,25 @@ const Hero = () => {
             Chuyển đổi số Logistics 4.0
           </div>
           
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-dark leading-tight">
+          <h1 className="text-5xl lg:text-7xl font-bold text-[#1a1a1a] leading-tight font-[family-name:var(--font-heading)]">
             Nâng tầm vận hành <br />
-            <span className="text-primary italic">Misty LGS</span> giải pháp tối ưu
+            <span className="text-primary italic font-[family-name:var(--font-heading)]">Misty LGS</span> giải pháp tối ưu
           </h1>
           
-          <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+          <p className="text-lg text-gray-600 leading-relaxed max-w-xl font-[family-name:var(--font-body)]">
             Chúng tôi không chỉ thiết kế Web/App, chúng tôi xây dựng hệ sinh thái công nghệ giúp doanh nghiệp Logistics quản lý tinh gọn, hiệu quả và đột phá doanh thu.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Link 
               href="#contact" 
-              className="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-accent transition-all shadow-xl shadow-primary/20 group"
+              className="bg-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-accent transition-all shadow-xl shadow-primary/20 group font-[family-name:var(--font-body)]"
             >
               Bắt đầu ngay <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 
               href="#services" 
-              className="border-2 border-gray-200 text-dark px-8 py-4 rounded-xl font-bold flex items-center justify-center hover:bg-gray-50 transition-all"
+              className="border-2 border-gray-200 text-[#1a1a1a] px-8 py-4 rounded-xl font-semibold flex items-center justify-center hover:bg-gray-50 transition-all font-[family-name:var(--font-body)]"
             >
               Xem giải pháp
             </Link>
@@ -53,16 +53,16 @@ const Hero = () => {
 
           <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-100">
             <div className="space-y-1">
-              <div className="text-2xl font-bold text-primary">100+</div>
-              <div className="text-xs text-gray-500 uppercase font-semibold">Đối tác tin dùng</div>
+              <div className="text-2xl font-bold text-primary font-[family-name:var(--font-heading)]">100+</div>
+              <div className="text-xs text-gray-500 uppercase font-semibold font-[family-name:var(--font-body)]">Đối tác tin dùng</div>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl font-bold text-primary">99%</div>
-              <div className="text-xs text-gray-500 uppercase font-semibold">Tối ưu quy trình</div>
+              <div className="text-2xl font-bold text-primary font-[family-name:var(--font-heading)]">99%</div>
+              <div className="text-xs text-gray-500 uppercase font-semibold font-[family-name:var(--font-body)]">Tối ưu quy trình</div>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl font-bold text-primary">24/7</div>
-              <div className="text-xs text-gray-500 uppercase font-semibold">Hỗ trợ kỹ thuật</div>
+              <div className="text-2xl font-bold text-primary font-[family-name:var(--font-heading)]">24/7</div>
+              <div className="text-xs text-gray-500 uppercase font-semibold font-[family-name:var(--font-body)]">Hỗ trợ kỹ thuật</div>
             </div>
           </div>
         </motion.div>
@@ -90,12 +90,12 @@ const Hero = () => {
               transition={{ duration: 4, repeat: Infinity }}
               className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-50 flex items-center gap-3"
             >
-              <div className="w-10 h-10 bg-emerald-500/10 text-emerald-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
                 <BarChart3 size={24} />
               </div>
               <div>
-                <div className="text-[10px] text-gray-400 font-bold uppercase">Lợi nhuận</div>
-                <div className="text-lg font-bold text-dark">+32%</div>
+                <div className="text-[10px] text-gray-400 font-bold uppercase font-[family-name:var(--font-body)]">Lợi nhuận</div>
+                <div className="text-lg font-bold text-[#1a1a1a] font-[family-name:var(--font-heading)]">+32%</div>
               </div>
             </motion.div>
 
@@ -104,12 +104,12 @@ const Hero = () => {
               transition={{ duration: 4, repeat: Infinity, delay: 1 }}
               className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-50 flex items-center gap-3"
             >
-              <div className="w-10 h-10 bg-amber-500/10 text-amber-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-accent/10 text-accent rounded-lg flex items-center justify-center">
                 <Zap size={24} />
               </div>
               <div>
-                <div className="text-[10px] text-gray-400 font-bold uppercase">Tốc độ xử lý</div>
-                <div className="text-lg font-bold text-dark">0.2s</div>
+                <div className="text-[10px] text-gray-400 font-bold uppercase font-[family-name:var(--font-body)]">Tốc độ xử lý</div>
+                <div className="text-lg font-bold text-[#1a1a1a] font-[family-name:var(--font-heading)]">0.2s</div>
               </div>
             </motion.div>
           </div>
