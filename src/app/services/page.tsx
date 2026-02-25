@@ -12,7 +12,6 @@ const services = [
     subtitle: "Website giới thiệu doanh nghiệp vận tải chuyên nghiệp",
     description: "Hệ thống website giới thiệu công ty vận tải, logistics chuyên nghiệp với giao diện chuẩn ngành, tối ưu SEO, tích hợp tra cứu vận đơn real-time.",
     icon: <Layout className="w-8 h-8" />,
-    color: "bg-[#356df1]",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80",
     features: [
       "Giao diện chuẩn Logistics, hiện đại",
@@ -33,7 +32,6 @@ const services = [
     subtitle: "TMS, WMS - Giải pháp quản lý vận hành",
     description: "Giải pháp quản lý vận tải (TMS), quản lý kho (WMS) giúp tự động hóa quy trình, giảm sai sót và tối ưu chi phí vận hành.",
     icon: <Smartphone className="w-8 h-8" />,
-    color: "bg-[#356df1]",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop&q=80",
     features: [
       "Quản lý đơn hàng tập trung (OMS)",
@@ -54,7 +52,6 @@ const services = [
     subtitle: "Giải pháp phần mềm Custom riêng biệt",
     description: "Tư vấn và phát triển các tính năng chuyên biệt dựa trên quy trình đặc thù của doanh nghiệp. Cá nhân hóa trải nghiệm 100%.",
     icon: <Settings className="w-8 h-8" />,
-    color: "bg-[#356df1]",
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop&q=80",
     features: [
       "Phân tích nghiệp vụ chuyên sâu",
@@ -74,14 +71,13 @@ const services = [
 export default function ServicesPage() {
   return (
     <main className="min-h-screen pt-20">
-      {/* Hero Section */}
       <section className="py-24 bg-[#ffffff]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl lg:text-6xl font-bold text-[#356df1] mb-6 font-[family-name:var(--font-heading)]">
+            <h1 className="text-5xl lg:text-6xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
               Dịch vụ của chúng tôi
             </h1>
-            <p className="text-xl text-[#356df1] leading-relaxed font-[family-name:var(--font-body)]">
+            <p className="text-xl text-[#666666] leading-relaxed font-[family-name:var(--font-body)]">
               Từ website giới thiệu đến hệ thống quản lý phức tạp, 
               chúng tôi cung cấp giải pháp công nghệ toàn diện cho ngành Logistics.
             </p>
@@ -89,31 +85,29 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services List */}
       {services.map((service, index) => (
-        <section key={service.id} id={service.id} className={`py-24 ${index % 2 === 1 ? 'bg-[#ffffff]' : 'bg-[#ffffff]'}`}>
+        <section key={service.id} id={service.id} className="py-24 bg-[#ffffff]">
           <div className="max-w-7xl mx-auto px-6">
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-              {/* Content */}
               <motion.div
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <div className={`w-16 h-16 ${service.color} text-[#ffffff] rounded-2xl flex items-center justify-center shadow-lg`}>
+                <div className="w-16 h-16 bg-[#356df1] text-[#ffffff] rounded-2xl flex items-center justify-center shadow-lg">
                   {service.icon}
                 </div>
                 
                 <div>
                   <p className="text-[#356df1] font-semibold mb-2 font-[family-name:var(--font-body)]">{service.subtitle}</p>
-                  <h2 className="text-4xl font-bold text-[#356df1] mb-4 font-[family-name:var(--font-heading)]">{service.title}</h2>
-                  <p className="text-lg text-[#356df1] leading-relaxed font-[family-name:var(--font-body)]">{service.description}</p>
+                  <h2 className="text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">{service.title}</h2>
+                  <p className="text-lg text-[#666666] leading-relaxed font-[family-name:var(--font-body)]">{service.description}</p>
                 </div>
 
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-[#356df1] font-[family-name:var(--font-body)]">
+                    <li key={idx} className="flex items-center gap-2 text-sm text-[#666666] font-[family-name:var(--font-body)]">
                       <CheckCircle2 className="w-5 h-5 text-[#356df1] shrink-0" />
                       {feature}
                     </li>
@@ -123,36 +117,31 @@ export default function ServicesPage() {
                 <div className="flex gap-4 pt-4">
                   <Link 
                     href="/contact"
-                    className={`${service.color} text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:opacity-90 transition-all font-[family-name:var(--font-body)]`}
+                    className="bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]"
                   >
                     Tư vấn ngay <ArrowRight size={20} />
                   </Link>
                 </div>
               </motion.div>
 
-              {/* Image & Benefits */}
               <motion.div
                 initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[#356df1]/30">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700"
-                  />
+                <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
+                  <img src={service.image} alt={service.title} className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700" />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   {service.benefits.map((benefit, idx) => (
-                    <div key={idx} className="p-4 bg-[#ffffff] rounded-2xl border-2 border-[#356df1]/30 shadow-sm">
+                    <div key={idx} className="p-4 bg-[#f5f5f5] rounded-2xl border border-gray-200">
                       <div className="w-10 h-10 bg-[#356df1]/10 text-[#356df1] rounded-lg flex items-center justify-center mb-3">
                         {benefit.icon}
                       </div>
-                      <h4 className="font-bold text-[#356df1] text-sm mb-1 font-[family-name:var(--font-heading)]">{benefit.title}</h4>
-                      <p className="text-xs text-[#356df1]/70 font-[family-name:var(--font-body)]">{benefit.desc}</p>
+                      <h4 className="font-bold text-[#000000] text-sm mb-1 font-[family-name:var(--font-heading)]">{benefit.title}</h4>
+                      <p className="text-xs text-[#666666] font-[family-name:var(--font-body)]">{benefit.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -162,7 +151,6 @@ export default function ServicesPage() {
         </section>
       ))}
 
-      {/* CTA Section */}
       <section className="py-24 bg-[#356df1] text-[#ffffff]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-6 font-[family-name:var(--font-heading)]">
@@ -171,10 +159,7 @@ export default function ServicesPage() {
           <p className="text-xl text-[#ffffff]/80 mb-8 font-[family-name:var(--font-body)]">
             Liên hệ ngay để được tư vấn miễn phí về giải pháp phù hợp nhất với doanh nghiệp của bạn.
           </p>
-          <Link 
-            href="/contact"
-            className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2 hover:bg-[#ffffff]/90 transition-all font-[family-name:var(--font-body)]"
-          >
+          <Link href="/contact" className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2 hover:bg-[#f5f5f5] transition-all font-[family-name:var(--font-body)]">
             Liên hệ tư vấn <ArrowRight size={20} />
           </Link>
         </div>

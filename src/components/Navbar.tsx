@@ -28,10 +28,8 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-        isScrolled
-          ? "bg-[#ffffff]/90 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 bg-[#ffffff]",
+        isScrolled ? "shadow-md" : ""
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -42,7 +40,7 @@ const Navbar = () => {
           </div>
           <span className={cn(
             "text-2xl font-bold tracking-tight font-[family-name:var(--font-heading)]",
-            isScrolled ? "text-[#356df1]" : "text-[#356df1]"
+            "text-[#000000]"
           )}>
             Misty <span className="text-[#356df1]">LGS</span>
           </span>
@@ -54,14 +52,14 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-[#356df1] hover:text-[#356df1]/70 transition-colors font-[family-name:var(--font-body)]"
+              className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
               {link.name}
             </Link>
           ))}
           <Link
             href="/contact"
-            className="bg-[#356df1] text-[#ffffff] px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#356df1]/80 transition-all shadow-lg shadow-[#356df1]/20 font-[family-name:var(--font-body)]"
+            className="bg-[#356df1] text-[#ffffff] px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]"
           >
             Nhận tư vấn
           </Link>
@@ -69,7 +67,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-[#356df1] p-2"
+          className="md:hidden text-[#000000] p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -78,13 +76,13 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t shadow-xl md:hidden animate-in slide-in-from-top duration-300">
+        <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t shadow-xl md:hidden">
           <div className="flex flex-col p-6 gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium text-[#356df1] border-b pb-2 font-[family-name:var(--font-body)]"
+                className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}

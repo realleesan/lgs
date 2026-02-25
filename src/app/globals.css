@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
 
 @theme {
-  /* Only 2 Colors: Blue #356df1 and White #ffffff */
+  /* Only Colors: Blue #356df1, White #ffffff, Black #000000, Gray #666666 */
   --color-primary: #356df1;
   --color-primary-dark: #2a5ad9;
   --color-primary-light: #e8eefc;
@@ -12,9 +12,9 @@
   --color-background: #ffffff;
   --color-surface: #ffffff;
   
-  --color-text-dark: #ffffff;
-  --color-text-medium: #ffffff;
-  --color-text-light: #ffffff;
+  --color-black: #000000;
+  --color-gray: #666666;
+  --color-gray-light: #999999;
   
   /* Font families */
   --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
@@ -25,7 +25,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #356df1;
+  --foreground: #000000;
   --primary: #356df1;
 }
 
@@ -42,12 +42,9 @@ h1, h2, h3, h4, h5, h6 {
 
 @layer base {
   * {
-    @apply border-white;
+    @apply border-gray-200;
   }
   html {
     scroll-behavior: smooth;
-  }
-  body {
-    @apply text-white;
   }
 }

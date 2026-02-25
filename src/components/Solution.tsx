@@ -9,7 +9,6 @@ const Solution = () => {
     <section id="solutions" className="py-24 bg-[#ffffff] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side: Pain points and illustration */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -18,10 +17,10 @@ const Solution = () => {
           >
             <div className="space-y-4">
               <h2 className="text-[#356df1] font-bold tracking-wider uppercase text-sm font-[family-name:var(--font-body)]">Giải pháp All-in-One</h2>
-              <h3 className="text-4xl lg:text-5xl font-bold text-[#356df1] leading-tight font-[family-name:var(--font-heading)]">
+              <h3 className="text-4xl lg:text-5xl font-bold text-[#000000] leading-tight font-[family-name:var(--font-heading)]">
                 Xóa bỏ rào cản từ <br /> các phần mềm rời rạc
               </h3>
-              <p className="text-[#356df1] text-lg leading-relaxed font-[family-name:var(--font-body)]">
+              <p className="text-[#666666] text-lg leading-relaxed font-[family-name:var(--font-body)]">
                 Nhiều doanh nghiệp Logistics đang mệt mỏi với việc quản lý dữ liệu phân tán trên nhiều nền tảng khác nhau. Misty LGS mang đến một hệ sinh thái duy nhất, đồng bộ và cá nhân hóa.
               </p>
             </div>
@@ -44,20 +43,19 @@ const Solution = () => {
                   icon: <Users className="w-6 h-6 text-[#356df1]" />,
                 },
               ].map((item, index) => (
-                <div key={index} className="flex gap-4 p-4 rounded-2xl hover:bg-[#356df1]/5 transition-colors border border-[#356df1]/20 hover:border-[#356df1]/40">
+                <div key={index} className="flex gap-4 p-4 rounded-2xl hover:bg-[#f5f5f5] transition-colors border border-gray-100">
                   <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center shrink-0">
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-[#356df1] font-[family-name:var(--font-heading)]">{item.title}</h4>
-                    <p className="text-[#356df1]/70 text-sm leading-relaxed font-[family-name:var(--font-body)]">{item.desc}</p>
+                    <h4 className="text-lg font-bold text-[#000000] font-[family-name:var(--font-heading)]">{item.title}</h4>
+                    <p className="text-[#666666] text-sm leading-relaxed font-[family-name:var(--font-body)]">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right Side: Visual Comparison or Feature Grid */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -106,8 +104,7 @@ const Solution = () => {
               </div>
             </div>
 
-            {/* Decorative background blur */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#356df1]/20 rounded-full blur-[120px] -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#356df1]/10 rounded-full blur-[120px] -z-10" />
           </motion.div>
         </div>
       </div>
