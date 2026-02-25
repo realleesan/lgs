@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Facebook, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Linkedin, Mail, MapPin, Phone, Clock } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -21,7 +21,7 @@ const Footer = () => {
             Chúng tôi cung cấp giải pháp công nghệ toàn diện, tối ưu hóa quy trình vận hành và quản lý.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="w-10 h-10 rounded-full bg-[#f5f5f5] flex items-center justify-center hover:bg-[#356df1] hover:text-[#ffffff] transition-colors">
+            <Link href="https://www.facebook.com/profile.php?id=61586737089750" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#f5f5f5] flex items-center justify-center hover:bg-[#356df1] hover:text-[#ffffff] transition-colors">
               <Facebook size={20} />
             </Link>
             <Link href="#" className="w-10 h-10 rounded-full bg-[#f5f5f5] flex items-center justify-center hover:bg-[#356df1] hover:text-[#ffffff] transition-colors">
@@ -58,15 +58,19 @@ const Footer = () => {
           <ul className="space-y-4 text-[#666666] text-sm font-[family-name:var(--font-body)]">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-[#356df1] shrink-0" />
-              <span>TP. Hồ Chí Minh, Việt Nam</span>
+              <span>Phường Phú Diễn, Thành phố Hà Nội</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-[#356df1] shrink-0" />
-              <span>+84 123 456 789</span>
+              <span>0914960029</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-[#356df1] shrink-0" />
-              <span>contact@mistylgs.com</span>
+              <span>baominhkpkp@gmail.com</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Clock size={18} className="text-[#356df1] shrink-0" />
+              <span>08:00 - 23:00 (T2 - CN)</span>
             </li>
           </ul>
         </div>

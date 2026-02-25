@@ -15,10 +15,10 @@ export default function ContactPage() {
   };
 
   const contactInfo = [
-    { icon: <Phone className="w-6 h-6" />, title: "Hotline tư vấn", value: "+84 123 456 789", desc: "Hỗ trợ 24/7" },
-    { icon: <Mail className="w-6 h-6" />, title: "Email liên hệ", value: "contact@mistylgs.com", desc: "Phản hồi trong 24h" },
-    { icon: <MapPin className="w-6 h-6" />, title: "Văn phòng", value: "TP. Hồ Chí Minh", desc: "Việt Nam" },
-    { icon: <Clock className="w-6 h-6" />, title: "Giờ làm việc", value: "8:00 - 18:00", desc: "Thứ 2 - Thứ 7" },
+    { icon: <Phone className="w-6 h-6" />, title: "Hotline tư vấn", value: "0914960029", desc: "Hỗ trợ 24/7" },
+    { icon: <Mail className="w-6 h-6" />, title: "Email liên hệ", value: "baominhkpkp@gmail.com", desc: "Phản hồi trong 24h" },
+    { icon: <MapPin className="w-6 h-6" />, title: "Văn phòng", value: "Phường Phú Diễn, TP. Hà Nội", desc: "Việt Nam" },
+    { icon: <Clock className="w-6 h-6" />, title: "Giờ làm việc", value: "08:00 - 23:00", desc: "Thứ 2 - Chủ nhật" },
   ];
 
   return (
@@ -114,7 +114,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">Vị trí của chúng tôi</h2>
-            <p className="text-[#666666] font-[family-name:var(--font-body)]">TP. Hồ Chí Minh, Việt Nam</p>
+            <p className="text-[#666666] font-[family-name:var(--font-body)]">Phường Phú Diễn, Thành phố Hà Nội, Việt Nam</p>
           </div>
           <div className="bg-[#f5f5f5] rounded-3xl h-96 flex items-center justify-center border border-gray-200">
             <div className="text-center">
