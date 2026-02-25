@@ -91,7 +91,7 @@ export default function SolutionsPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-[#ffffff] p-8 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow">
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-[#ffffff] p-8 rounded-3xl border border-gray-200 hover:border-[#356df1] transition-all">
                 <div className="w-14 h-14 bg-[#356df1]/10 text-[#356df1] rounded-2xl flex items-center justify-center mb-6">{feature.icon}</div>
                 <h3 className="text-xl font-bold text-[#000000] mb-3 font-[family-name:var(--font-heading)]">{feature.title}</h3>
                 <p className="text-[#666666] leading-relaxed font-[family-name:var(--font-body)]">{feature.desc}</p>

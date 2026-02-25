@@ -50,7 +50,7 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-[#ffffff] rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-all group overflow-hidden"
+              className="bg-[#ffffff] rounded-3xl border border-gray-200 hover:border-[#356df1] transition-all group overflow-hidden"
             >
               <div className="h-40 overflow-hidden">
                 <img 
@@ -60,7 +60,7 @@ const Services = () => {
                 />
               </div>
               <div className="p-8">
-                <div className="w-16 h-16 bg-[#356df1] text-[#ffffff] rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-[#356df1] text-[#ffffff] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   {service.icon}
                 </div>
                 <h4 className="text-2xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">{service.title}</h4>

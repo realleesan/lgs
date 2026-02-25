@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -21,6 +22,8 @@ const Navbar = () => {
     { name: "Trang chủ", href: "/" },
     { name: "Dịch vụ", href: "/services" },
     { name: "Giải pháp", href: "/solutions" },
+    { name: "Báo giá", href: "/pricing" },
+    { name: "Tin tức", href: "/news" },
     { name: "Về chúng tôi", href: "/about" },
     { name: "Liên hệ", href: "/contact" },
   ];
@@ -28,16 +31,14 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 bg-[#ffffff]",
-        isScrolled ? "shadow-md" : ""
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 bg-[#ffffff] border-b border-gray-100",
+        isScrolled ? "border-b border-gray-200" : ""
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-[#356df1] rounded-lg flex items-center justify-center text-[#ffffff] font-bold text-xl group-hover:scale-105 transition-transform">
-            M
-          </div>
+          <Image src="/icons.png" alt="Misty LGS Logo" width={40} height={40} className="rounded-lg" />
           <span className={cn(
             "text-2xl font-bold tracking-tight font-[family-name:var(--font-heading)]",
             "text-[#000000]"
@@ -76,7 +77,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t shadow-xl md:hidden">
+        <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t border-gray-200 md:hidden">
           <div className="flex flex-col p-6 gap-4">
             {navLinks.map((link) => (
               <Link

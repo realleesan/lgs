@@ -39,7 +39,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link 
               href="#contact" 
-              className="bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all shadow-lg font-[family-name:var(--font-body)]"
+              className="bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]"
             >
               Bắt đầu ngay <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -73,7 +73,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative hidden lg:block"
         >
-          <div className="relative z-10 bg-[#ffffff] rounded-3xl shadow-2xl border border-gray-200 p-4 overflow-hidden group">
+          <div className="relative z-10 bg-[#ffffff] rounded-3xl border border-gray-200 p-4 overflow-hidden group">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
               <img 
                 src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=800&fit=crop&q=80" 
@@ -85,7 +85,7 @@ const Hero = () => {
             <motion.div 
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -top-6 -right-6 bg-[#ffffff] p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3"
+              className="absolute -top-6 -right-6 bg-[#ffffff] p-4 rounded-2xl border border-gray-100 flex items-center gap-3"
             >
               <div className="w-10 h-10 bg-[#356df1]/10 text-[#356df1] rounded-lg flex items-center justify-center">
                 <BarChart3 size={24} />
@@ -99,7 +99,7 @@ const Hero = () => {
             <motion.div 
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-              className="absolute -bottom-6 -left-6 bg-[#ffffff] p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3"
+              className="absolute -bottom-6 -left-6 bg-[#ffffff] p-4 rounded-2xl border border-gray-100 flex items-center gap-3"
             >
               <div className="w-10 h-10 bg-[#356df1]/10 text-[#356df1] rounded-lg flex items-center justify-center">
                 <Zap size={24} />

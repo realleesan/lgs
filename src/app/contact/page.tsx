@@ -64,7 +64,7 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-[#ffffff] p-8 lg:p-12 rounded-3xl shadow-xl border border-gray-200">
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-[#ffffff] p-8 lg:p-12 rounded-3xl border border-gray-200">
               <h3 className="text-2xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">Gửi yêu cầu tư vấn</h3>
               {submitted ? (
                 <div className="text-center py-12">
@@ -101,7 +101,7 @@ export default function ContactPage() {
                     <label className="text-sm font-bold text-[#000000] ml-1 font-[family-name:var(--font-body)]">Lời nhắn</label>
                     <textarea rows={4} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} placeholder="Mô tả sơ lược về nhu cầu của bạn..." className="w-full px-5 py-4 rounded-xl bg-[#f5f5f5] border border-gray-200 focus:outline-none focus:border-[#356df1] transition-all text-[#000000] font-medium placeholder:text-[#999999] resize-none font-[family-name:var(--font-body)]"></textarea>
                   </div>
-                  <button type="submit" className="w-full bg-[#356df1] text-[#ffffff] py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all shadow-lg font-[family-name:var(--font-body)]">Gửi yêu cầu <Send size={20} /></button>
+                  <button type="submit" className="w-full bg-[#356df1] text-[#ffffff] py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]">Gửi yêu cầu <Send size={20} /></button>
                   <p className="text-xs text-[#999999] text-center font-[family-name:var(--font-body)]">Bằng việc gửi form, bạn đồng ý với chính sách bảo mật của chúng tôi.</p>
                 </form>
               )}
@@ -116,11 +116,16 @@ export default function ContactPage() {
             <h2 className="text-3xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">Vị trí của chúng tôi</h2>
             <p className="text-[#666666] font-[family-name:var(--font-body)]">Phường Phú Diễn, Thành phố Hà Nội, Việt Nam</p>
           </div>
-          <div className="bg-[#f5f5f5] rounded-3xl h-96 flex items-center justify-center border border-gray-200">
-            <div className="text-center">
-              <MapPin className="w-12 h-12 text-[#356df1] mx-auto mb-4" />
-              <p className="text-[#666666] font-[family-name:var(--font-body)]">Bản đồ sẽ được tích hợp tại đây</p>
-            </div>
+          <div className="bg-[#f5f5f5] rounded-3xl h-96 w-full overflow-hidden border border-gray-200">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.657489667626!2d105.76235767477684!3d21.046192780608256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abb1a1cba5e3%3A0x6017c53dc908c0d9!2zUGjDumMgUGjDuiwgVGjhu6cgxJDhu6ljLCBIYWkgIsSDbw!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Linkedin, Mail, MapPin, Phone, Clock } from "lucide-react";
 
 const Footer = () => {
@@ -9,9 +10,7 @@ const Footer = () => {
         {/* Brand Info */}
         <div className="space-y-6">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-[#356df1] rounded-lg flex items-center justify-center text-[#ffffff] font-bold text-xl">
-              M
-            </div>
+            <Image src="/icons.png" alt="Misty LGS Logo" width={40} height={40} className="rounded-lg" />
             <span className="text-2xl font-bold tracking-tight font-[family-name:var(--font-heading)]">
               Misty <span className="text-[#356df1]">LGS</span>
             </span>
@@ -48,6 +47,8 @@ const Footer = () => {
             <li><Link href="/" className="hover:text-[#356df1] transition-colors">Trang chủ</Link></li>
             <li><Link href="/about" className="hover:text-[#356df1] transition-colors">Về chúng tôi</Link></li>
             <li><Link href="/solutions" className="hover:text-[#356df1] transition-colors">Giải pháp All-in-One</Link></li>
+            <li><Link href="/pricing" className="hover:text-[#356df1] transition-colors">Báo giá</Link></li>
+            <li><Link href="/news" className="hover:text-[#356df1] transition-colors">Tin tức</Link></li>
             <li><Link href="/contact" className="hover:text-[#356df1] transition-colors">Báo giá dịch vụ</Link></li>
           </ul>
         </div>

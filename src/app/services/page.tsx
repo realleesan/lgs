@@ -95,7 +95,7 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <div className="w-16 h-16 bg-[#356df1] text-[#ffffff] rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 bg-[#356df1] text-[#ffffff] rounded-2xl flex items-center justify-center">
                   {service.icon}
                 </div>
                 
@@ -130,7 +130,7 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
+                <div className="rounded-3xl overflow-hidden border border-gray-200">
                   <img src={service.image} alt={service.title} className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700" />
                 </div>
                 

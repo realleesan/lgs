@@ -47,7 +47,7 @@ const Contact = () => {
                 },
               ].map((item, index) => (
                 <div key={index} className="flex gap-5 items-center">
-                  <div className={`w-12 h-12 ${item.bg} rounded-2xl flex items-center justify-center shadow-lg shrink-0`}>
+                  <div className={`w-12 h-12 ${item.bg} rounded-2xl flex items-center justify-center shrink-0`}>
                     {item.icon}
                   </div>
                   <div>
@@ -73,7 +73,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-[#ffffff] p-8 lg:p-12 rounded-[2.5rem] shadow-xl border border-gray-200"
+            className="bg-[#ffffff] p-8 lg:p-12 rounded-[2.5rem] border border-gray-200"
           >
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -128,7 +128,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#356df1] text-[#ffffff] py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all shadow-lg group font-[family-name:var(--font-body)]"
+                className="w-full bg-[#356df1] text-[#ffffff] py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all group font-[family-name:var(--font-body)]"
               >
                 Gửi yêu cầu ngay <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>

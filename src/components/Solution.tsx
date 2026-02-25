@@ -62,7 +62,7 @@ const Solution = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="bg-[#356df1] rounded-[2.5rem] p-8 lg:p-12 text-[#ffffff] shadow-2xl relative z-10">
+            <div className="bg-[#356df1] rounded-[2.5rem] p-8 lg:p-12 text-[#ffffff] border border-gray-200 relative z-10">
               <div className="flex items-center gap-4 mb-10">
                 <div className="w-12 h-12 bg-[#ffffff] rounded-full flex items-center justify-center">
                   <Zap className="w-6 h-6 text-[#356df1]" fill="#356df1" />

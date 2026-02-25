@@ -41,7 +41,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
                 href="/services" 
-                className="bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all shadow-lg font-[family-name:var(--font-body)]"
+                className="bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]"
               >
                 Khám phá dịch vụ <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -75,7 +75,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative hidden lg:block"
           >
-            <div className="relative z-10 bg-[#ffffff] rounded-3xl shadow-2xl border border-gray-200 p-4 overflow-hidden">
+            <div className="relative z-10 bg-[#ffffff] rounded-3xl border border-gray-200 p-4 overflow-hidden">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
                 <img 
                   src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=800&fit=crop&q=80" 
@@ -129,7 +129,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-[#ffffff] p-8 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition-all group"
+                className="bg-[#ffffff] p-8 rounded-3xl border border-gray-200 hover:border-[#356df1] transition-all group"
               >
                 <div className="w-16 h-16 bg-[#356df1]/10 text-[#356df1] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
                   {service.icon}
