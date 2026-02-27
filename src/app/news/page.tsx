@@ -1,74 +1,40 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Eye } from "lucide-react";
 import Link from "next/link";
+import { getNews } from "@/lib/api";
 
-const newsItems = [
-  {
-    id: 1,
-    title: "Xu hướng chuyển đổi số Logistics 2024",
-    excerpt: "Khám phá những xu hướng công nghệ mới nhất đang thay đổi cách vận hành của các doanh nghiệp logistics.",
-    category: "Xu hướng",
-    date: "20/02/2024",
-    views: 1250,
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&q=80",
-    size: "large",
-  },
-  {
-    id: 2,
-    title: "Giải pháp All-in-One cho Logistics",
-    excerpt: "Tìm hiểu cách hệ thống quản lý tích hợp giúp doanh nghiệp tối ưu hóa vận hành và giảm chi phí.",
-    category: "Giải pháp",
-    date: "18/02/2024",
-    views: 980,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80",
-    size: "medium",
-  },
-  {
-    id: 3,
-    title: "Case Study: Thành công chuyển đổi số",
-    excerpt: "Chia sẻ kinh nghiệm thực tế và kết quả đạt được sau khi triển khai hệ thống.",
-    category: "Case Study",
-    date: "15/02/2024",
-    views: 756,
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80",
-    size: "medium",
-  },
-  {
-    id: 4,
-    title: "5 Tiêu chí chọn phần mềm WMS",
-    excerpt: "Hướng dẫn lựa chọn giải pháp WMS phù hợp với quy mô doanh nghiệp.",
-    category: "Hướng dẫn",
-    date: "12/02/2024",
-    views: 542,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
-    size: "small",
-  },
-  {
-    id: 5,
-    title: "Tầm quan trọng của dữ liệu trong vận tải",
-    excerpt: "Cách tận dụng dữ liệu để đưa ra quyết định kinh doanh chính xác.",
-    category: "Kiến thức",
-    date: "10/02/2024",
-    views: 423,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
-    size: "small",
-  },
-  {
-    id: 6,
-    title: "Ra mắt tính năng mới: AI trong Logistics",
-    excerpt: "Cập nhật phiên bản mới với công nghệ AI giúp dự đoán nhu cầu vận chuyển.",
-    category: "Sản phẩm",
-    date: "08/02/2024",
-    views: 687,
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop&q=80",
-    size: "small",
-  },
-];
+interface NewsItem {
+  id: number;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  views: number;
+  image: string;
+  size: string;
+}
 
 export default function NewsPage() {
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const data = await getNews();
+        setNews(data || []);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchNews();
+  }, []);
+
   return (
     <main className="min-h-screen pt-20">
       {/* Hero */}
@@ -95,59 +61,69 @@ export default function NewsPage() {
       <section className="py-16 bg-[#ffffff]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {newsItems.map((item, index) => (
-              <motion.article
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className={`group bg-[#ffffff] rounded-2xl border border-gray-100 overflow-hidden hover:border-[#356df1] transition-colors ${
-                  item.size === "large" ? "md:col-span-2" : ""
-                }`}
-              >
-                {/* Image */}
-                <div className={`relative ${item.size === "large" ? "h-64" : "h-40"} overflow-hidden`}>
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                </div>
-
-                <div className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="px-3 py-1 bg-[#356df1]/10 text-[#356df1] text-xs font-medium rounded-full">
-                      {item.category}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs text-[#999999]">
-                      <Clock size={12} /> {item.date}
-                    </span>
+            {loading ? (
+              <div className="col-span-full text-center py-20">
+                <div className="animate-pulse text-[#666666]">Đang tải tin tức...</div>
+              </div>
+            ) : news.length === 0 ? (
+              <div className="col-span-full text-center py-20">
+                <p className="text-[#666666]">Chưa có tin tức nào</p>
+              </div>
+            ) : (
+              news.map((item, index) => (
+                <motion.article
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className={`group bg-[#ffffff] rounded-2xl border border-gray-100 overflow-hidden hover:border-[#356df1] transition-colors ${
+                    item.size === "large" ? "md:col-span-2" : ""
+                  }`}
+                >
+                  {/* Image */}
+                  <div className={`relative ${item.size === "large" ? "h-64" : "h-40"} overflow-hidden`}>
+                    <img 
+                      src={item.image || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&q=80"} 
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   </div>
 
-                  <h2 className="text-lg font-bold text-[#000000] mb-2 group-hover:text-[#356df1] transition-colors font-[family-name:var(--font-heading)]">
-                    {item.title}
-                  </h2>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-3 py-1 bg-[#356df1]/10 text-[#356df1] text-xs font-medium rounded-full">
+                        {item.category}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs text-[#999999]">
+                        <Clock size={12} /> {item.date}
+                      </span>
+                    </div>
 
-                  <p className="text-[#666666] text-sm mb-4 line-clamp-2 font-[family-name:var(--font-body)]">
-                    {item.excerpt}
-                  </p>
+                    <h2 className="text-lg font-bold text-[#000000] mb-2 group-hover:text-[#356df1] transition-colors font-[family-name:var(--font-heading)]">
+                      {item.title}
+                    </h2>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                    <span className="flex items-center gap-1 text-xs text-[#999999]">
-                      <Eye size={12} /> {item.views}
-                    </span>
-                    <Link 
-                      href={`/news/${item.id}`} 
-                      className="flex items-center gap-1 text-[#356df1] text-sm font-medium hover:gap-2 transition-all"
-                    >
-                      Đọc tiếp <ArrowRight size={14} />
-                    </Link>
+                    <p className="text-[#666666] text-sm mb-4 line-clamp-2 font-[family-name:var(--font-body)]">
+                      {item.excerpt}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                      <span className="flex items-center gap-1 text-xs text-[#999999]">
+                        <Eye size={12} /> {item.views}
+                      </span>
+                      <Link 
+                        href={`/news/${item.id}`} 
+                        className="flex items-center gap-1 text-[#356df1] text-sm font-medium hover:gap-2 transition-all"
+                      >
+                        Đọc tiếp <ArrowRight size={14} />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            ))}
+                </motion.article>
+              ))
+            )}
           </div>
         </div>
       </section>

@@ -3,15 +3,27 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send, Clock, CheckCircle2 } from "lucide-react";
+import { submitContact } from "@/lib/api";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", service: "web", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setLoading(true);
+    try {
+      await submitContact(formData);
+      setSubmitted(true);
+      setFormData({ name: "", phone: "", email: "", service: "web", message: "" });
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactInfo = [
