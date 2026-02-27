@@ -2,165 +2,160 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Layout, Smartphone, Settings, CheckCircle2, Globe, Truck, Warehouse } from "lucide-react";
+import { Check, ArrowRight, Layout, Smartphone, Settings, BarChart3, Shield, Zap } from "lucide-react";
 import Link from "next/link";
 
 const services = [
   {
-    id: "web",
-    title: "Web Logistics có sẵn",
-    subtitle: "Website giới thiệu doanh nghiệp vận tải chuyên nghiệp",
-    description: "Hệ thống website giới thiệu công ty vận tải, logistics chuyên nghiệp với giao diện chuẩn ngành, tối ưu SEO, tích hợp tra cứu vận đơn real-time.",
+    title: "Web Logistics",
+    subtitle: "Chuyên nghiệp & Tối ưu SEO",
+    description: "Website giới thiệu công ty vận tải, logistics với giao diện hiện đại. Tích hợp đầy đủ tính năng cần thiết.",
+    features: ["Tra cứu vận đơn", "Bảng giá tự động", "Tối ưu SEO", "CMS dễ quản lý"],
     icon: <Layout className="w-8 h-8" />,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80",
-    features: [
-      "Giao diện chuẩn Logistics, hiện đại",
-      "Tích hợp tra cứu Tracking real-time",
-      "Bảng giá tự động & báo giá online",
-      "CMS dễ sử dụng, quản lý nội dung",
-      "Tối ưu SEO, tốc độ tải nhanh",
-      "Responsive trên mọi thiết bị",
-    ],
-    benefits: [
-      { icon: <Globe />, title: "Tăng 40% lượt truy cập", desc: "Nhờ SEO tối ưu và giao diện chuyên nghiệp" },
-      { icon: <Truck />, title: "Giảm 60% cuộc gọi hỏi vận đơn", desc: "Khách hàng tự tra cứu tracking" },
-    ],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
+    reversed: false,
   },
   {
-    id: "app",
-    title: "App & Phần mềm quản lý",
-    subtitle: "TMS, WMS - Giải pháp quản lý vận hành",
-    description: "Giải pháp quản lý vận tải (TMS), quản lý kho (WMS) giúp tự động hóa quy trình, giảm sai sót và tối ưu chi phí vận hành.",
+    title: "App & Phần mềm",
+    subtitle: "Quản lý toàn diện",
+    description: "Giải pháp TMS, WMS giúp tự động hóa quy trình vận hành. Quản lý đơn hàng, điều phối xe, kho bãi hiệu quả.",
+    features: ["Quản lý đơn hàng", "Điều phối xe", "Báo cáo thông minh", "Tích hợp API"],
     icon: <Smartphone className="w-8 h-8" />,
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop&q=80",
-    features: [
-      "Quản lý đơn hàng tập trung (OMS)",
-      "Điều phối xe, tối ưu lộ trình",
-      "Quản lý kho hàng (WMS) thông minh",
-      "App lái xe, giao nhận chuyên nghiệp",
-      "Báo cáo doanh thu, chi phí real-time",
-      "Tích hợp E-invoice, Vận đơn điện tử",
-    ],
-    benefits: [
-      { icon: <Warehouse />, title: "Tăng 35% hiệu suất kho", desc: "Nhờ quản lý thông minh và tự động hóa" },
-      { icon: <Truck />, title: "Giảm 25% chi phí vận chuyển", desc: "Tối ưu lộ trình và điều phối" },
-    ],
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&q=80",
+    reversed: true,
   },
   {
-    id: "custom",
     title: "Thiết kế theo yêu cầu",
-    subtitle: "Giải pháp phần mềm Custom riêng biệt",
-    description: "Tư vấn và phát triển các tính năng chuyên biệt dựa trên quy trình đặc thù của doanh nghiệp. Cá nhân hóa trải nghiệm 100%.",
+    subtitle: "Giải pháp riêng biệt",
+    description: "Phát triển tính năng theo quy trình đặc thù của doanh nghiệp. 100% cá nhân hóa theo nhu cầu.",
+    features: ["Phân tích nghiệp vụ", "UI/UX độc quyền", "Khả năng mở rộng", "Hỗ trợ lâu dài"],
     icon: <Settings className="w-8 h-8" />,
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop&q=80",
-    features: [
-      "Phân tích nghiệp vụ chuyên sâu",
-      "Thiết kế UI/UX độc quyền theo brand",
-      "Phát triển tính năng đặc thù",
-      "Tích hợp API bên thứ 3 (ERP, CRM)",
-      "Khả năng mở rộng vô hạn",
-      "Bảo mật cao, đáp ứng compliance",
-    ],
-    benefits: [
-      { icon: <Settings />, title: "100% cá nhân hóa", desc: "Phù hợp hoàn hảo với quy trình của bạn" },
-      { icon: <CheckCircle2 />, title: "Không giới hạn tính năng", desc: "Phát triển theo nhu cầu thực tế" },
-    ],
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&q=80",
+    reversed: false,
   },
+];
+
+const benefits = [
+  { icon: <Zap className="w-5 h-5" />, text: "Triển khai nhanh" },
+  { icon: <Shield className="w-5 h-5" />, text: "Bảo mật cao" },
+  { icon: <BarChart3 className="w-5 h-5" />, text: "Phân tích dữ liệu" },
+  { icon: <Check className="w-5 h-5" />, text: "Hỗ trợ 24/7" },
 ];
 
 export default function ServicesPage() {
   return (
     <main className="min-h-screen pt-20">
-      <section className="py-24 bg-[#ffffff]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl lg:text-6xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
-              Dịch vụ của chúng tôi
-            </h1>
-            <p className="text-xl text-[#666666] leading-relaxed font-[family-name:var(--font-body)]">
-              Từ website giới thiệu đến hệ thống quản lý phức tạp, 
-              chúng tôi cung cấp giải pháp công nghệ toàn diện cho ngành Logistics.
-            </p>
-          </div>
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
+            Dịch vụ
+          </h1>
+          <p className="text-lg text-[#666666] font-[family-name:var(--font-body)]">
+            Giải pháp công nghệ toàn diện cho ngành Logistics
+          </p>
         </div>
       </section>
 
-      {services.map((service, index) => (
-        <section key={service.id} id={service.id} className="py-24 bg-[#ffffff]">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-              <motion.div
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="space-y-6"
-              >
-                <div className="w-16 h-16 bg-[#356df1] text-[#ffffff] rounded-2xl flex items-center justify-center">
+      {/* Services Alternating Layout */}
+      <section className="py-16 bg-[#ffffff]">
+        <div className="max-w-7xl mx-auto px-6 space-y-24">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className={`grid lg:grid-cols-2 gap-12 items-center ${service.reversed ? 'lg:flex-row-reverse' : ''}`}
+            >
+              {/* Content */}
+              <div className={service.reversed ? 'lg:order-2' : ''}>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#356df1]/10 text-[#356df1] text-sm font-medium mb-4">
                   {service.icon}
+                  {service.subtitle}
                 </div>
-                
-                <div>
-                  <p className="text-[#356df1] font-semibold mb-2 font-[family-name:var(--font-body)]">{service.subtitle}</p>
-                  <h2 className="text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">{service.title}</h2>
-                  <p className="text-lg text-[#666666] leading-relaxed font-[family-name:var(--font-body)]">{service.description}</p>
-                </div>
-
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <h2 className="text-3xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+                  {service.title}
+                </h2>
+                <p className="text-[#666666] mb-6 leading-relaxed font-[family-name:var(--font-body)]">
+                  {service.description}
+                </p>
+                <ul className="grid grid-cols-2 gap-3 mb-8">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-[#666666] font-[family-name:var(--font-body)]">
-                      <CheckCircle2 className="w-5 h-5 text-[#356df1] shrink-0" />
+                    <li key={idx} className="flex items-center gap-2 text-sm text-[#000000]">
+                      <Check className="w-4 h-4 text-[#356df1]" />
                       {feature}
                     </li>
                   ))}
                 </ul>
+                <Link 
+                  href="/contact" 
+                  className="inline-flex items-center gap-2 text-[#356df1] font-semibold hover:gap-3 transition-all font-[family-name:var(--font-body)]"
+                >
+                  Tìm hiểu thêm <ArrowRight size={18} />
+                </Link>
+              </div>
 
-                <div className="flex gap-4 pt-4">
-                  <Link 
-                    href="/contact"
-                    className="bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-xl font-semibold flex items-center gap-2 hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]"
-                  >
-                    Tư vấn ngay <ArrowRight size={20} />
-                  </Link>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="space-y-6"
-              >
-                <div className="rounded-3xl overflow-hidden border border-gray-200">
-                  <img src={service.image} alt={service.title} className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700" />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  {service.benefits.map((benefit, idx) => (
-                    <div key={idx} className="p-4 bg-[#f5f5f5] rounded-2xl border border-gray-200">
-                      <div className="w-10 h-10 bg-[#356df1]/10 text-[#356df1] rounded-lg flex items-center justify-center mb-3">
-                        {benefit.icon}
+              {/* Image */}
+              <div className={service.reversed ? 'lg:order-1' : ''}>
+                <div className="relative">
+                  <div className="aspect-[4/3] rounded-3xl overflow-hidden">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {/* Floating badge */}
+                  <div className="absolute -bottom-4 -right-4 bg-[#ffffff] p-4 rounded-2xl border border-gray-100 shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-[#356df1] rounded-xl flex items-center justify-center">
+                        {service.icon}
                       </div>
-                      <h4 className="font-bold text-[#000000] text-sm mb-1 font-[family-name:var(--font-heading)]">{benefit.title}</h4>
-                      <p className="text-xs text-[#666666] font-[family-name:var(--font-body)]">{benefit.desc}</p>
+                      <div>
+                        <div className="text-xs text-[#999999]">Chi tiết</div>
+                        <div className="font-bold text-[#000000]">Xem ngay</div>
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-      <section className="py-24 bg-[#356df1] text-[#ffffff]">
+      {/* Benefits Bar */}
+      <section className="py-12 bg-[#f8fafc] border-y border-gray-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-wrap justify-center gap-8">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-2 text-[#666666]">
+                <div className="w-8 h-8 bg-[#356df1]/10 rounded-lg flex items-center justify-center text-[#356df1]">
+                  {benefit.icon}
+                </div>
+                <span className="font-medium font-[family-name:var(--font-body)]">{benefit.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-[#356df1]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6 font-[family-name:var(--font-heading)]">
-            Bạn cần giải pháp tùy chỉnh?
+          <h2 className="text-3xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
+            Cần tư vấn chi tiết?
           </h2>
-          <p className="text-xl text-[#ffffff]/80 mb-8 font-[family-name:var(--font-body)]">
-            Liên hệ ngay để được tư vấn miễn phí về giải pháp phù hợp nhất với doanh nghiệp của bạn.
+          <p className="text-[#ffffff]/80 mb-8 font-[family-name:var(--font-body)]">
+            Liên hệ ngay để được hỗ trợ lựa chọn giải pháp phù hợp
           </p>
-          <Link href="/contact" className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2 hover:bg-[#f5f5f5] transition-all font-[family-name:var(--font-body)]">
-            Liên hệ tư vấn <ArrowRight size={20} />
+          <Link 
+            href="/contact" 
+            className="inline-block bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
+          >
+            Liên hệ tư vấn
           </Link>
         </div>
       </section>
