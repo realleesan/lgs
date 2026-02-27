@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,14 +20,18 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Trang chủ", href: "/" },
-    { name: "Dịch vụ", href: "/services" },
-    { name: "Giải pháp", href: "/solutions" },
-    { name: "Báo giá", href: "/pricing" },
-    { name: "Tin tức", href: "/news" },
-    { name: "Về chúng tôi", href: "/about" },
-    { name: "Liên hệ", href: "/contact" },
+  const servicesMenu = [
+    { name: "Thiết kế Web Logistics", href: "/services" },
+    { name: "Phát triển App", href: "/services" },
+    { name: "Phần mềm WMS/TMS", href: "/services" },
+    { name: "Thiết kế theo yêu cầu", href: "/services" },
+  ];
+
+  const solutionsMenu = [
+    { name: "Giải pháp All-in-One", href: "/solutions" },
+    { name: "Quản lý kho bãi", href: "/solutions" },
+    { name: "Quản lý vận tải", href: "/solutions" },
+    { name: "Tư vấn chuyển đổi số", href: "/solutions" },
   ];
 
   return (
@@ -48,16 +54,98 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+        <div className="hidden md:flex items-center gap-6">
+          <Link
+            href="/"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            Trang chủ
+          </Link>
+
+          {/* Services Dropdown */}
+          <div className="relative">
+            <button
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+              className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
-              {link.name}
-            </Link>
-          ))}
+              Dịch vụ <ChevronDown size={16} />
+            </button>
+            {servicesOpen && (
+              <div 
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+                className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2"
+              >
+                {servicesMenu.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-sm text-[#666666] hover:text-[#356df1] hover:bg-[#f5f5f5] font-[family-name:var(--font-body)]"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Solutions Dropdown */}
+          <div className="relative">
+            <button
+              onMouseEnter={() => setSolutionsOpen(true)}
+              onMouseLeave={() => setSolutionsOpen(false)}
+              className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+            >
+              Giải pháp <ChevronDown size={16} />
+            </button>
+            {solutionsOpen && (
+              <div 
+                onMouseEnter={() => setSolutionsOpen(true)}
+                onMouseLeave={() => setSolutionsOpen(false)}
+                className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2"
+              >
+                {solutionsMenu.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-sm text-[#666666] hover:text-[#356df1] hover:bg-[#f5f5f5] font-[family-name:var(--font-body)]"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            Báo giá
+          </Link>
+
+          <Link
+            href="/news"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            Tin tức
+          </Link>
+
+          <Link
+            href="/about"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            Về chúng tôi
+          </Link>
+
+          <Link
+            href="/contact"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            Liên hệ
+          </Link>
+
           <Link
             href="/contact"
             className="bg-[#356df1] text-[#ffffff] px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#2a5ad9] transition-all font-[family-name:var(--font-body)]"
@@ -77,18 +165,76 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t border-gray-200 md:hidden">
+        <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t border-gray-200 md:hidden max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col p-6 gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Trang chủ
+            </Link>
+            
+            <div className="border-b pb-2">
+              <div className="text-lg font-medium text-[#000000] mb-2 font-[family-name:var(--font-body)]">Dịch vụ</div>
+              {servicesMenu.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            <div className="border-b pb-2">
+              <div className="text-lg font-medium text-[#000000] mb-2 font-[family-name:var(--font-body)]">Giải pháp</div>
+              {solutionsMenu.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            <Link
+              href="/pricing"
+              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Báo giá
+            </Link>
+
+            <Link
+              href="/news"
+              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Tin tức
+            </Link>
+
+            <Link
+              href="/about"
+              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Về chúng tôi
+            </Link>
+
+            <Link
+              href="/contact"
+              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Liên hệ
+            </Link>
+
             <Link
               href="/contact"
               className="bg-[#356df1] text-[#ffffff] text-center py-3 rounded-lg font-bold font-[family-name:var(--font-body)]"

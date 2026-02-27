@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   description: "Misty LGS chuyên cung cấp giải pháp Web, App và phần mềm quản lý tối ưu cho ngành Logistics. Chuyển đổi số doanh nghiệp với hệ sinh thái All-in-One.",
   icons: {
     icon: "/icons.png",
+    shortcut: "/icons.png",
+    apple: "/icons.png",
   },
 };
 
