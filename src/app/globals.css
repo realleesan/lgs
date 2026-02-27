@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&display=swap');
 
 @theme {
   /* Only Colors: Blue #356df1, White #ffffff, Black #000000, Gray #666666 */
@@ -16,9 +16,9 @@
   --color-gray: #666666;
   --color-gray-light: #999999;
   
-  /* Font families */
-  --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --font-body: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* Font families - Exo 2 only */
+  --font-heading: var(--font-exo2), 'Exo 2', sans-serif;
+  --font-body: var(--font-exo2), 'Exo 2', sans-serif;
   
   --font-sans: var(--font-body);
 }
@@ -32,12 +32,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body);
+  font-family: var(--font-exo2);
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-exo2);
 }
 
 @layer base {
