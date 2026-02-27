@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Layout, Smartphone, Settings, BarChart3, Shield, Zap } from "lucide-react";
+import { Check, ArrowRight, Layout, Smartphone, Settings } from "lucide-react";
 import Link from "next/link";
 
 const services = [
@@ -35,20 +35,21 @@ const services = [
   },
 ];
 
-const benefits = [
-  { icon: <Zap className="w-5 h-5" />, text: "Triển khai nhanh" },
-  { icon: <Shield className="w-5 h-5" />, text: "Bảo mật cao" },
-  { icon: <BarChart3 className="w-5 h-5" />, text: "Phân tích dữ liệu" },
-  { icon: <Check className="w-5 h-5" />, text: "Hỗ trợ 24/7" },
-];
-
 export default function ServicesPage() {
   return (
     <main className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
+      {/* Hero Section with Background */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1920&h=600&fit=crop&q=80" 
+            alt="Technology Background"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]" />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
             Dịch vụ
           </h1>
           <p className="text-lg text-[#666666] font-[family-name:var(--font-body)]">
@@ -107,18 +108,6 @@ export default function ServicesPage() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  {/* Floating badge */}
-                  <div className="absolute -bottom-4 -right-4 bg-[#ffffff] p-4 rounded-2xl border border-gray-100 shadow-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#356df1] rounded-xl flex items-center justify-center">
-                        {service.icon}
-                      </div>
-                      <div>
-                        <div className="text-xs text-[#999999]">Chi tiết</div>
-                        <div className="font-bold text-[#000000]">Xem ngay</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -126,25 +115,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Benefits Bar */}
-      <section className="py-12 bg-[#f8fafc] border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-2 text-[#666666]">
-                <div className="w-8 h-8 bg-[#356df1]/10 rounded-lg flex items-center justify-center text-[#356df1]">
-                  {benefit.icon}
-                </div>
-                <span className="font-medium font-[family-name:var(--font-body)]">{benefit.text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="py-20 bg-[#356df1]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative py-20 overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&h=600&fit=crop&q=80" 
+          alt="CTA Background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#356df1]/90" />
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-3xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
             Cần tư vấn chi tiết?
           </h2>

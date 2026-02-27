@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ChevronDown, BarChart3, Package, Truck, Globe, Shield, Zap } from "lucide-react";
+import { Check, Globe, Package, Truck, Zap } from "lucide-react";
 
 const solutions = [
   {
@@ -12,6 +12,7 @@ const solutions = [
     icon: <Globe className="w-6 h-6" />,
     description: "Hệ thống tích hợp tất cả tính năng cần thiết cho doanh nghiệp Logistics. Từ quản lý đơn hàng, kho bãi đến vận tải trong một nền tảng duy nhất.",
     features: ["Quản lý tập trung", "Tích hợp đa kênh", "Báo cáo real-time", "Tiết kiệm 30% chi phí"],
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "wms",
@@ -20,6 +21,7 @@ const solutions = [
     icon: <Package className="w-6 h-6" />,
     description: "Hệ thống quản lý kho thông minh. Theo dõi tồn kho, quy trình nhập xuất, tối ưu không gian lưu trữ.",
     features: ["Quản lý tồn kho", "Quy trình nhập/xuất", "Báo cáo tự động", "Tích hợp barcode"],
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "tms",
@@ -28,6 +30,7 @@ const solutions = [
     icon: <Truck className="w-6 h-6" />,
     description: "Giải pháp quản lý vận tải toàn diện. Điều phối xe, theo dõi lộ trình, tối ưu chi phí vận chuyển.",
     features: ["Điều phối xe", "Theo dõi GPS", "Tối ưu lộ trình", "Quản lý tài xế"],
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop&q=80",
   },
   {
     id: "digital",
@@ -36,6 +39,7 @@ const solutions = [
     icon: <Zap className="w-6 h-6" />,
     description: "Đồng hành cùng doanh nghiệp trong hành trình chuyển đổi số. Phân tích quy trình, đề xuất giải pháp phù hợp.",
     features: ["Phân tích quy trình", "Đề xuất giải pháp", "Triển khai từng bước", "Đào tạo nhân sự"],
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80",
   },
 ];
 
@@ -53,10 +57,18 @@ export default function SolutionsPage() {
 
   return (
     <main className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
+      {/* Hero */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=600&fit=crop&q=80" 
+            alt="Solutions Background"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]" />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
             Giải pháp
           </h1>
           <p className="text-lg text-[#666666] font-[family-name:var(--font-body)]">
@@ -80,7 +92,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* Tab Navigation */}
-      <section className="py-12 bg-[#ffffff]">
+      <section className="py-8 bg-[#ffffff]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-wrap justify-center gap-3">
             {solutions.map((solution) => (
@@ -113,7 +125,18 @@ export default function SolutionsPage() {
               transition={{ duration: 0.3 }}
               className="grid lg:grid-cols-2 gap-12 items-center"
             >
-              {/* Left Content */}
+              {/* Left - Image */}
+              <div className="relative">
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden">
+                  <img 
+                    src={activeSolution.image}
+                    alt={activeSolution.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Right - Content */}
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#356df1]/10 text-[#356df1] text-sm font-medium mb-4">
                   {activeSolution.icon}
@@ -136,52 +159,29 @@ export default function SolutionsPage() {
                   ))}
                 </ul>
               </div>
-
-              {/* Right Visual */}
-              <div className="relative">
-                <div className="aspect-square bg-[#f8fafc] rounded-3xl p-8 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 bg-[#356df1]/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                      <div className="text-[#356df1]">
-                        {activeSolution.icon}
-                      </div>
-                    </div>
-                    <div className="text-4xl font-bold text-[#000000] font-[family-name:var(--font-heading)]">
-                      {activeSolution.title}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating card */}
-                <div className="absolute -bottom-4 -left-4 bg-[#ffffff] p-4 rounded-2xl border border-gray-100 shadow-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                      <Shield className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-[#999999]">Bảo mật</div>
-                      <div className="font-bold text-[#000000]">ISO 27001</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#f8fafc]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+      <section className="relative py-20 overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=600&fit=crop&q=80" 
+          alt="CTA"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#356df1]/90" />
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h2 className="text-3xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
             Cần tư vấn giải pháp?
           </h2>
-          <p className="text-[#666666] mb-8 font-[family-name:var(--font-body)]">
+          <p className="text-[#ffffff]/80 mb-8 font-[family-name:var(--font-body)]">
             Liên hệ để được phân tích và đề xuất giải pháp phù hợp
           </p>
           <a 
             href="/contact" 
-            className="inline-block bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-full font-semibold hover:bg-[#2a5ad9] transition-all"
+            className="inline-block bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
           >
             Liên hệ tư vấn
           </a>

@@ -6,35 +6,31 @@ import { Check, Users, Award, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 const stats = [
-  { value: "100+", label: "Khách hàng", icon: <Users className="w-6 h-6" /> },
-  { value: "50+", label: "Dự án", icon: <Award className="w-6 h-6" /> },
-  { value: "99%", label: "Hài lòng", icon: <TrendingUp className="w-6 h-6" /> },
+  { value: "100+", label: "Khách hàng" },
+  { value: "50+", label: "Dự án" },
+  { value: "99%", label: "Hài lòng" },
 ];
 
 const values = [
-  {
-    title: "Tập trung khách hàng",
-    description: "Luôn đặt nhu cầu khách hàng lên hàng đầu",
-    icon: <Users className="w-6 h-6" />,
-  },
-  {
-    title: "Chất lượng cao",
-    description: "Cam kết mang đến sản phẩm tốt nhất",
-    icon: <Award className="w-6 h-6" />,
-  },
-  {
-    title: "Phát triển bền vững",
-    description: "Xây dựng giải pháp lâu dài cho doanh nghiệp",
-    icon: <TrendingUp className="w-6 h-6" />,
-  },
+  { title: "Tập trung khách hàng", description: "Luôn đặt nhu cầu khách hàng lên hàng đầu" },
+  { title: "Chất lượng cao", description: "Cam kết mang đến sản phẩm tốt nhất" },
+  { title: "Phát triển bền vững", description: "Xây dựng giải pháp lâu dài cho doanh nghiệp" },
 ];
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen pt-20">
-      {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* Hero with Background */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=600&fit=crop&q=80" 
+            alt="Office Background"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]" />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
             Về chúng tôi
           </h1>
@@ -50,9 +46,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-3 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="w-12 h-12 bg-[#ffffff]/20 rounded-xl flex items-center justify-center mx-auto mb-3 text-[#ffffff]">
-                  {stat.icon}
-                </div>
                 <div className="text-3xl font-bold text-[#ffffff] font-[family-name:var(--font-heading)]">{stat.value}</div>
                 <div className="text-[#ffffff]/80 text-sm font-[family-name:var(--font-body)]">{stat.label}</div>
               </div>
@@ -63,8 +56,20 @@ export default function AboutPage() {
 
       {/* About Content */}
       <section className="py-20 bg-[#ffffff]">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image */}
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&q=80" 
+                  alt="Team working"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Content */}
             <div>
               <h2 className="text-3xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
                 Misty LGS
@@ -72,30 +77,25 @@ export default function AboutPage() {
               <p className="text-[#666666] mb-4 leading-relaxed font-[family-name:var(--font-body)]">
                 Chúng tôi là đơn vị chuyên cung cấp giải pháp công nghệ cho ngành Logistics. Với sứ mệnh giúp doanh nghiệp chuyển đổi số hiệu quả, Misty LGS mang đến hệ thống toàn diện từ website, app đến phần mềm quản lý.
               </p>
-              <p className="text-[#666666] mb-6 leading-relaxed font-[family-name:var(--font-body)]">
+              <p className="text-[#666666] mb-8 leading-relaxed font-[family-name:var(--font-body)]">
                 Đội ngũ giàu kinh nghiệm, am hiểu ngành Logistics, luôn sẵn sàng hỗ trợ khách hàng 24/7.
               </p>
-            </div>
-            <div className="bg-[#f8fafc] rounded-3xl p-8">
-              <h3 className="text-xl font-bold text-[#000000] mb-6 font-[family-name:var(--font-heading)]">
-                Tại sao chọn Misty LGS?
-              </h3>
-              <ul className="space-y-4">
+
+              <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
                   "Giải pháp All-in-One",
                   "Hỗ trợ 24/7",
                   "Bảo hành dài hạn",
-                  "Giá cạnh tranh",
-                  "Cập nhật thường xuyên"
+                  "Giá cạnh tranh"
                 ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-[#356df1]/10 rounded-full flex items-center justify-center">
-                      <Check className="w-4 h-4 text-[#356df1]" />
+                  <div key={index} className="flex items-center gap-2">
+                    <div className="w-5 h-5 bg-[#356df1]/10 rounded-full flex items-center justify-center">
+                      <Check className="w-3 h-3 text-[#356df1]" />
                     </div>
                     <span className="text-[#000000] font-[family-name:var(--font-body)]">{item}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function AboutPage() {
                 className="bg-[#ffffff] p-6 rounded-2xl border border-gray-100"
               >
                 <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4">
-                  {value.icon}
+                  {index === 0 ? <Users className="w-6 h-6" /> : index === 1 ? <Award className="w-6 h-6" /> : <TrendingUp className="w-6 h-6" />}
                 </div>
                 <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">{value.title}</h3>
                 <p className="text-[#666666] text-sm font-[family-name:var(--font-body)]">{value.description}</p>
@@ -129,8 +129,14 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#356df1]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative py-20 overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=600&fit=crop&q=80" 
+          alt="Meeting"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#356df1]/90" />
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-3xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
             Sẵn sàng hợp tác?
           </h2>

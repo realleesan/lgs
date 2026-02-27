@@ -13,6 +13,7 @@ const newsItems = [
     category: "Xu hướng",
     date: "20/02/2024",
     views: 1250,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&q=80",
     size: "large",
   },
   {
@@ -22,6 +23,7 @@ const newsItems = [
     category: "Giải pháp",
     date: "18/02/2024",
     views: 980,
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80",
     size: "medium",
   },
   {
@@ -31,6 +33,7 @@ const newsItems = [
     category: "Case Study",
     date: "15/02/2024",
     views: 756,
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80",
     size: "medium",
   },
   {
@@ -40,6 +43,7 @@ const newsItems = [
     category: "Hướng dẫn",
     date: "12/02/2024",
     views: 542,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
     size: "small",
   },
   {
@@ -49,6 +53,7 @@ const newsItems = [
     category: "Kiến thức",
     date: "10/02/2024",
     views: 423,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
     size: "small",
   },
   {
@@ -58,6 +63,7 @@ const newsItems = [
     category: "Sản phẩm",
     date: "08/02/2024",
     views: 687,
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop&q=80",
     size: "small",
   },
 ];
@@ -66,8 +72,16 @@ export default function NewsPage() {
   return (
     <main className="min-h-screen pt-20">
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&h=600&fit=crop&q=80" 
+            alt="News Background"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] to-[#f8fafc]" />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
             Tin tức
           </h1>
@@ -77,7 +91,7 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* News Grid - Masonry Style */}
+      {/* News Grid */}
       <section className="py-16 bg-[#ffffff]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -92,14 +106,17 @@ export default function NewsPage() {
                   item.size === "large" ? "md:col-span-2" : ""
                 }`}
               >
-                {/* Placeholder Visual */}
-                <div className={`bg-[#f8fafc] ${item.size === "large" ? "h-64" : "h-40"} flex items-center justify-center`}>
-                  <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center">
-                    <div className="w-6 h-6 bg-[#356df1] rounded-lg" />
-                  </div>
+                {/* Image */}
+                <div className={`relative ${item.size === "large" ? "h-64" : "h-40"} overflow-hidden`}>
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
 
-                <div className="p-6">
+                <div className="p-5">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="px-3 py-1 bg-[#356df1]/10 text-[#356df1] text-xs font-medium rounded-full">
                       {item.category}
@@ -117,7 +134,7 @@ export default function NewsPage() {
                     {item.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                     <span className="flex items-center gap-1 text-xs text-[#999999]">
                       <Eye size={12} /> {item.views}
                     </span>
@@ -136,8 +153,14 @@ export default function NewsPage() {
       </section>
 
       {/* Newsletter */}
-      <section className="py-16 bg-[#356df1]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+      <section className="relative py-16 overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=1920&h=400&fit=crop&q=80" 
+          alt="Newsletter"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#356df1]" />
+        <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-2xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
             Đăng ký nhận tin
           </h2>
