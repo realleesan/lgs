@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +33,11 @@ const Navbar = () => {
     { name: "Quản lý kho bãi", href: "/solutions" },
     { name: "Quản lý vận tải", href: "/solutions" },
     { name: "Tư vấn chuyển đổi số", href: "/solutions" },
+  ];
+
+  const aboutMenu = [
+    { name: "Về chúng tôi", href: "/about" },
+    { name: "Portfolio", href: "#" },
   ];
 
   return (
@@ -62,15 +68,16 @@ const Navbar = () => {
             Trang chủ
           </Link>
 
-          {/* Services Dropdown */}
+          {/* Services Dropdown - Click to navigate, Hover to show dropdown */}
           <div className="relative">
-            <button
+            <Link
+              href="/services"
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
               className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
               Dịch vụ <ChevronDown size={16} />
-            </button>
+            </Link>
             {servicesOpen && (
               <div 
                 onMouseEnter={() => setServicesOpen(true)}
@@ -90,15 +97,16 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Solutions Dropdown */}
+          {/* Solutions Dropdown - Click to navigate, Hover to show dropdown */}
           <div className="relative">
-            <button
+            <Link
+              href="/solutions"
               onMouseEnter={() => setSolutionsOpen(true)}
               onMouseLeave={() => setSolutionsOpen(false)}
               className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
               Giải pháp <ChevronDown size={16} />
-            </button>
+            </Link>
             {solutionsOpen && (
               <div 
                 onMouseEnter={() => setSolutionsOpen(true)}
@@ -132,12 +140,33 @@ const Navbar = () => {
             Tin tức
           </Link>
 
-          <Link
-            href="/about"
-            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
-          >
-            Về chúng tôi
-          </Link>
+          {/* About Dropdown - Non-clickable title with dropdown */}
+          <div className="relative">
+            <button
+              onMouseEnter={() => setAboutOpen(true)}
+              onMouseLeave={() => setAboutOpen(false)}
+              className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+            >
+              Giới thiệu <ChevronDown size={16} />
+            </button>
+            {aboutOpen && (
+              <div 
+                onMouseEnter={() => setAboutOpen(true)}
+                onMouseLeave={() => setAboutOpen(false)}
+                className="absolute top-full left-0 mt-2 w-48 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2"
+              >
+                {aboutMenu.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-sm text-[#666666] hover:text-[#356df1] hover:bg-[#f5f5f5] font-[family-name:var(--font-body)]"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
 
           <Link
             href="/contact"
@@ -219,13 +248,19 @@ const Navbar = () => {
               Tin tức
             </Link>
 
-            <Link
-              href="/about"
-              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Về chúng tôi
-            </Link>
+            <div className="border-b pb-2">
+              <div className="text-lg font-medium text-[#000000] mb-2 font-[family-name:var(--font-body)]">Giới thiệu</div>
+              <Link
+                href="/about"
+                className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                - Về chúng tôi
+              </Link>
+              <span className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]">
+                - Portfolio (sắp ra mắt)
+              </span>
+            </div>
 
             <Link
               href="/contact"
