@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,6 +12,9 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const solutionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const aboutTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,22 +71,25 @@ const Navbar = () => {
             Trang chủ
           </Link>
 
-          {/* Services Dropdown - Click to navigate, Hover to show dropdown */}
-          <div className="relative">
+          {/* Services Dropdown */}
+          <div 
+            className="relative"
+            onMouseEnter={() => {
+              if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+              setServicesOpen(true);
+            }}
+            onMouseLeave={() => {
+              servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 300);
+            }}
+          >
             <Link
               href="/services"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
               className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
               Dịch vụ <ChevronDown size={16} />
             </Link>
             {servicesOpen && (
-              <div 
-                onMouseEnter={() => setServicesOpen(true)}
-                onMouseLeave={() => setServicesOpen(false)}
-                className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2"
-              >
+              <div className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2">
                 {servicesMenu.map((item) => (
                   <Link
                     key={item.name}
@@ -97,22 +103,25 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Solutions Dropdown - Click to navigate, Hover to show dropdown */}
-          <div className="relative">
+          {/* Solutions Dropdown */}
+          <div 
+            className="relative"
+            onMouseEnter={() => {
+              if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
+              setSolutionsOpen(true);
+            }}
+            onMouseLeave={() => {
+              solutionsTimeoutRef.current = setTimeout(() => setSolutionsOpen(false), 300);
+            }}
+          >
             <Link
               href="/solutions"
-              onMouseEnter={() => setSolutionsOpen(true)}
-              onMouseLeave={() => setSolutionsOpen(false)}
               className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
               Giải pháp <ChevronDown size={16} />
             </Link>
             {solutionsOpen && (
-              <div 
-                onMouseEnter={() => setSolutionsOpen(true)}
-                onMouseLeave={() => setSolutionsOpen(false)}
-                className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2"
-              >
+              <div className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2">
                 {solutionsMenu.map((item) => (
                   <Link
                     key={item.name}
@@ -141,20 +150,23 @@ const Navbar = () => {
           </Link>
 
           {/* About Dropdown - Non-clickable title with dropdown */}
-          <div className="relative">
+          <div 
+            className="relative"
+            onMouseEnter={() => {
+              if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current);
+              setAboutOpen(true);
+            }}
+            onMouseLeave={() => {
+              aboutTimeoutRef.current = setTimeout(() => setAboutOpen(false), 300);
+            }}
+          >
             <button
-              onMouseEnter={() => setAboutOpen(true)}
-              onMouseLeave={() => setAboutOpen(false)}
               className="flex items-center gap-1 text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
             >
               Giới thiệu <ChevronDown size={16} />
             </button>
             {aboutOpen && (
-              <div 
-                onMouseEnter={() => setAboutOpen(true)}
-                onMouseLeave={() => setAboutOpen(false)}
-                className="absolute top-full left-0 mt-2 w-48 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2"
-              >
+              <div className="absolute top-full left-0 mt-2 w-48 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2">
                 {aboutMenu.map((item) => (
                   <Link
                     key={item.name}

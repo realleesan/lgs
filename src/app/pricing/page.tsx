@@ -2,14 +2,14 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Check, X, ChevronLeft, ChevronRight, ChevronDown, Layout, Smartphone, Settings, Box } from "lucide-react";
 import Link from "next/link";
 
 const services = [
-  { id: "web", name: "Thiết kế Web Logistics", icon: "🌐" },
-  { id: "app", name: "Phát triển App", icon: "📱" },
-  { id: "wms", name: "Phần mềm WMS/TMS", icon: "📦" },
-  { id: "custom", name: "Thiết kế theo yêu cầu", icon: "✨" },
+  { id: "web", name: "Thiết kế Web Logistics", icon: Layout },
+  { id: "app", name: "Phát triển App", icon: Smartphone },
+  { id: "wms", name: "Phần mềm WMS/TMS", icon: Box },
+  { id: "custom", name: "Thiết kế theo yêu cầu", icon: Settings },
 ];
 
 const pricingData: Record<string, Array<{
@@ -229,6 +229,7 @@ export default function PricingPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const currentPackages = pricingData[activeService] || pricingData.web;
+  const ActiveIcon = services.find(s => s.id === activeService)?.icon || Layout;
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % currentPackages.length);
@@ -261,7 +262,7 @@ export default function PricingPage() {
               className="w-full flex items-center justify-between px-6 py-4 bg-[#f8fafc] border border-gray-200 rounded-xl hover:border-[#356df1] transition-colors"
             >
               <span className="flex items-center gap-3">
-                <span className="text-2xl">{services.find(s => s.id === activeService)?.icon}</span>
+                <ActiveIcon className="w-6 h-6 text-[#356df1]" />
                 <span className="text-lg font-medium text-[#000000] font-[family-name:var(--font-body)]">
                   {services.find(s => s.id === activeService)?.name}
                 </span>
@@ -277,24 +278,27 @@ export default function PricingPage() {
                   exit={{ opacity: 0, y: -10 }}
                   className="absolute top-full left-0 right-0 mt-2 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg overflow-hidden z-10"
                 >
-                  {services.map((service) => (
-                    <button
-                      key={service.id}
-                      onClick={() => {
-                        setActiveService(service.id);
-                        setCurrentSlide(0);
-                        setDropdownOpen(false);
-                      }}
-                      className={`w-full flex items-center gap-3 px-6 py-4 hover:bg-[#f8fafc] transition-colors ${
-                        activeService === service.id ? 'bg-[#356df1]/10 text-[#356df1]' : 'text-[#000000]'
-                      }`}
-                    >
-                      <span className="text-2xl">{service.icon}</span>
-                      <span className="text-base font-medium font-[family-name:var(--font-body)]">
-                        {service.name}
-                      </span>
-                    </button>
-                  ))}
+                  {services.map((service) => {
+                    const IconComponent = service.icon;
+                    return (
+                      <button
+                        key={service.id}
+                        onClick={() => {
+                          setActiveService(service.id);
+                          setCurrentSlide(0);
+                          setDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center gap-3 px-6 py-4 hover:bg-[#f8fafc] transition-colors ${
+                          activeService === service.id ? 'bg-[#356df1]/10 text-[#356df1]' : 'text-[#000000]'
+                        }`}
+                      >
+                        <IconComponent className="w-6 h-6" />
+                        <span className="text-base font-medium font-[family-name:var(--font-body)]">
+                          {service.name}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -302,23 +306,26 @@ export default function PricingPage() {
 
           {/* Service Tabs - Desktop */}
           <div className="hidden md:flex items-center justify-center gap-2 mt-6">
-            {services.map((service) => (
-              <button
-                key={service.id}
-                onClick={() => {
-                  setActiveService(service.id);
-                  setCurrentSlide(0);
-                }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-                  activeService === service.id
-                    ? 'bg-[#356df1] text-[#ffffff]'
-                    : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
-                }`}
-              >
-                <span>{service.icon}</span>
-                <span className="text-sm font-medium font-[family-name:var(--font-body)]">{service.name}</span>
-              </button>
-            ))}
+            {services.map((service) => {
+              const IconComponent = service.icon;
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => {
+                    setActiveService(service.id);
+                    setCurrentSlide(0);
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
+                    activeService === service.id
+                      ? 'bg-[#356df1] text-[#ffffff]'
+                      : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span className="text-sm font-medium font-[family-name:var(--font-body)]">{service.name}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -326,45 +333,26 @@ export default function PricingPage() {
       {/* Pricing Slider */}
       <section className="py-16 bg-[#ffffff]">
         <div className="max-w-6xl mx-auto px-6">
-          {/* Slider Navigation */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-8">
+            {/* Prev Button */}
             <button
               onClick={prevSlide}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
+              className="flex-shrink-0 w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
             >
               <ChevronLeft size={24} />
             </button>
-            <div className="flex gap-2">
-              {currentPackages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    currentSlide === index ? 'bg-[#356df1] w-8' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={nextSlide}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
 
-          {/* Pricing Cards - Slider */}
-          <div className="overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`${activeService}-${currentSlide}`}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.3 }}
-                className="flex justify-center"
-              >
-                <div className="grid md:grid-cols-3 gap-6 max-w-5xl w-full">
+            {/* Cards */}
+            <div className="flex-1 overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${activeService}-${currentSlide}`}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid md:grid-cols-3 gap-6"
+                >
                   {currentPackages.map((pkg, index) => (
                     <motion.div
                       key={index}
@@ -373,7 +361,7 @@ export default function PricingPage() {
                       transition={{ delay: index * 0.1 }}
                       className={`relative rounded-3xl p-6 border ${
                         pkg.popular 
-                          ? "bg-[#356df1] border-[#356df1] text-[#ffffff] md:scale-110" 
+                          ? "bg-[#356df1] border-[#356df1] text-[#ffffff]" 
                           : "bg-[#ffffff] border-gray-200"
                       }`}
                     >
@@ -428,27 +416,36 @@ export default function PricingPage() {
                       </Link>
                     </motion.div>
                   ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={nextSlide}
+              className="flex-shrink-0 w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* Pagination Dots - Below cards */}
+          <div className="flex items-center justify-center gap-2 mt-8">
+            {currentPackages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 rounded-full transition-all ${
+                  currentSlide === index ? 'bg-[#356df1] w-8' : 'bg-gray-300 w-2'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Service Info */}
-      <section className="py-12 bg-[#f8fafc]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h3 className="text-xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-            {services.find(s => s.id === activeService)?.name}
-          </h3>
-          <p className="text-[#666666] font-[family-name:var(--font-body)]">
-            Liên hệ với chúng tôi để được tư vấn chi tiết và báo giá theo nhu cầu riêng của doanh nghiệp.
-          </p>
-        </div>
-      </section>
-
-      {/* FAQ or Note */}
-      <section className="py-16 bg-[#ffffff]">
+      {/* Note included in pricing section */}
+      <section className="py-8 bg-[#f8fafc]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-[#666666] font-[family-name:var(--font-body)]">
             Giá chưa bao gồm VAT. Liên hệ để được tư vấn và báo giá chi tiết theo nhu cầu riêng.
