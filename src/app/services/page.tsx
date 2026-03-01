@@ -93,9 +93,6 @@ export default function ServicesPage() {
           <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
             Dịch vụ
           </h1>
-          <p className="text-lg text-[#666666] font-[family-name:var(--font-body)]">
-            Giải pháp công nghệ toàn diện cho ngành Logistics
-          </p>
         </div>
       </section>
 

@@ -2,15 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, ChevronLeft, ChevronRight, ChevronDown, Layout, Smartphone, Settings, Box } from "lucide-react";
+import { Check, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-
-const services = [
-  { id: "web", name: "Thiết kế Web Logistics", icon: Layout },
-  { id: "app", name: "Phát triển App", icon: Smartphone },
-  { id: "wms", name: "Phần mềm WMS/TMS", icon: Box },
-  { id: "custom", name: "Thiết kế theo yêu cầu", icon: Settings },
-];
 
 const pricingData: Record<string, Array<{
   name: string;
@@ -226,10 +219,8 @@ const pricingData: Record<string, Array<{
 export default function PricingPage() {
   const [activeService, setActiveService] = useState("web");
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const currentPackages = pricingData[activeService] || pricingData.web;
-  const ActiveIcon = services.find(s => s.id === activeService)?.icon || Layout;
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % currentPackages.length);
@@ -247,85 +238,60 @@ export default function PricingPage() {
           <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
             Bảng giá
           </h1>
-          <p className="text-lg text-[#666666] font-[family-name:var(--font-body)]">
-            Chọn giải pháp phù hợp với nhu cầu
-          </p>
         </div>
       </section>
 
-      {/* Service Selector - Dropdown */}
-      <section className="py-8 bg-[#ffffff] border-b border-gray-100">
+      {/* Service Tabs */}
+      <section className="pb-8 bg-[#ffffff]">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="relative">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full flex items-center justify-between px-6 py-4 bg-[#f8fafc] border border-gray-200 rounded-xl hover:border-[#356df1] transition-colors"
+              onClick={() => { setActiveService("web"); setCurrentSlide(0); }}
+              className={`px-6 py-3 rounded-full transition-all ${
+                activeService === "web"
+                  ? 'bg-[#356df1] text-[#ffffff]'
+                  : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
+              }`}
             >
-              <span className="flex items-center gap-3">
-                <ActiveIcon className="w-6 h-6 text-[#356df1]" />
-                <span className="text-lg font-medium text-[#000000] font-[family-name:var(--font-body)]">
-                  {services.find(s => s.id === activeService)?.name}
-                </span>
-              </span>
-              <ChevronDown className={`text-[#666666] transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Thiết kế Web</span>
             </button>
-
-            <AnimatePresence>
-              {dropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full left-0 right-0 mt-2 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg overflow-hidden z-10"
-                >
-                  {services.map((service) => {
-                    const IconComponent = service.icon;
-                    return (
-                      <button
-                        key={service.id}
-                        onClick={() => {
-                          setActiveService(service.id);
-                          setCurrentSlide(0);
-                          setDropdownOpen(false);
-                        }}
-                        className={`w-full flex items-center gap-3 px-6 py-4 hover:bg-[#f8fafc] transition-colors ${
-                          activeService === service.id ? 'bg-[#356df1]/10 text-[#356df1]' : 'text-[#000000]'
-                        }`}
-                      >
-                        <IconComponent className="w-6 h-6" />
-                        <span className="text-base font-medium font-[family-name:var(--font-body)]">
-                          {service.name}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <button
+              onClick={() => { setActiveService("app"); setCurrentSlide(0); }}
+              className={`px-6 py-3 rounded-full transition-all ${
+                activeService === "app"
+                  ? 'bg-[#356df1] text-[#ffffff]'
+                  : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
+              }`}
+            >
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Phát triển App</span>
+            </button>
+            <button
+              onClick={() => { setActiveService("wms"); setCurrentSlide(0); }}
+              className={`px-6 py-3 rounded-full transition-all ${
+                activeService === "wms"
+                  ? 'bg-[#356df1] text-[#ffffff]'
+                  : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
+              }`}
+            >
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Phần mềm WMS/TMS</span>
+            </button>
+            <button
+              onClick={() => { setActiveService("custom"); setCurrentSlide(0); }}
+              className={`px-6 py-3 rounded-full transition-all ${
+                activeService === "custom"
+                  ? 'bg-[#356df1] text-[#ffffff]'
+                  : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
+              }`}
+            >
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Thiết kế theo yêu cầu</span>
+            </button>
           </div>
 
-          {/* Service Tabs - Desktop */}
-          <div className="hidden md:flex items-center justify-center gap-2 mt-6">
-            {services.map((service) => {
-              const IconComponent = service.icon;
-              return (
-                <button
-                  key={service.id}
-                  onClick={() => {
-                    setActiveService(service.id);
-                    setCurrentSlide(0);
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-                    activeService === service.id
-                      ? 'bg-[#356df1] text-[#ffffff]'
-                      : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
-                  }`}
-                >
-                  <IconComponent className="w-4 h-4" />
-                  <span className="text-sm font-medium font-[family-name:var(--font-body)]">{service.name}</span>
-                </button>
-              );
-            })}
+          {/* VAT Note - Above cards */}
+          <div className="text-center mt-6">
+            <p className="text-[#666666] font-[family-name:var(--font-body)]">
+              Giá chưa bao gồm VAT. Liên hệ để được tư vấn và báo giá chi tiết theo nhu cầu riêng.
+            </p>
           </div>
         </div>
       </section>
@@ -337,9 +303,9 @@ export default function PricingPage() {
             {/* Prev Button */}
             <button
               onClick={prevSlide}
-              className="flex-shrink-0 w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
+              className="flex-shrink-0 w-14 h-14 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={28} />
             </button>
 
             {/* Cards */}
@@ -359,14 +325,14 @@ export default function PricingPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className={`relative rounded-3xl p-6 border ${
+                      className={`relative rounded-3xl p-8 border ${
                         pkg.popular 
                           ? "bg-[#356df1] border-[#356df1] text-[#ffffff]" 
                           : "bg-[#ffffff] border-gray-200"
                       }`}
                     >
                       {pkg.popular && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#ffffff] text-[#356df1] text-xs font-bold rounded-full">
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#ffffff] text-[#356df1] text-sm font-bold rounded-full whitespace-nowrap">
                           Phổ biến
                         </div>
                       )}
@@ -376,12 +342,12 @@ export default function PricingPage() {
                           {pkg.name}
                         </h3>
                         <div className="flex items-baseline justify-center gap-1">
-                          <span className={`text-4xl font-bold font-[family-name:var(--font-heading)] ${pkg.popular ? "text-[#ffffff]" : "text-[#356df1]"}`}>
+                          <span className={`text-5xl font-bold font-[family-name:var(--font-heading)] ${pkg.popular ? "text-[#ffffff]" : "text-[#356df1]"}`}>
                             {pkg.price}
                           </span>
-                          {pkg.unit && <span className={`text-sm ${pkg.popular ? "text-[#ffffff]/80" : "text-[#666666]"}`}>{pkg.unit}</span>}
+                          {pkg.unit && <span className={`text-base ${pkg.popular ? "text-[#ffffff]/80" : "text-[#666666]"}`}>{pkg.unit}</span>}
                         </div>
-                        <p className={`text-sm mt-2 ${pkg.popular ? "text-[#ffffff]/80" : "text-[#666666]"}`}>
+                        <p className={`text-base mt-2 ${pkg.popular ? "text-[#ffffff]/80" : "text-[#666666]"}`}>
                           {pkg.description}
                         </p>
                       </div>
@@ -390,13 +356,13 @@ export default function PricingPage() {
                         {pkg.features.map((feature, i) => (
                           <li key={i} className="flex items-center gap-2">
                             {feature.included ? (
-                              <Check size={18} className={pkg.popular ? "text-[#ffffff]" : "text-[#356df1]"} />
+                              <Check size={20} className={pkg.popular ? "text-[#ffffff]" : "text-[#356df1]"} />
                             ) : (
-                              <X size={18} className="text-gray-400" />
+                              <X size={20} className="text-gray-400" />
                             )}
                             <span className={feature.included 
                               ? (pkg.popular ? "text-[#ffffff]" : "text-[#000000]") 
-                              : "text-gray-400"
+                              : "text-gray-400 text-base"
                             }>
                               {feature.name}
                             </span>
@@ -406,7 +372,7 @@ export default function PricingPage() {
 
                       <Link 
                         href="/contact"
-                        className={`block w-full py-3 rounded-full font-semibold text-center transition-all ${
+                        className={`block w-full py-4 rounded-full font-semibold text-center transition-all ${
                           pkg.popular 
                             ? "bg-[#ffffff] text-[#356df1] hover:bg-[#f8fafc]" 
                             : "bg-[#356df1] text-[#ffffff] hover:bg-[#2a5ad9]"
@@ -423,14 +389,14 @@ export default function PricingPage() {
             {/* Next Button */}
             <button
               onClick={nextSlide}
-              className="flex-shrink-0 w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
+              className="flex-shrink-0 w-14 h-14 rounded-full border border-gray-200 flex items-center justify-center text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={28} />
             </button>
           </div>
 
-          {/* Pagination Dots - Below cards */}
-          <div className="flex items-center justify-center gap-2 mt-8">
+          {/* Pagination Dots */}
+          <div className="flex items-center justify-center gap-2 mt-10">
             {currentPackages.map((_, index) => (
               <button
                 key={index}
@@ -441,15 +407,6 @@ export default function PricingPage() {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Note included in pricing section */}
-      <section className="py-8 bg-[#f8fafc]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-[#666666] font-[family-name:var(--font-body)]">
-            Giá chưa bao gồm VAT. Liên hệ để được tư vấn và báo giá chi tiết theo nhu cầu riêng.
-          </p>
         </div>
       </section>
     </main>
