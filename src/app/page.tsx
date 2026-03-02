@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe } from "lucide-react";
+import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe, Star, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -14,10 +14,38 @@ export default function HomePage() {
   ];
 
   const features = [
-    { title: "Web Logistics", desc: "Website chuyên nghiệp, tối ưu SEO" },
-    { title: "App Quản lý", desc: "Quản lý vận tải, kho bãi hiệu quả" },
-    { title: "Phần mềm TMS/WMS", desc: "Tự động hóa quy trình Logistics" },
-    { title: "Tư vấn DS", desc: "Chuyển đổi số toàn diện" },
+    { title: "Web Logistics", desc: "Website chuyên nghiệp, tối ưu SEO", icon: Globe, href: "/web-logistics" },
+    { title: "App Quản lý", desc: "Quản lý vận tải, kho bãi hiệu quả", icon: Package, href: "/app" },
+    { title: "Phần mềm WMS", desc: "Quản lý kho bãi thông minh", icon: BarChart3, href: "/wms" },
+    { title: "Phần mềm TMS", desc: "Tối ưu vận tải, tiết kiệm chi phí", icon: Truck, href: "/tms" },
+  ];
+
+  const testimonials = [
+    {
+      name: "Nguyễn Văn A",
+      company: "Viettrans Logistics",
+      content: "Misty LGS đã giúp chúng tôi tăng 40% hiệu suất kho. Hệ thống rất dễ sử dụng.",
+      rating: 5,
+    },
+    {
+      name: "Trần Thị B",
+      company: "GreenLogistics",
+      content: "Website mới giúp doanh thu online tăng 60% chỉ sau 3 tháng. Rất hài lòng!",
+      rating: 5,
+    },
+    {
+      name: "Lê Hoàng C",
+      company: "ShipTech Inc",
+      content: "App quản lý giao hàng vận hành rất mượt. Đội ngũ dev hiểu nghiệp vụ rất kỹ.",
+      rating: 5,
+    },
+  ];
+
+  const benefits = [
+    { title: "Nhanh chóng", desc: "Triển khai trong thời gian ngắn", icon: Zap },
+    { title: "An toàn", desc: "Dữ liệu được mã hóa và backup", icon: Check },
+    { title: "Tiết kiệm", desc: "Giảm 30% chi phí vận hành", icon: BarChart3 },
+    { title: "Hỗ trợ 24/7", desc: "Đội ngũ hỗ trợ luôn sẵn sàng", icon: Truck },
   ];
 
   return (
@@ -70,10 +98,10 @@ export default function HomePage() {
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link 
-                  href="/solutions" 
+                  href="/demo" 
                   className="px-8 py-4 rounded-full font-semibold text-[#666666] border border-gray-200 hover:border-[#356df1] hover:text-[#356df1] transition-all font-[family-name:var(--font-body)]"
                 >
-                  Xem giải pháp
+                  Xem Demo
                 </Link>
               </div>
 
@@ -127,44 +155,139 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-[#f8fafc]">
+      {/* Products Section */}
+      <section className="py-24 bg-[#ffffff]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-              Giải pháp toàn diện
+              Sản phẩm của chúng tôi
             </h2>
             <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
-              Tất cả trong một nền tảng duy nhất
+              Giải pháp toàn diện cho doanh nghiệp Logistics
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link 
+                    href={feature.href}
+                    className="block bg-[#ffffff] p-6 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group h-full"
+                  >
+                    <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#356df1] transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">{feature.desc}</p>
+                    <div className="mt-4 flex items-center gap-1 text-[#356df1] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                      Tìm hiểu thêm <ArrowUpRight size={14} />
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 bg-[#356df1]/10 rounded-full flex items-center justify-center text-[#356df1] mx-auto mb-4">
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">
+                    {benefit.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Preview */}
+      <section className="py-24 bg-[#ffffff]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+              Khách hàng nói gì?
+            </h2>
+            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
+              Những đánh giá chân thực từ khách hàng đã tin tưởng Misty LGS
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-[#ffffff] p-6 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group"
+                className="bg-[#f8fafc] p-6 rounded-2xl"
               >
-                <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">{feature.title}</h3>
-                <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">{feature.desc}</p>
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-[#fbbf24] text-[#fbbf24]" />
+                  ))}
+                </div>
+                <p className="text-[#666666] mb-6 font-[family-name:var(--font-body)]">
+                  "{testimonial.content}"
+                </p>
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="font-bold text-[#000000]">{testimonial.name}</div>
+                  <div className="text-sm text-[#999999]">{testimonial.company}</div>
+                </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link 
+              href="/testimonials" 
+              className="inline-flex items-center gap-2 text-[#356df1] font-semibold hover:gap-3 transition-all"
+            >
+              Xem tất cả đánh giá <ArrowRight size={18} />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Image Banner */}
-      <section className="relative py-32 overflow-hidden">
+      {/* CTA Banner */}
+      <section className="relative py-24 overflow-hidden">
         <img 
           src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&h=600&fit=crop&q=80" 
-          alt="Shipping Containers"
+          alt="CTA"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#356df1]/80" />
+        <div className="absolute inset-0 bg-[#356df1]/90" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
             Sẵn sàng chuyển đổi số?
@@ -172,12 +295,20 @@ export default function HomePage() {
           <p className="text-[#ffffff]/80 text-lg mb-8 font-[family-name:var(--font-body)]">
             Bắt đầu miễn phí ngay hôm nay. Không cần thẻ tín dụng.
           </p>
-          <Link 
-            href="/contact" 
-            className="inline-block bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
-          >
-            Dùng thử miễn phí
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link 
+              href="/contact" 
+              className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
+            >
+              Dùng thử miễn phí
+            </Link>
+            <Link 
+              href="/pricing" 
+              className="bg-transparent text-[#ffffff] border-2 border-[#ffffff] px-8 py-4 rounded-full font-semibold hover:bg-[#ffffff]/10 transition-all"
+            >
+              Xem báo giá
+            </Link>
+          </div>
         </div>
       </section>
     </main>

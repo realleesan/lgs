@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import SearchModal from "@/components/SearchModal";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,10 +26,10 @@ const Navbar = () => {
   }, []);
 
   const servicesMenu = [
-    { name: "Thiết kế Web Logistics", href: "/services" },
-    { name: "Phát triển App", href: "/services" },
-    { name: "Phần mềm WMS/TMS", href: "/services" },
-    { name: "Thiết kế theo yêu cầu", href: "/services" },
+    { name: "Thiết kế Web Logistics", href: "/web-logistics" },
+    { name: "Phát triển App Mobile", href: "/app" },
+    { name: "Phần mềm WMS", href: "/wms" },
+    { name: "Phần mềm TMS", href: "/tms" },
   ];
 
   const solutionsMenu = [
@@ -38,9 +39,17 @@ const Navbar = () => {
     { name: "Tư vấn chuyển đổi số", href: "/solutions" },
   ];
 
+  const demoMenu = [
+    { name: "Xem Demo", href: "/demo" },
+    { name: "Tính năng", href: "/demo#features" },
+    { name: "Báo giá", href: "/pricing" },
+  ];
+
   const aboutMenu = [
     { name: "Về chúng tôi", href: "/about" },
     { name: "Portfolio", href: "/portfolio" },
+    { name: "Đánh giá khách hàng", href: "/testimonials" },
+    { name: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -136,6 +145,13 @@ const Navbar = () => {
           </div>
 
           <Link
+            href="/demo"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            Demo
+          </Link>
+
+          <Link
             href="/pricing"
             className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
           >
@@ -179,6 +195,15 @@ const Navbar = () => {
               </div>
             )}
           </div>
+
+          <Link
+            href="/faq"
+            className="text-sm font-medium text-[#666666] hover:text-[#356df1] transition-colors font-[family-name:var(--font-body)]"
+          >
+            FAQ
+          </Link>
+
+          <SearchModal />
 
           <Link
             href="/contact"
@@ -245,6 +270,14 @@ const Navbar = () => {
             </div>
 
             <Link
+              href="/demo"
+              className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Demo
+            </Link>
+
+            <Link
               href="/pricing"
               className="text-lg font-medium text-[#000000] border-b pb-2 font-[family-name:var(--font-body)]"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -275,6 +308,20 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 - Portfolio
+              </Link>
+              <Link
+                href="/testimonials"
+                className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                - Đánh giá khách hàng
+              </Link>
+              <Link
+                href="/faq"
+                className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                - FAQ
               </Link>
             </div>
 
