@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, MessageCircle, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { FAQSchema } from "@/components/StructuredData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface FAQItem {
   id: number;
@@ -92,7 +93,7 @@ const categories = [
 ];
 
 export default function FAQPage() {
-  const [lang, setLang] = useState<"vi" | "en">("vi");
+  const { lang, setLang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
   const [openItem, setOpenItem] = useState<number | null>(null);
 

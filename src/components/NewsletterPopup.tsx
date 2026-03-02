@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, Check, Loader2 } from "lucide-react";
+import { subscribeNewsletter } from "@/lib/api";
 
 interface NewsletterPopupProps {
   title?: string;
@@ -61,7 +62,7 @@ export default function NewsletterPopup({
 
     // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await subscribeNewsletter(email);
       setSuccess(true);
       // Store email in localStorage for demo purposes
       localStorage.setItem("newsletter_email", email);

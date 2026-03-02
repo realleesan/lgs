@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Quote, ThumbsUp, Users } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Testimonial {
   id: number;
@@ -103,7 +104,7 @@ const partners = [
 ];
 
 export default function TestimonialsPage() {
-  const [lang, setLang] = useState<"vi" | "en">("vi");
+  const { lang, setLang } = useLanguage();
 
   const stats = [
     { value: "100+", label: "Khách hàng", labelEn: "Customers" },

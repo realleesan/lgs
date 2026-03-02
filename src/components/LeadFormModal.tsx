@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Loader2, ArrowRight, Send } from "lucide-react";
 import { submitLead } from "@/lib/api";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LeadFormModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ const budgets = [
 ];
 
 export default function LeadFormModal({ isOpen, onClose, service, source = "website" }: LeadFormModalProps) {
-  const [lang, setLang] = useState<"vi" | "en">("vi");
+  const { lang, toggleLang } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -120,7 +121,7 @@ export default function LeadFormModal({ isOpen, onClose, service, source = "webs
               {/* Language Toggle */}
               <div className="flex justify-end px-6 pt-4">
                 <button
-                  onClick={() => setLang(lang === "vi" ? "en" : "vi")}
+                  onClick={toggleLang}
                   className="text-xs text-[#356df1] hover:underline"
                 >
                   {lang === "vi" ? "🇺🇸 English" : "🇻🇳 Tiếng Việt"}

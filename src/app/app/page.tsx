@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Smartphone, Tablet, Monitor, Zap, BarChart3, MessageCircle, Bell } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Feature {
   icon: React.ReactNode;
@@ -113,7 +114,7 @@ const packages = [
 ];
 
 export default function AppPage() {
-  const [lang, setLang] = useState<"vi" | "en">("vi");
+  const { lang, setLang } = useLanguage();
 
   return (
     <main className="min-h-screen pt-20">

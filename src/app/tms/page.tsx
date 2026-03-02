@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, Truck, MapPin, BarChart3, Clock, Route, Fuel, Users } from "lucide-react";
 import Link from "next/link";
 import LeadFormModal from "@/components/LeadFormModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Feature {
   icon: React.ReactNode;
@@ -138,7 +139,7 @@ const packages = [
 ];
 
 export default function TMSPage() {
-  const [lang, setLang] = useState<"vi" | "en">("vi");
+  const { lang, setLang } = useLanguage();
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
 
   return (

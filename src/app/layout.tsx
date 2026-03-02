@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { OrganizationSchema, WebSiteSchema } from "@/components/StructuredData";
 import NewsletterPopup from "@/components/NewsletterPopup";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const exo2 = Exo_2({
   variable: "--font-exo2",
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
     description: "Misty LGS chuyên cung cấp giải pháp Web, App và phần mềm quản lý tối ưu cho ngành Logistics. Chuyển đổi số doanh nghiệp với hệ sinh thái All-in-One.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/icons.png",
         width: 1200,
         height: 630,
         alt: "Misty LGS - Giải pháp Logistics toàn diện",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Misty LGS | Chuyển đổi số Logistics toàn diện",
     description: "Misty LGS chuyên cung cấp giải pháp Web, App và phần mềm quản lý tối ưu cho ngành Logistics.",
-    images: ["/og-image.png"],
+    images: ["/icons.png"],
     creator: "@mistylgs",
   },
   robots: {
@@ -98,10 +100,14 @@ export default function RootLayout({
         <WebSiteSchema />
       </head>
       <body className={`${exo2.variable} font-sans antialiased`}>
-        <Navbar />
-        {children}
-        <Footer />
-        <NewsletterPopup />
+        <ErrorBoundary>
+          <LanguageProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <NewsletterPopup />
+          </LanguageProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

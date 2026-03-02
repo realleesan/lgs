@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import SearchModal from "@/components/SearchModal";
+import { servicesMenu, solutionsMenu, demoMenu, aboutMenu } from "@/config/menus";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

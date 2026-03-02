@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, Globe, Search, BarChart3, Smartphone, Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import LeadFormModal from "@/components/LeadFormModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Feature {
   icon: React.ReactNode;
@@ -119,7 +120,7 @@ const packages = [
 ];
 
 export default function WebLogisticsPage() {
-  const [lang, setLang] = useState<"vi" | "en">("vi");
+  const { lang, setLang } = useLanguage();
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
 
   return (
