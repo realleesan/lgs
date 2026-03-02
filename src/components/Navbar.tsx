@@ -40,7 +40,7 @@ const Navbar = () => {
 
   const aboutMenu = [
     { name: "Về chúng tôi", href: "/about" },
-    { name: "Portfolio", href: "#" },
+    { name: "Portfolio", href: "/portfolio" },
   ];
 
   return (
@@ -269,9 +269,13 @@ const Navbar = () => {
               >
                 - Về chúng tôi
               </Link>
-              <span className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]">
-                - Portfolio (sắp ra mắt)
-              </span>
+              <Link
+                href="/portfolio"
+                className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                - Portfolio
+              </Link>
             </div>
 
             <Link
