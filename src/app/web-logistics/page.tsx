@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Globe, Search, BarChart3, Smartphone, Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import LeadFormModal from "@/components/LeadFormModal";
 
 interface Feature {
   icon: React.ReactNode;
@@ -119,6 +120,7 @@ const packages = [
 
 export default function WebLogisticsPage() {
   const [lang, setLang] = useState<"vi" | "en">("vi");
+  const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
 
   return (
     <main className="min-h-screen pt-20">
@@ -172,13 +174,13 @@ export default function WebLogisticsPage() {
               </p>
 
               <div className="flex flex-wrap gap-4 mb-8">
-                <Link 
-                  href="/contact" 
+                <button 
+                  onClick={() => setIsLeadFormOpen(true)}
                   className="inline-flex items-center gap-2 bg-[#356df1] text-[#ffffff] px-6 py-3 rounded-full font-semibold hover:bg-[#2a5ad9] transition-colors"
                 >
                   {lang === "vi" ? "Nhận báo giá" : "Get Quote"}
                   <ArrowRight size={18} />
-                </Link>
+                </button>
                 <Link 
                   href="/demo" 
                   className="inline-flex items-center gap-2 bg-[#ffffff] text-[#356df1] border border-[#356df1] px-6 py-3 rounded-full font-semibold hover:bg-[#e8eefc] transition-colors"
@@ -325,8 +327,8 @@ export default function WebLogisticsPage() {
                   ))}
                 </ul>
 
-                <Link 
-                  href="/contact"
+                <button 
+                  onClick={() => setIsLeadFormOpen(true)}
                   className={`block w-full py-4 rounded-full font-semibold text-center transition-all ${
                     pkg.popular 
                       ? "bg-[#ffffff] text-[#356df1] hover:bg-[#f8fafc]" 
@@ -334,7 +336,7 @@ export default function WebLogisticsPage() {
                   }`}
                 >
                   {lang === "vi" ? "Đăng ký ngay" : "Register Now"}
-                </Link>
+                </button>
               </motion.div>
             ))}
           </div>
@@ -360,14 +362,22 @@ export default function WebLogisticsPage() {
               ? "Liên hệ ngay để được tư vấn miễn phí"
               : "Contact us now for free consultation"}
           </p>
-          <Link 
-            href="/contact" 
+          <button 
+            onClick={() => setIsLeadFormOpen(true)}
             className="inline-block bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
           >
             {lang === "vi" ? "Liên hệ ngay" : "Contact Now"}
-          </Link>
+          </button>
         </div>
       </section>
+
+      {/* Lead Form Modal */}
+      <LeadFormModal 
+        isOpen={isLeadFormOpen} 
+        onClose={() => setIsLeadFormOpen(false)} 
+        service="web-logistics"
+        source="web-logistics"
+      />
     </main>
   );
 }

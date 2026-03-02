@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, X, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import Link from "next/link";
+import LeadFormModal from "@/components/LeadFormModal";
 
 const pricingData: Record<string, Array<{
   name: string;
@@ -219,6 +220,8 @@ const pricingData: Record<string, Array<{
 export default function PricingPage() {
   const [activeService, setActiveService] = useState("web");
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
 
   const currentPackages = pricingData[activeService] || pricingData.web;
 
@@ -370,8 +373,11 @@ export default function PricingPage() {
                         ))}
                       </ul>
 
-                      <Link 
-                        href="/contact"
+                      <button 
+                        onClick={() => {
+                          setSelectedService(activeService);
+                          setIsLeadFormOpen(true);
+                        }}
                         className={`block w-full py-4 rounded-full font-semibold text-center transition-all ${
                           pkg.popular 
                             ? "bg-[#ffffff] text-[#356df1] hover:bg-[#f8fafc]" 
@@ -379,7 +385,7 @@ export default function PricingPage() {
                         }`}
                       >
                         {pkg.cta}
-                      </Link>
+                      </button>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -409,6 +415,14 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      {/* Lead Form Modal */}
+      <LeadFormModal 
+        isOpen={isLeadFormOpen} 
+        onClose={() => setIsLeadFormOpen(false)} 
+        service={selectedService}
+        source="pricing"
+      />
     </main>
   );
 }

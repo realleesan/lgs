@@ -293,6 +293,11 @@ const Navbar = () => {
               Tin tức
             </Link>
 
+            {/* Search for mobile */}
+            <div className="border-b pb-2">
+              <SearchModal onOpen={() => setIsMobileMenuOpen(false)} />
+            </div>
+
             <div className="border-b pb-2">
               <div className="text-lg font-medium text-[#000000] mb-2 font-[family-name:var(--font-body)]">Giới thiệu</div>
               <Link

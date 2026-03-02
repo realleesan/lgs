@@ -137,7 +137,7 @@ const searchData: SearchResult[] = [
   },
 ];
 
-export default function SearchModal() {
+export default function SearchModal({ onOpen }: { onOpen?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [lang, setLang] = useState<"vi" | "en">("vi");
@@ -178,7 +178,10 @@ export default function SearchModal() {
     <>
       {/* Search Button */}
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          if (onOpen) onOpen();
+        }}
         className="flex items-center gap-2 px-4 py-2 bg-[#f8fafc] border border-gray-200 rounded-full text-sm text-[#666666] hover:border-[#356df1] hover:text-[#356df1] transition-colors"
       >
         <Search size={16} />
