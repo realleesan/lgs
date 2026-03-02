@@ -27,6 +27,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import Link from "next/link";
+import LeadFormModal from "@/components/LeadFormModal";
 
 type ProductType = "web" | "app" | "wms" | "tms";
 
@@ -216,6 +217,7 @@ export default function DemoPage() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLangVi, setIsLangVi] = useState(true);
+  const [showLeadForm, setShowLeadForm] = useState(false);
 
   // Auto-rotate features
   React.useEffect(() => {
@@ -605,22 +607,29 @@ export default function DemoPage() {
             }
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link 
-              href="/contact" 
+            <button 
+              onClick={() => setShowLeadForm(true)}
               className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all flex items-center gap-2"
             >
               {isLangVi ? "Dùng thử miễn phí" : "Try Free"}
               <ArrowRight size={18} />
-            </Link>
-            <Link 
-              href="/contact" 
+            </button>
+            <button 
+              onClick={() => setShowLeadForm(true)}
               className="bg-transparent text-[#ffffff] px-8 py-4 rounded-full font-semibold border-2 border-[#ffffff] hover:bg-[#ffffff]/10 transition-all"
             >
               {isLangVi ? "Liên hệ tư vấn" : "Contact Sales"}
-            </Link>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Lead Form Modal */}
+      <LeadFormModal 
+        isOpen={showLeadForm} 
+        onClose={() => setShowLeadForm(false)} 
+        source="demo"
+      />
     </main>
   );
 }
