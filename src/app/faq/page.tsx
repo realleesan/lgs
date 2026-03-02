@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, MessageCircle, Mail, Phone } from "lucide-react";
 import Link from "next/link";
+import { FAQSchema } from "@/components/StructuredData";
 
 interface FAQItem {
   id: number;
@@ -99,8 +100,16 @@ export default function FAQPage() {
     ? faqItems 
     : faqItems.filter(item => item.category === activeCategory);
 
+  // Transform FAQ items for structured data
+  const structuredDataItems = faqItems.map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  }));
+
   return (
-    <main className="min-h-screen pt-20">
+    <>
+      <FAQSchema items={structuredDataItems} />
+      <main className="min-h-screen pt-20">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -261,5 +270,6 @@ export default function FAQPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }
