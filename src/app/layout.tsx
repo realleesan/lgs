@@ -113,7 +113,7 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebSiteSchema />
       </head>
-      <body className={`${exo2.variable} font-sans antialiased`}>
+      <body className={`${exo2.variable} font-sans antialiased bg-grid-pattern min-h-screen`}>
         <ErrorBoundary>
           <LanguageProvider>
             <Navbar />

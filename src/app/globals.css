@@ -34,9 +34,6 @@ body {
   color: var(--foreground);
   font-family: var(--font-exo2);
   overflow-x: hidden;
-  max-width: 1440px;
-  margin: 0 auto;
-  box-shadow: 0 0 100px rgba(0,0,0,0.1);
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -1,16 +1,9 @@
-import { createClient } from '@supabase/supabase-js'
+// Supabase client stub - used by api.ts
+// Currently not configured - returns empty data
 
-// Use environment variables - these must be set in .env.local
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const supabase: any = null;
 
-// Create client only if environment variables are available
-// Otherwise, return null and let the API functions handle the case gracefully
-export const supabase = (supabaseUrl && supabaseAnonKey) 
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null
-
-// Helper to check if Supabase is configured
-export const isSupabaseConfigured = () => {
-  return !!(supabaseUrl && supabaseAnonKey)
+export function isSupabaseConfigured(): boolean {
+  return false;
 }
