@@ -48,7 +48,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Grid - Large Map */}
-      <section className="py-12 bg-[#ffffff]">
+      <section className="py-12 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-5 gap-8">
             {/* Map - Takes 3 columns */}

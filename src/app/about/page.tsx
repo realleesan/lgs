@@ -55,7 +55,7 @@ export default function AboutPage() {
       </section>
 
       {/* About Content */}
-      <section className="py-20 bg-[#ffffff]">
+      <section className="py-20 bg-grid-pattern">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image */}
@@ -102,7 +102,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-16 bg-[#f8fafc]">
+      <section className="py-16 bg-dot-pattern">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-[#000000] text-center mb-12 font-[family-name:var(--font-heading)]">
             Giá trị cốt lõi

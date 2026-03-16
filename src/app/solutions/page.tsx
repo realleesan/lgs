@@ -130,7 +130,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* Tab Navigation */}
-      <section className="py-8 bg-[#ffffff]">
+      <section className="py-8 bg-grid-pattern">
         <div className="max-w-5xl mx-auto px-6">
           {loading ? (
             <div className="text-center py-4">
@@ -158,7 +158,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* Content Area */}
-      <section className="py-16 bg-[#ffffff]">
+      <section className="py-16 bg-dot-pattern">
         <div className="max-w-6xl mx-auto px-6">
           <AnimatePresence mode="wait">
             <motion.div

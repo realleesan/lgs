@@ -490,7 +490,7 @@ export default function DemoPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 bg-[#f8fafc]">
+      <section className="py-24 bg-dot-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
@@ -530,7 +530,7 @@ export default function DemoPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-[#ffffff]">
+      <section className="py-24 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">

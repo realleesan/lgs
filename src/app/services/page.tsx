@@ -97,7 +97,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Alternating Layout */}
-      <section className="py-16 bg-[#ffffff]">
+      <section className="py-16 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           {loading ? (
             <div className="text-center py-20">
