@@ -1,0 +1,33 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "demo": "Demo",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Digital Transformation for Logistics Enterprises",
+    "subtitle": "Building websites, software and logistics management systems to help businesses operate more efficiently and professionally.",
+    "cta": "Get Free Consultation",
+    "ctaDemo": "View Demo"
+  },
+  "PainPoints": {
+    "title": "What Logistics Enterprises Are Facing"
+  },
+  "Solutions": {
+    "title": "Digital Transformation Solutions from Misty LGS"
+  },
+  "Pricing": {
+    "title": "Service Pricing",
+    "starter": "Starter",
+    "business": "Business",
+    "enterprise": "Enterprise"
+  },
+  "CTA": {
+    "title": "Ready for Digital Transformation?",
+    "subtitle": "Get free digital transformation consultation - solutions tailored to your scale and budget",
+    "button": "Get Free Consultation"
+  }
+}

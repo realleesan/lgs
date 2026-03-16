@@ -1,0 +1,33 @@
+{
+  "Navigation": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "services": "Dịch vụ",
+    "demo": "Demo",
+    "blog": "Blog",
+    "contact": "Liên hệ"
+  },
+  "Hero": {
+    "title": "Chuyển đổi số cho doanh nghiệp logistics",
+    "subtitle": "Xây dựng website, phần mềm và hệ thống quản lý logistics giúp doanh nghiệp vận hành hiệu quả và chuyên nghiệp hơn.",
+    "cta": "Nhận tư vấn miễn phí",
+    "ctaDemo": "Xem demo"
+  },
+  "PainPoints": {
+    "title": "Doanh nghiệp logistics đang gặp những vấn đề này"
+  },
+  "Solutions": {
+    "title": "Giải pháp chuyển đổi số từ Misty LGS"
+  },
+  "Pricing": {
+    "title": "Bảng giá dịch vụ",
+    "starter": "Starter",
+    "business": "Business",
+    "enterprise": "Enterprise"
+  },
+  "CTA": {
+    "title": "Sẵn sàng chuyển đổi số cho doanh nghiệp?",
+    "subtitle": "Nhận tư vấn chuyển đổi số miễn phí - giải pháp phù hợp với quy mô và ngân sách của bạn",
+    "button": "Nhận tư vấn chuyển đổi số miễn phí"
+  }
+}

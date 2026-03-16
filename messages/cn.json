@@ -1,0 +1,33 @@
+{
+  "Navigation": {
+    "home": "首页",
+    "about": "关于我们",
+    "services": "服务",
+    "demo": "演示",
+    "blog": "博客",
+    "contact": "联系我们"
+  },
+  "Hero": {
+    "title": "物流企业数字化转型",
+    "subtitle": "建设网站、软件和物流管理系统，帮助企业更高效、更专业地运营。",
+    "cta": "免费咨询",
+    "ctaDemo": "查看演示"
+  },
+  "PainPoints": {
+    "title": "物流企业面临的挑战"
+  },
+  "Solutions": {
+    "title": "Misty LGS 数字化解决方案"
+  },
+  "Pricing": {
+    "title": "服务价格",
+    "starter": "入门版",
+    "business": "商业版",
+    "enterprise": "企业版"
+  },
+  "CTA": {
+    "title": "准备好数字化转型了吗？",
+    "subtitle": "获取免费数字化转型咨询 - 根据您的规模和预算定制解决方案",
+    "button": "免费咨询"
+  }
+}
