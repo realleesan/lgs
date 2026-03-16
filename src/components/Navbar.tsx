@@ -5,13 +5,13 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { mainMenu, solutionsMenu } from "@/config/menus";
+import { mainMenu, servicesMenu } from "@/config/menus";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const solutionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,11 +49,11 @@ const Navbar = () => {
                 key={item.name}
                 className="relative"
                 onMouseEnter={() => {
-                  if (solutionsTimeoutRef.current) clearTimeout(solutionsTimeoutRef.current);
-                  setSolutionsOpen(true);
+                  if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+                  setServicesOpen(true);
                 }}
                 onMouseLeave={() => {
-                  solutionsTimeoutRef.current = setTimeout(() => setSolutionsOpen(false), 300);
+                  servicesTimeoutRef.current = setTimeout(() => setServicesOpen(false), 300);
                 }}
               >
                 <Link
@@ -62,15 +62,15 @@ const Navbar = () => {
                 >
                   {item.name} <ChevronDown size={16} />
                 </Link>
-                {solutionsOpen && (
+                {servicesOpen && (
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[#ffffff] border border-gray-200 rounded-xl shadow-lg py-2">
-                    {solutionsMenu.map((solution) => (
+                    {servicesMenu.map((service) => (
                       <Link
-                        key={solution.name}
-                        href={solution.href}
+                        key={service.name}
+                        href={service.href}
                         className="block px-4 py-2 text-sm text-[#666666] hover:text-[#356df1] hover:bg-[#f5f5f5] font-[family-name:var(--font-body)]"
                       >
-                        {solution.name}
+                        {service.name}
                       </Link>
                     ))}
                   </div>
@@ -110,19 +110,19 @@ const Navbar = () => {
         <div className="absolute top-full left-0 right-0 bg-[#ffffff] border-t border-gray-200 md:hidden max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col p-6 gap-4">
             {mainMenu.map((item) => (
-              item.href === "/solutions" ? (
+              item.href === "/services" ? (
                 <div key={item.name} className="border-b pb-2">
                   <div className="text-lg font-medium text-[#000000] mb-2 font-[family-name:var(--font-body)]">
                     {item.name}
                   </div>
-                  {solutionsMenu.map((solution) => (
+                  {servicesMenu.map((service) => (
                     <Link
-                      key={solution.name}
-                      href={solution.href}
+                      key={service.name}
+                      href={service.href}
                       className="block pl-4 py-2 text-base text-[#666666] font-[family-name:var(--font-body)]"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      {solution.name}
+                      {service.name}
                     </Link>
                   ))}
                 </div>
