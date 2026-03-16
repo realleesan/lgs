@@ -89,14 +89,6 @@ export default function HomePage() {
     { title: "Tracking System", desc: "Xem demo tra cứu vận đơn", href: "/demo" },
   ];
 
-  // Benefits
-  const benefits = [
-    { title: "Thiết kế theo yêu cầu", desc: "100% cá nhân hóa theo quy trình kinh doanh của bạn", icon: Settings },
-    { title: "Dễ sử dụng", desc: "Giao diện trực quan, không cần đào tạo phức tạp", icon: Users },
-    { title: "Tiết kiệm 30% chi phí", desc: "Giảm nhân sự, tăng hiệu suất vận hành", icon: TrendingUp },
-    { title: "Hỗ trợ 24/7", desc: "Đội ngũ kỹ thuật luôn sẵn sàng hỗ trợ", icon: Zap },
-  ];
-
   // Stats
   const stats = [
     { value: "100+", label: "Doanh nghiệp Logistics" },
@@ -410,37 +402,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-[#356df1]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="w-16 h-16 bg-[#ffffff]/10 rounded-full flex items-center justify-center text-[#ffffff] mx-auto mb-4">
-                    <Icon className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#ffffff] mb-2 font-[family-name:var(--font-heading)]">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-sm text-[#ffffff]/80 font-[family-name:var(--font-body)]">
-                    {benefit.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Stats Section */}
       <section className="py-16 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
@@ -454,66 +415,6 @@ export default function HomePage() {
                   {stat.label}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section - 3 tiers (Section 7) */}
-      <section className="py-20 bg-dot-pattern">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-              Bảng giá dịch vụ
-            </h2>
-            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
-              Chọn gói phù hợp với quy mô doanh nghiệp của bạn
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`bg-[#ffffff] p-8 rounded-2xl border ${tier.popular ? 'border-[#356df1] relative' : 'border-gray-100'}`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#356df1] text-[#ffffff] px-4 py-1 rounded-full text-sm font-medium">
-                    Phổ biến nhất
-                  </div>
-                )}
-                <h3 className="text-2xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
-                  {tier.name}
-                </h3>
-                <div className="text-3xl font-bold text-[#356df1] mb-2 font-[family-name:var(--font-heading)]">
-                  {tier.price}
-                </div>
-                <p className="text-[#666666] mb-6 font-[family-name:var(--font-body)]">
-                  {tier.desc}
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {tier.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-[#666666]">
-                      <Check className="w-5 h-5 text-green-600" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link 
-                  href="/contact"
-                  className={`block text-center py-3 rounded-full font-semibold transition-all ${
-                    tier.popular 
-                      ? 'bg-[#356df1] text-[#ffffff] hover:bg-[#2a5ad9]' 
-                      : 'border-2 border-[#356df1] text-[#356df1] hover:bg-[#356df1] hover:text-[#ffffff]'
-                  }`}
-                >
-                  Liên hệ tư vấn
-                </Link>
-              </motion.div>
             ))}
           </div>
         </div>

@@ -5,12 +5,6 @@ import { motion } from "framer-motion";
 import { Check, Users, Award, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
-const stats = [
-  { value: "100+", label: "Khách hàng" },
-  { value: "50+", label: "Dự án" },
-  { value: "99%", label: "Hài lòng" },
-];
-
 const values = [
   { title: "Tập trung khách hàng", description: "Luôn đặt nhu cầu khách hàng lên hàng đầu" },
   { title: "Chất lượng cao", description: "Cam kết mang đến sản phẩm tốt nhất" },
@@ -37,20 +31,6 @@ export default function AboutPage() {
           <p className="text-lg text-[#666666] font-[family-name:var(--font-body)]">
             Đồng hành cùng doanh nghiệp Logistics chuyển đổi số
           </p>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-12 bg-[#356df1]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-3 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-[#ffffff] font-[family-name:var(--font-heading)]">{stat.value}</div>
-                <div className="text-[#ffffff]/80 text-sm font-[family-name:var(--font-body)]">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
