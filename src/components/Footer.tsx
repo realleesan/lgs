@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Linkedin, Mail, MapPin, Phone, Clock } from "lucide-react";
+import { footerProducts, footerCompany, footerActions } from "@/config/menus";
 
 const Footer = () => {
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
           </Link>
           <p className="text-[#666666] text-sm leading-relaxed font-[family-name:var(--font-body)]">
             Đơn vị tiên phong trong lĩnh vực chuyển đổi số cho ngành Logistics. 
-            Chúng tôi cung cấp giải pháp công nghệ toàn diện, tối ưu hóa quy trình vận hành và quản lý.
+            Giúp doanh nghiệp vận hành hiệu quả hơn với giải pháp công nghệ toàn diện.
           </p>
           <div className="flex gap-4">
             <Link href="https://www.facebook.com/profile.php?id=61586737089750" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#f5f5f5] flex items-center justify-center hover:bg-[#356df1] hover:text-[#ffffff] transition-colors">
@@ -29,51 +30,69 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Services */}
+        {/* Products/Solutions - Main navigation */}
         <div>
-          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Dịch vụ</h4>
+          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Sản phẩm</h4>
           <ul className="space-y-4 text-[#666666] text-sm font-[family-name:var(--font-body)]">
-            <li><Link href="/services" className="hover:text-[#356df1] transition-colors">Web Logistics có sẵn</Link></li>
-            <li><Link href="/services" className="hover:text-[#356df1] transition-colors">App Quản lý vận tải</Link></li>
-            <li><Link href="/services" className="hover:text-[#356df1] transition-colors">Phần mềm kho bãi (WMS)</Link></li>
-            <li><Link href="/services" className="hover:text-[#356df1] transition-colors">Thiết kế theo yêu cầu</Link></li>
+            {footerProducts.map((item, index) => (
+              <li key={index}>
+                <Link href={item.href} className="hover:text-[#356df1] transition-colors">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Quick Links */}
+        {/* Company - Secondary navigation */}
         <div>
-          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Liên kết nhanh</h4>
+          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Về công ty</h4>
           <ul className="space-y-4 text-[#666666] text-sm font-[family-name:var(--font-body)]">
-            <li><Link href="/" className="hover:text-[#356df1] transition-colors">Trang chủ</Link></li>
-            <li><Link href="/about" className="hover:text-[#356df1] transition-colors">Về chúng tôi</Link></li>
-            <li><Link href="/solutions" className="hover:text-[#356df1] transition-colors">Giải pháp All-in-One</Link></li>
-            <li><Link href="/pricing" className="hover:text-[#356df1] transition-colors">Báo giá</Link></li>
-            <li><Link href="/news" className="hover:text-[#356df1] transition-colors">Tin tức</Link></li>
-            <li><Link href="/contact" className="hover:text-[#356df1] transition-colors">Báo giá dịch vụ</Link></li>
+            {footerCompany.map((item, index) => (
+              <li key={index}>
+                <Link href={item.href} className="hover:text-[#356df1] transition-colors">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Contact Info */}
+        {/* Actions - CTAs */}
         <div>
-          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Liên hệ</h4>
+          <h4 className="text-lg font-bold mb-6 font-[family-name:var(--font-heading)]">Hành động</h4>
           <ul className="space-y-4 text-[#666666] text-sm font-[family-name:var(--font-body)]">
-            <li className="flex items-start gap-3">
-              <MapPin size={18} className="text-[#356df1] shrink-0" />
-              <span>Phường Phú Diễn, Thành phố Hà Nội</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone size={18} className="text-[#356df1] shrink-0" />
-              <span>0914960029</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail size={18} className="text-[#356df1] shrink-0" />
-              <span>baominhkpkp@gmail.com</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Clock size={18} className="text-[#356df1] shrink-0" />
-              <span>08:00 - 23:00 (T2 - CN)</span>
-            </li>
+            {footerActions.map((item, index) => (
+              <li key={index}>
+                <Link href={item.href} className="hover:text-[#356df1] transition-colors">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
+          
+          {/* Contact Info */}
+          <div className="mt-8 pt-8 border-t border-gray-100">
+            <h4 className="text-lg font-bold mb-4 font-[family-name:var(--font-heading)]">Liên hệ</h4>
+            <ul className="space-y-3 text-[#666666] text-sm font-[family-name:var(--font-body)]">
+              <li className="flex items-start gap-3">
+                <MapPin size={18} className="text-[#356df1] shrink-0" />
+                <span>Phường Phú Diễn, Thành phố Hà Nội</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone size={18} className="text-[#356df1] shrink-0" />
+                <span>0914960029</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={18} className="text-[#356df1] shrink-0" />
+                <span>baominhkpkp@gmail.com</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Clock size={18} className="text-[#356df1] shrink-0" />
+                <span>08:00 - 23:00 (T2 - CN)</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
