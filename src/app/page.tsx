@@ -89,14 +89,6 @@ export default function HomePage() {
     { title: "Tracking System", desc: "Xem demo tra cứu vận đơn", href: "/demo" },
   ];
 
-  // Stats
-  const stats = [
-    { value: "100+", label: "Doanh nghiệp Logistics" },
-    { value: "50+", label: "Dự án triển khai" },
-    { value: "30%", label: "Giảm chi phí vận hành" },
-    { value: "24/7", label: "Hỗ trợ liên tục" },
-  ];
-
   return (
     <main className="min-h-screen">
       {/* Hero Section - Focused on pain points */}
@@ -180,23 +172,6 @@ export default function HomePage() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#356df1]/30 via-transparent to-transparent" />
-                
-                {/* Floating Card */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute bottom-6 right-6 bg-[#ffffff] p-4 rounded-2xl shadow-lg"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                      <Check className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-[#999999]">Đơn hàng hôm nay</div>
-                      <div className="font-bold text-[#000000]">+127 đơn</div>
-                    </div>
-                  </div>
-                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -208,6 +183,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+              Thách thức mà doanh nghiệp Logistics gặp phải
             </h2>
             <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
               Chúng tôi hiểu những thách thức của ngành logistics và có giải pháp phù hợp
@@ -321,50 +297,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Demo Section - Important for logistics customers (Section 4) */}
-      <section className="py-20 bg-[#f8fafc]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-              Trải nghiệm demo trước khi quyết định
-            </h2>
-            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
-              Khách logistics rất thích xem demo dashboard. Trải nghiệm trực quan các tính năng để yên tâm hơn
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {demos.map((demo, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link 
-                  href={demo.href}
-                  className="block bg-[#ffffff] p-8 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group"
-                >
-                  <div className="w-14 h-14 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
-                    <Layout className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
-                    {demo.title}
-                  </h3>
-                  <p className="text-[#666666] font-[family-name:var(--font-body)]">
-                    {demo.desc}
-                  </p>
-                  <div className="mt-4 flex items-center gap-1 text-[#356df1] text-sm font-medium">
-                    Xem ngay <ArrowUpRight size={14} />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Workflow Section - 5 steps (Section 5) */}
       <section className="py-20 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
@@ -397,24 +329,6 @@ export default function HomePage() {
                   {step.desc}
                 </p>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 bg-grid-pattern">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-[#356df1] font-[family-name:var(--font-heading)]">
-                  {stat.value}
-                </div>
-                <div className="text-[#666666] font-[family-name:var(--font-body)]">
-                  {stat.label}
-                </div>
-              </div>
             ))}
           </div>
         </div>
