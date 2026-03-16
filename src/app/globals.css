@@ -40,6 +40,170 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-exo2);
 }
 
+/* ============ FONT SIZES - INCREASED FOR READABILITY ============ */
+
+/* Base font size increased */
+html {
+  font-size: 18px;
+}
+
+/* Headers - Larger sizes */
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.75rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* Body text - Larger */
+body {
+  font-size: 1.125rem;
+}
+
+/* Navbar text - Larger */
+nav {
+  font-size: 1.125rem;
+}
+
+/* Footer text - Larger */
+footer {
+  font-size: 1rem;
+}
+
+/* Button text */
+button, .btn {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ============ BACKGROUND PATTERS ============ */
+
+/* Grid pattern */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(53, 109, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 109, 241, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Dot pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(53, 109, 241, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Diagonal lines pattern */
+.bg-lines-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(53, 109, 241, 0.03) 10px,
+    rgba(53, 109, 241, 0.03) 20px
+  );
+}
+
+/* Gradient background sections */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #356df1 0%, #1e4bc7 100%);
+}
+
+.bg-gradient-light {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.bg-gradient-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Section dividers with wave pattern */
+.section-divider {
+  position: relative;
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23ffffff' d='M0,50 C360,100 720,0 1080,50 C1260,75 1380,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat top;
+  background-size: cover;
+  transform: translateY(-99%);
+}
+
+/* Card with shadow and gradient */
+.card-gradient {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(53, 109, 241, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-gradient:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(53, 109, 241, 0.15);
+  border-color: rgba(53, 109, 241, 0.2);
+}
+
+/* Hero section with overlay pattern */
+.hero-pattern {
+  position: relative;
+}
+
+.hero-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(53, 109, 241, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(53, 109, 241, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(53, 109, 241, 0.04) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #356df1, #6b8cff, #356df1);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
 @layer base {
   * {
     @apply border-gray-200;

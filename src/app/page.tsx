@@ -6,20 +6,21 @@ import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe, Star, ArrowUp
 import Link from "next/link";
 
 export default function HomePage() {
-  // Pain points - 4 main logistics problems (from app.md)
+  // Pain points - 4 main logistics problems (from app.md) - with images
   const painPoints = [
-    { icon: Package, title: "Quản lý đơn hàng bằng Excel", desc: "Excel rời rạc, không biết trạng thái đơn hàng, nhân viên cập nhật thủ công" },
-    { icon: Globe, title: "Không có tracking cho khách", desc: "Khách hàng gọi điện hỏi hàng đang ở đâu, phải gọi điện hỏi tài xế" },
-    { icon: Truck, title: "Điều phối xe thủ công", desc: "Không biết xe nào đang rảnh, không tối ưu chuyến, chi phí vận chuyển cao" },
-    { icon: Settings, title: "Website thiếu chuyên nghiệp", desc: "Không có form báo giá, không có tracking, không có catalog dịch vụ" },
+    { icon: Package, title: "Quản lý đơn hàng bằng Excel", desc: "Excel rời rạc, không biết trạng thái đơn hàng, nhân viên cập nhật thủ công", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&q=80" },
+    { icon: Globe, title: "Không có tracking cho khách", desc: "Khách hàng gọi điện hỏi hàng đang ở đâu, phải gọi điện hỏi tài xế", image: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&h=300&fit=crop&q=80" },
+    { icon: Truck, title: "Điều phối xe thủ công", desc: "Không biết xe nào đang rảnh, không tối ưu chuyến, chi phí vận chuyển cao", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=300&fit=crop&q=80" },
+    { icon: Settings, title: "Website thiếu chuyên nghiệp", desc: "Không có form báo giá, không có tracking, không có catalog dịch vụ", image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop&q=80" },
   ];
 
-  // Solutions - 4 main groups (from app.md)
+  // Solutions - 4 main groups (from app.md) - with images
   const solutions = [
     { 
       title: "Website Logistics", 
       desc: "Website chuyên cho công ty logistics với tracking đơn hàng, form báo giá, quản lý khách hàng, đa ngôn ngữ và SEO.",
       icon: Globe, 
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80",
       href: "/web-logistics",
       features: ["Tra cứu vận đơn online", "Bảng giá tự động", "Tối ưu SEO logistics", "Đa ngôn ngữ"]
     },
@@ -27,6 +28,7 @@ export default function HomePage() {
       title: "Logistics Management System (LMS)", 
       desc: "Phần mềm quản lý logistics toàn diện với các module quản lý đơn hàng, khách hàng, tài xế/xe, chứng từ và dashboard doanh thu.",
       icon: Database, 
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
       href: "/solutions",
       features: ["Quản lý đơn hàng", "Quản lý tài xế/xe", "Tracking vận chuyển", "Dashboard doanh thu"]
     },
@@ -34,6 +36,7 @@ export default function HomePage() {
       title: "Logistics Mobile App", 
       desc: "App cho driver và khách hàng: nhận chuyến, cập nhật trạng thái, scan POD, GPS tracking, xem lịch sử vận chuyển.",
       icon: Smartphone, 
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop&q=80",
       href: "/app",
       features: ["Driver App", "Customer App", "GPS real-time", "Scan POD"]
     },
@@ -41,6 +44,7 @@ export default function HomePage() {
       title: "Custom Web App", 
       desc: "Hệ thống theo yêu cầu: Freight forwarding, Warehouse management, CRM logistics, Booking system.",
       icon: Code, 
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&q=80",
       href: "/solutions",
       features: ["Freight forwarding", "WMS custom", "CRM logistics", "Booking system"]
     },
@@ -208,7 +212,7 @@ export default function HomePage() {
       </section>
 
       {/* Pain Points Section */}
-      <section className="py-20 bg-[#f8fafc]">
+      <section className="py-20 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
@@ -229,17 +233,27 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-[#ffffff] p-6 rounded-2xl border border-gray-100"
+                  className="bg-[#ffffff] rounded-2xl border border-gray-100 overflow-hidden card-gradient"
                 >
-                  <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4">
-                    <Icon className="w-6 h-6" />
+                  {/* Image */}
+                  <div className="h-40 overflow-hidden">
+                    <img 
+                      src={point.image} 
+                      alt={point.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
-                    {point.title}
-                  </h3>
-                  <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">
-                    {point.desc}
-                  </p>
+                  <div className="p-6">
+                    <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                      {point.title}
+                    </h3>
+                    <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">
+                      {point.desc}
+                    </p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -248,7 +262,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-[#ffffff]">
+      <section className="py-24 bg-dot-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
@@ -272,29 +286,39 @@ export default function HomePage() {
                 >
                   <Link 
                     href={solution.href}
-                    className="block bg-[#ffffff] p-8 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group h-full"
+                    className="block bg-[#ffffff] rounded-2xl border border-gray-100 overflow-hidden hover:border-[#356df1] transition-colors group h-full card-gradient"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="w-14 h-14 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] shrink-0 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
-                        <Icon className="w-7 h-7" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#356df1] transition-colors">
-                          {solution.title}
-                        </h3>
-                        <p className="text-[#666666] mb-4 font-[family-name:var(--font-body)]">
-                          {solution.desc}
-                        </p>
-                        <ul className="space-y-2 mb-4">
-                          {solution.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-center gap-2 text-sm text-[#666666]">
-                              <Check className="w-4 h-4 text-[#356df1]" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="flex items-center gap-1 text-[#356df1] text-sm font-medium">
-                          Tìm hiểu thêm <ArrowUpRight size={14} />
+                    {/* Image */}
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={solution.image} 
+                        alt={solution.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-8">
+                      <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] shrink-0 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
+                          <Icon className="w-7 h-7" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#356df1] transition-colors">
+                            {solution.title}
+                          </h3>
+                          <p className="text-[#666666] mb-4 font-[family-name:var(--font-body)]">
+                            {solution.desc}
+                          </p>
+                          <ul className="space-y-2 mb-4">
+                            {solution.features.map((feature, idx) => (
+                              <li key={idx} className="flex items-center gap-2 text-sm text-[#666666]">
+                                <Check className="w-4 h-4 text-[#356df1]" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                          <div className="flex items-center gap-1 text-[#356df1] text-sm font-medium">
+                            Tìm hiểu thêm <ArrowUpRight size={14} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -351,7 +375,7 @@ export default function HomePage() {
       </section>
 
       {/* Workflow Section - 5 steps (Section 5) */}
-      <section className="py-20 bg-[#ffffff]">
+      <section className="py-20 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
@@ -419,7 +443,7 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-[#f8fafc]">
+      <section className="py-16 bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -437,7 +461,7 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section - 3 tiers (Section 7) */}
-      <section className="py-20 bg-[#f8fafc]">
+      <section className="py-20 bg-dot-pattern">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
