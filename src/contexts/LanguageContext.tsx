@@ -2,13 +2,21 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type Language = "vi" | "en";
+// Support 3 languages as per app.md: VI (default), EN, CN
+type Language = "vi" | "en" | "cn";
 
 interface LanguageContextType {
   lang: Language;
   setLang: (lang: Language) => void;
   toggleLang: () => void;
+  languages: { code: Language; name: string; nativeName: string }[];
 }
+
+const languages = [
+  { code: "vi" as Language, name: "Vietnamese", nativeName: "Tiếng Việt" },
+  { code: "en" as Language, name: "English", nativeName: "English" },
+  { code: "cn" as Language, name: "Chinese", nativeName: "中文" },
+];
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
@@ -22,7 +30,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   // Optional: Persist language preference
   useEffect(() => {
     const saved = localStorage.getItem("language");
-    if (saved === "en" || saved === "vi") {
+    if (saved === "vi" || saved === "en" || saved === "cn") {
       setLang(saved);
     }
   }, []);
@@ -33,12 +41,15 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   };
 
   const toggleLang = () => {
-    const newLang = lang === "vi" ? "en" : "vi";
+    // Cycle through: vi -> en -> cn -> vi
+    const langs: Language[] = ["vi", "en", "cn"];
+    const currentIndex = langs.indexOf(lang);
+    const newLang = langs[(currentIndex + 1) % langs.length];
     handleSetLang(newLang);
   };
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang: handleSetLang, toggleLang }}>
+    <LanguageContext.Provider value={{ lang, setLang: handleSetLang, toggleLang, languages }}>
       {children}
     </LanguageContext.Provider>
   );

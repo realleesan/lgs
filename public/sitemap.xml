@@ -1,92 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mistylgs.com/</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/about</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/about</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/services</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/services</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/solutions</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/solutions</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/pricing</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/pricing</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/portfolio</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/portfolio</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/testimonials</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mistylgs.com/faq</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/faq</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/demo</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/demo</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/contact</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/contact</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/news</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/news</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/web-logistics</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/web-logistics</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/app</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/app</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/wms</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/wms</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mistylgs.com/tms</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://mistylgs.vn/tms</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

@@ -1,53 +1,54 @@
 /**
  * Website Mission:
- * "Giúp doanh nghiệp Logistics Việt Nam chuyển đổi số thành công với giải pháp công nghệ toàn diện -
- * từ website đến phần mềm quản lý: đơn giản, nhanh chóng, hiệu quả."
+ * "Nền tảng giải pháp chuyển đổi số cho doanh nghiệp logistics vừa và nhỏ"
  * 
- * Customer Pain Points Addressed:
- * 1. Không biết bắt đầu từ đâu → Menu đơn giản 5 mục chính
- * 2. Thông tin lộn xộn → Mỗi trang có giá trị riêng biệt
- * 3. Không rõ lợi ích → CTA rõ ràng trên mỗi trang
- * 4. Lo lắng về chi phí → Trang báo giá chi tiết
- * 5. Muốn xem trước → Trang demo trực quan
+ * Customer Pain Points Addressed (from app.md):
+ * 1. Quản lý đơn hàng bằng Excel
+ * 2. Không có tracking cho khách
+ * 3. Điều phối xe thủ công
+ * 4. Website thiếu chuyên nghiệp
  * 
- * Menu Philosophy:
- * - Tối đa 5 mục menu chính + 1 CTA button
- * - Mỗi mục menu dẫn đến giải pháp cụ thể cho vấn đề khách hàng
- * - Không trùng lặp, không confuse
- * - Hỗ trợ hành trình khách hàng: Landing → Tìm hiểu → Demo → Quyết định
+ * Solutions (4 main groups from app.md):
+ * 1. Website Logistics
+ * 2. Logistics Management System (LMS)
+ * 3. Logistics Mobile App
+ * 4. Custom Web App
  */
 
-// Menu configuration for the application
-// Simplified structure based on customer journey
+// Menu configuration - Updated according to app.md sitemap
 
 export interface MenuItem {
   name: string;
   href: string;
-  description?: string; // Brief description for accessibility
+  description?: string;
 }
 
-// Primary Navigation - 5 items max (excluding CTA)
-// Following customer journey: Home → Solutions → Demo → Pricing → Contact
+// Primary Navigation - 6 items (from app.md sitemap)
 export const mainMenu: MenuItem[] = [
   { 
     name: "Trang chủ", 
     href: "/",
-    description: "Trang chủ - Tổng quan giải pháp"
+    description: "Trang chủ - Giải pháp chuyển đổi số logistics"
   },
   { 
-    name: "Giải pháp", 
-    href: "/solutions",
-    description: "Các giải pháp WMS, TMS, Web, App"
+    name: "Giới thiệu", 
+    href: "/about",
+    description: "Sứ mệnh, Về chúng tôi, Portfolio"
   },
   { 
-    name: "Xem Demo", 
+    name: "Dịch vụ", 
+    href: "/services",
+    description: "Website Logistics, LMS, Mobile App, Custom System"
+  },
+  { 
+    name: "Demo", 
     href: "/demo",
-    description: "Trải nghiệm phần mềm trực quan"
+    description: "Demo website, phần mềm, dashboard logistics"
   },
   { 
-    name: "Báo giá", 
-    href: "/pricing",
-    description: "Bảng giá dịch vụ chi tiết"
+    name: "Blog", 
+    href: "/news",
+    description: "Tin tức chuyển đổi số logistics"
   },
   { 
     name: "Liên hệ", 
@@ -56,43 +57,70 @@ export const mainMenu: MenuItem[] = [
   },
 ];
 
-// Solutions Dropdown - Products/Services
-// Each item solves a specific customer problem
-export const solutionsMenu: MenuItem[] = [
+// Services sub-menu - 4 main groups + additional services
+export const servicesMenu: MenuItem[] = [
   { 
-    name: "Phần mềm WMS", 
-    href: "/wms",
-    description: "Quản lý kho bãi thông minh"
-  },
-  { 
-    name: "Phần mềm TMS", 
-    href: "/tms",
-    description: "Quản lý vận tải hiệu quả"
-  },
-  { 
-    name: "Web Logistics", 
+    name: "Website Logistics", 
     href: "/web-logistics",
-    description: "Website chuyên nghiệp cho logistics"
+    description: "Website chuyên nghiệp với tracking, form báo giá, đa ngôn ngữ"
   },
   { 
-    name: "App Mobile", 
+    name: "Logistics Management System (LMS)", 
+    href: "/solutions",
+    description: "Phần mềm quản lý logistics toàn diện"
+  },
+  { 
+    name: "Logistics Mobile App", 
     href: "/app",
-    description: "Ứng dụng quản lý trên điện thoại"
+    description: "Driver app và Customer app"
+  },
+  { 
+    name: "Custom Web App", 
+    href: "/solutions",
+    description: "Hệ thống theo yêu cầu riêng"
+  },
+  { 
+    name: "Thuê website", 
+    href: "/services",
+    description: "Dịch vụ thuê website theo tháng"
+  },
+  { 
+    name: "Bảo trì website", 
+    href: "/services",
+    description: "Dịch vụ bảo trì và cập nhật"
   },
 ];
 
-// Secondary Links - Pages with unique value
-// These pages have different content from main pages
-export const secondaryMenu: MenuItem[] = [
+// Demo sub-menu
+export const demoMenu: MenuItem[] = [
   { 
-    name: "Về chúng tôi", 
-    href: "/about",
-    description: "Thông tin về Misty LGS"
+    name: "Demo Website Logistics", 
+    href: "/demo",
+    description: "Xem demo website chuyên nghiệp"
   },
   { 
-    name: "Tin tức", 
-    href: "/news",
-    description: "Tin tức và cập nhật ngành logistics"
+    name: "Demo Phần mềm Logistics", 
+    href: "/demo",
+    description: "Xem demo hệ thống quản lý"
+  },
+  { 
+    name: "Demo Dashboard", 
+    href: "/demo",
+    description: "Xem demo dashboard thống kê"
+  },
+];
+
+// Secondary Links
+export const secondaryMenu: MenuItem[] = [
+  { 
+    name: "Pricing", 
+    href: "/pricing",
+    description: "Bảng giá dịch vụ"
+  },
+  { 
+    name: "Portfolio", 
+    href: "/portfolio",
+    description: "Dự án đã triển khai"
   },
   { 
     name: "Câu hỏi thường gặp", 
@@ -102,19 +130,18 @@ export const secondaryMenu: MenuItem[] = [
 ];
 
 // Footer menu configurations
-// Organized by customer needs
-
 export const footerProducts = [
-  { name: "Phần mềm WMS", href: "/wms", description: "Quản lý kho bãi" },
-  { name: "Phần mềm TMS", href: "/tms", description: "Quản lý vận tải" },
-  { name: "Web Logistics", href: "/web-logistics", description: "Website logistics" },
-  { name: "App Mobile", href: "/app", description: "Ứng dụng di động" },
+  { name: "Website Logistics", href: "/web-logistics", description: "Website logistics" },
+  { name: "LMS - Phần mềm quản lý", href: "/solutions", description: "Logistics Management System" },
+  { name: "Mobile App", href: "/app", description: "Ứng dụng di động" },
+  { name: "Custom Development", href: "/solutions", description: "Phát triển theo yêu cầu" },
 ];
 
 export const footerCompany = [
   { name: "Về chúng tôi", href: "/about" },
   { name: "Tin tức", href: "/news" },
-  { name: "Câu hỏi thường gặp", href: "/faq" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "FAQ", href: "/faq" },
 ];
 
 export const footerActions = [
@@ -123,15 +150,10 @@ export const footerActions = [
   { name: "Liên hệ tư vấn", href: "/contact" },
 ];
 
-// Customer Journey Map:
+// Customer Journey Map (from app.md):
 // 1. Landing (/) → Overview of solutions
-// 2. Solutions (/solutions) → Choose specific solution
-// 3. Product pages (wms, tms, web-logistics, app) → Detailed info
-// 4. Demo (/demo) → Try before buy
-// 5. Pricing (/pricing) → Cost transparency
+// 2. About (/about) → Sứ mệnh, Về chúng tôi, Portfolio
+// 3. Services (/services) → 4 main groups + Thuê web + Bảo trì
+// 4. Demo (/demo) → Website, Software, Dashboard
+// 5. Blog (/news) → Chuyển đổi số logistics
 // 6. Contact (/contact) → Take action
-// 
-// Removed/Consolidated:
-// - /services: Merged into /solutions (duplicate content)
-// - /portfolio: Removed (not primary decision factor)
-// - /testimonials: Can be referenced in /about or /demo

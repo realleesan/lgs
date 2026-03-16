@@ -2,48 +2,87 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe, Star, ArrowUpRight, Settings, Users, TrendingUp } from "lucide-react";
+import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe, Star, ArrowUpRight, Settings, Users, TrendingUp, Layout, Code, Smartphone, Database, Clock, Award } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
-  // Pain points for logistics companies
+  // Pain points - 4 main logistics problems (from app.md)
   const painPoints = [
-    { icon: Package, title: "Quản lý kho lộn xộn", desc: "Không biết hàng tồn kho bao nhiêu, nhập xuất thủ công" },
-    { icon: Truck, title: "Điều xe không hiệu quả", desc: "Xe chạy rỗng, không tối ưu lộ trình, chi phí vận chuyển cao" },
-    { icon: Globe, title: "Khách hàng không theo dõi được đơn", desc: "Khách hàng gọi điện hỏi liên tục, tốn thời gian" },
-    { icon: Settings, title: "Hệ thống rời rạc", desc: "Nhiều phần mềm riêng lẻ, không tích hợp được với nhau" },
+    { icon: Package, title: "Quản lý đơn hàng bằng Excel", desc: "Excel rời rạc, không biết trạng thái đơn hàng, nhân viên cập nhật thủ công" },
+    { icon: Globe, title: "Không có tracking cho khách", desc: "Khách hàng gọi điện hỏi hàng đang ở đâu, phải gọi điện hỏi tài xế" },
+    { icon: Truck, title: "Điều phối xe thủ công", desc: "Không biết xe nào đang rảnh, không tối ưu chuyến, chi phí vận chuyển cao" },
+    { icon: Settings, title: "Website thiếu chuyên nghiệp", desc: "Không có form báo giá, không có tracking, không có catalog dịch vụ" },
   ];
 
-  // Services/Products offered
-  const services = [
+  // Solutions - 4 main groups (from app.md)
+  const solutions = [
     { 
-      title: "Thiết kế Web Logistics", 
-      desc: "Website chuyên nghiệp cho công ty vận tải, logistics. Tích hợp tra cứu vận đơn, bảng giá tự động, SEO hiệu quả.",
+      title: "Website Logistics", 
+      desc: "Website chuyên cho công ty logistics với tracking đơn hàng, form báo giá, quản lý khách hàng, đa ngôn ngữ và SEO.",
       icon: Globe, 
       href: "/web-logistics",
-      features: ["Tra cứu vận đơn online", "Bảng giá tự động", "Tối ưu SEO Google"]
+      features: ["Tra cứu vận đơn online", "Bảng giá tự động", "Tối ưu SEO logistics", "Đa ngôn ngữ"]
     },
     { 
-      title: "App Quản lý Logistics", 
-      desc: "Ứng dụng di động cho driver, kho bãi, dispatch. Quản lý đơn hàng, theo dõi GPS, thông báo tự động.",
-      icon: Truck, 
+      title: "Logistics Management System (LMS)", 
+      desc: "Phần mềm quản lý logistics toàn diện với các module quản lý đơn hàng, khách hàng, tài xế/xe, chứng từ và dashboard doanh thu.",
+      icon: Database, 
+      href: "/solutions",
+      features: ["Quản lý đơn hàng", "Quản lý tài xế/xe", "Tracking vận chuyển", "Dashboard doanh thu"]
+    },
+    { 
+      title: "Logistics Mobile App", 
+      desc: "App cho driver và khách hàng: nhận chuyến, cập nhật trạng thái, scan POD, GPS tracking, xem lịch sử vận chuyển.",
+      icon: Smartphone, 
       href: "/app",
-      features: ["Quản lý driver", "Theo dõi GPS real-time", "Thông báo tự động"]
+      features: ["Driver App", "Customer App", "GPS real-time", "Scan POD"]
     },
     { 
-      title: "Phần mềm WMS", 
-      desc: "Hệ thống quản lý kho bãi thông minh. Kiểm soát tồn kho, quy trình nhập xuất, barcode scanning.",
-      icon: Package, 
-      href: "/wms",
-      features: ["Quản lý tồn kho", "Quy trình nhập/xuất", "Tích hợp barcode"]
+      title: "Custom Web App", 
+      desc: "Hệ thống theo yêu cầu: Freight forwarding, Warehouse management, CRM logistics, Booking system.",
+      icon: Code, 
+      href: "/solutions",
+      features: ["Freight forwarding", "WMS custom", "CRM logistics", "Booking system"]
     },
-    { 
-      title: "Phần mềm TMS", 
-      desc: "Hệ thống quản lý vận tải toàn diện. Điều phối xe, tối ưu lộ trình, tính cước tự động.",
-      icon: BarChart3, 
-      href: "/tms",
-      features: ["Điều phối xe tự động", "Tối ưu lộ trình", "Tính cước tự động"]
+  ];
+
+  // Workflow/Process (5 steps from app.md)
+  const workflow = [
+    { step: "01", title: "Phân tích nhu cầu", desc: "Tìm hiểu quy trình kinh doanh, xác định pain points" },
+    { step: "02", title: "Thiết kế hệ thống", desc: "Lập technical specification, thiết kế UI/UX" },
+    { step: "03", title: "Phát triển", desc: "Code và tích hợp các tính năng theo yêu cầu" },
+    { step: "04", title: "Triển khai", desc: "Deploy, testing và đào tạo sử dụng" },
+    { step: "05", title: "Bảo trì", desc: "Hỗ trợ kỹ thuật, cập nhật tính năng mới" },
+  ];
+
+  // Pricing tiers (from app.md)
+  const pricingTiers = [
+    {
+      name: "Starter",
+      price: "Liên hệ",
+      desc: "Phù hợp doanh nghiệp nhỏ",
+      features: ["Landing page", "1 ngôn ngữ", "Form liên hệ", "Bảo hành 12 tháng"]
     },
+    {
+      name: "Business",
+      price: "Liên hệ",
+      desc: "Phù hợp doanh nghiệp vừa",
+      features: ["Website đầy đủ", "Tracking đơn hàng", "CMS quản lý", "Bảo hành 24 tháng"],
+      popular: true
+    },
+    {
+      name: "Enterprise",
+      price: "Liên hệ",
+      desc: "Phù hợp doanh nghiệp lớn",
+      features: ["Đa ngôn ngữ", "Dashboard", "Tích hợp API", "Hỗ trợ 24/7"]
+    },
+  ];
+
+  // Demo links (important for logistics customers)
+  const demos = [
+    { title: "Website Logistics", desc: "Xem demo website chuyên nghiệp", href: "/demo" },
+    { title: "Dashboard quản lý", desc: "Xem demo hệ thống quản lý", href: "/demo" },
+    { title: "Tracking System", desc: "Xem demo tra cứu vận đơn", href: "/demo" },
   ];
 
   // Benefits
@@ -54,7 +93,7 @@ export default function HomePage() {
     { title: "Hỗ trợ 24/7", desc: "Đội ngũ kỹ thuật luôn sẵn sàng hỗ trợ", icon: Zap },
   ];
 
-  // Social proof
+  // Stats
   const stats = [
     { value: "100+", label: "Doanh nghiệp Logistics" },
     { value: "50+", label: "Dự án triển khai" },
@@ -221,8 +260,8 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon;
+            {solutions.map((solution, index) => {
+              const Icon = solution.icon;
               return (
                 <motion.div
                   key={index}
@@ -232,7 +271,7 @@ export default function HomePage() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link 
-                    href={service.href}
+                    href={solution.href}
                     className="block bg-[#ffffff] p-8 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group h-full"
                   >
                     <div className="flex items-start gap-4">
@@ -241,13 +280,13 @@ export default function HomePage() {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#356df1] transition-colors">
-                          {service.title}
+                          {solution.title}
                         </h3>
                         <p className="text-[#666666] mb-4 font-[family-name:var(--font-body)]">
-                          {service.desc}
+                          {solution.desc}
                         </p>
                         <ul className="space-y-2 mb-4">
-                          {service.features.map((feature, idx) => (
+                          {solution.features.map((feature, idx) => (
                             <li key={idx} className="flex items-center gap-2 text-sm text-[#666666]">
                               <Check className="w-4 h-4 text-[#356df1]" />
                               {feature}
@@ -263,6 +302,87 @@ export default function HomePage() {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section - Important for logistics customers (Section 4) */}
+      <section className="py-20 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+              Trải nghiệm demo trước khi quyết định
+            </h2>
+            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
+              Khách logistics rất thích xem demo dashboard. Trải nghiệm trực quan các tính năng để yên tâm hơn
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {demos.map((demo, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link 
+                  href={demo.href}
+                  className="block bg-[#ffffff] p-8 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group"
+                >
+                  <div className="w-14 h-14 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
+                    <Layout className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                    {demo.title}
+                  </h3>
+                  <p className="text-[#666666] font-[family-name:var(--font-body)]">
+                    {demo.desc}
+                  </p>
+                  <div className="mt-4 flex items-center gap-1 text-[#356df1] text-sm font-medium">
+                    Xem ngay <ArrowUpRight size={14} />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Workflow Section - 5 steps (Section 5) */}
+      <section className="py-20 bg-[#ffffff]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+              Quy trình làm việc
+            </h2>
+            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
+              5 bước chuyên nghiệp từ phân tích đến bảo trì
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-5 gap-4">
+            {workflow.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 bg-[#356df1]/10 rounded-full flex items-center justify-center text-[#356df1] mx-auto mb-4 text-2xl font-bold font-[family-name:var(--font-heading)]">
+                  {step.step}
+                </div>
+                <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -316,6 +436,66 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Pricing Section - 3 tiers (Section 7) */}
+      <section className="py-20 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+              Bảng giá dịch vụ
+            </h2>
+            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
+              Chọn gói phù hợp với quy mô doanh nghiệp của bạn
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {pricingTiers.map((tier, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`bg-[#ffffff] p-8 rounded-2xl border ${tier.popular ? 'border-[#356df1] relative' : 'border-gray-100'}`}
+              >
+                {tier.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#356df1] text-[#ffffff] px-4 py-1 rounded-full text-sm font-medium">
+                    Phổ biến nhất
+                  </div>
+                )}
+                <h3 className="text-2xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                  {tier.name}
+                </h3>
+                <div className="text-3xl font-bold text-[#356df1] mb-2 font-[family-name:var(--font-heading)]">
+                  {tier.price}
+                </div>
+                <p className="text-[#666666] mb-6 font-[family-name:var(--font-body)]">
+                  {tier.desc}
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-[#666666]">
+                      <Check className="w-5 h-5 text-green-600" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Link 
+                  href="/contact"
+                  className={`block text-center py-3 rounded-full font-semibold transition-all ${
+                    tier.popular 
+                      ? 'bg-[#356df1] text-[#ffffff] hover:bg-[#2a5ad9]' 
+                      : 'border-2 border-[#356df1] text-[#356df1] hover:bg-[#356df1] hover:text-[#ffffff]'
+                  }`}
+                >
+                  Liên hệ tư vấn
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Banner */}
       <section className="relative py-24 overflow-hidden">
         <img 
@@ -329,14 +509,14 @@ export default function HomePage() {
             Sẵn sàng chuyển đổi số cho doanh nghiệp?
           </h2>
           <p className="text-[#ffffff]/80 text-lg mb-8 font-[family-name:var(--font-body)]">
-            Liên hệ ngay để được tư vấn giải pháp phù hợp với quy mô và ngân sách của bạn
+            Nhận tư vấn chuyển đổi số miễn phí - giải pháp phù hợp với quy mô và ngân sách của bạn
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               href="/contact" 
               className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
             >
-              Nhận tư vấn miễn phí
+              Nhận tư vấn chuyển đổi số miễn phí
             </Link>
             <Link 
               href="/pricing" 

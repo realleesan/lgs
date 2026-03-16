@@ -15,19 +15,20 @@ const pricingData: Record<string, Array<{
   cta: string;
   popular: boolean;
 }>> = {
-  web: [
+  // Website Logistics (from app.md)
+  website: [
     {
       name: "Starter",
       price: "9.9M",
       unit: "VNĐ/năm",
-      description: "Cho doanh nghiệp nhỏ",
+      description: "Phù hợp doanh nghiệp nhỏ",
       features: [
-        { name: "Web Logistics", included: true },
-        { name: "Domain + Hosting", included: true },
-        { name: "Hỗ trợ SEO cơ bản", included: true },
+        { name: "Landing page", included: true },
+        { name: "1 ngôn ngữ", included: true },
+        { name: "Form liên hệ", included: true },
         { name: "Bảo hành 12 tháng", included: true },
-        { name: "App quản lý", included: false },
-        { name: "Phần mềm WMS/TMS", included: false },
+        { name: "Tracking đơn hàng", included: false },
+        { name: "CMS quản lý", included: false },
       ],
       cta: "Bắt đầu",
       popular: false,
@@ -36,14 +37,14 @@ const pricingData: Record<string, Array<{
       name: "Business",
       price: "19.9M",
       unit: "VNĐ/năm",
-      description: "Giải pháp toàn diện",
+      description: "Phù hợp doanh nghiệp vừa",
       features: [
-        { name: "Web Logistics", included: true },
-        { name: "Domain + Hosting", included: true },
-        { name: "Hỗ trợ SEO nâng cao", included: true },
+        { name: "Website đầy đủ", included: true },
+        { name: "Tracking đơn hàng", included: true },
+        { name: "CMS quản lý", included: true },
         { name: "Bảo hành 24 tháng", included: true },
-        { name: "App quản lý", included: true },
-        { name: "Phần mềm WMS", included: true },
+        { name: "Đa ngôn ngữ", included: false },
+        { name: "Tích hợp API", included: false },
       ],
       cta: "Bắt đầu",
       popular: true,
@@ -52,112 +53,114 @@ const pricingData: Record<string, Array<{
       name: "Enterprise",
       price: "Liên hệ",
       unit: "",
-      description: "Giải pháp riêng",
+      description: "Phù hợp doanh nghiệp lớn",
       features: [
-        { name: "Thiết kế theo yêu cầu", included: true },
-        { name: "Hosting riêng", included: true },
-        { name: "SEO toàn diện", included: true },
-        { name: "Bảo hành trọn đời", included: true },
-        { name: "App đầy đủ", included: true },
-        { name: "WMS/TMS đầy đủ", included: true },
-      ],
-      cta: "Liên hệ",
-      popular: false,
-    },
-  ],
-  app: [
-    {
-      name: "Basic App",
-      price: "29.9M",
-      unit: "VNĐ",
-      description: "App cơ bản cho doanh nghiệp",
-      features: [
-        { name: "App iOS + Android", included: true },
-        { name: "Giao diện cơ bản", included: true },
-        { name: "Đăng ký/Đăng nhập", included: true },
-        { name: "Quản lý đơn hàng", included: true },
-        { name: "Thông báo đẩy", included: true },
-        { name: "Tích hợp payment", included: false },
-      ],
-      cta: "Bắt đầu",
-      popular: false,
-    },
-    {
-      name: "Pro App",
-      price: "59.9M",
-      unit: "VNĐ",
-      description: "App đầy đủ tính năng",
-      features: [
-        { name: "App iOS + Android", included: true },
-        { name: "Giao diện theo yêu cầu", included: true },
-        { name: "Đăng ký/Đăng nhập", included: true },
-        { name: "Quản lý đơn hàng", included: true },
-        { name: "Thông báo đẩy", included: true },
-        { name: "Tích hợp payment", included: true },
-      ],
-      cta: "Bắt đầu",
-      popular: true,
-    },
-    {
-      name: "Enterprise App",
-      price: "Liên hệ",
-      unit: "",
-      description: "Giải pháp riêng",
-      features: [
-        { name: "App theo yêu cầu", included: true },
-        { name: "Giao diện cao cấp", included: true },
-        { name: "Tích hợp CRM/ERP", included: true },
-        { name: "AI/Chatbot", included: true },
+        { name: "Đa ngôn ngữ", included: true },
+        { name: "Dashboard", included: true },
+        { name: "Tích hợp API", included: true },
         { name: "Bảo hành trọn đời", included: true },
         { name: "Hỗ trợ 24/7", included: true },
+        { name: "Thiết kế theo yêu cầu", included: true },
       ],
       cta: "Liên hệ",
       popular: false,
     },
   ],
-  wms: [
+  // Logistics Management System (LMS) - from app.md
+  lms: [
     {
-      name: "WMS Basic",
-      price: "49.9M",
+      name: "Starter",
+      price: "29.9M",
       unit: "VNĐ/năm",
-      description: "Quản lý kho cơ bản",
+      description: "Phù hợp doanh nghiệp nhỏ",
       features: [
-        { name: "Quản lý nhập xuất kho", included: true },
-        { name: "Quản lý tồn kho", included: true },
-        { name: "Mã vạch/Scan", included: true },
-        { name: "Báo cáo cơ bản", included: true },
-        { name: "Nhiều kho", included: false },
+        { name: "Quản lý đơn hàng", included: true },
+        { name: "Quản lý khách hàng", included: false },
+        { name: "Tracking vận chuyển", included: false },
+        { name: "Quản lý tài xế/xe", included: false },
+        { name: "Dashboard doanh thu", included: false },
         { name: "Tích hợp API", included: false },
       ],
       cta: "Bắt đầu",
       popular: false,
     },
     {
-      name: "WMS Pro",
-      price: "99.9M",
+      name: "Business",
+      price: "59.9M",
       unit: "VNĐ/năm",
-      description: "Giải pháp quản lý kho toàn diện",
+      description: "Phù hợp doanh nghiệp vừa",
       features: [
-        { name: "Quản lý nhập xuất kho", included: true },
-        { name: "Quản lý tồn kho", included: true },
-        { name: "Mã vạch/Scan", included: true },
-        { name: "Báo cáo nâng cao", included: true },
-        { name: "Nhiều kho", included: true },
-        { name: "Tích hợp API", included: true },
+        { name: "Quản lý đơn hàng", included: true },
+        { name: "Quản lý khách hàng", included: true },
+        { name: "Tracking vận chuyển", included: true },
+        { name: "Quản lý tài xế/xe", included: true },
+        { name: "Dashboard doanh thu", included: false },
+        { name: "Tích hợp API", included: false },
       ],
       cta: "Bắt đầu",
       popular: true,
     },
     {
-      name: "WMS Enterprise",
+      name: "Enterprise",
       price: "Liên hệ",
       unit: "",
-      description: "Giải pháp riêng",
+      description: "Phù hợp doanh nghiệp lớn",
       features: [
-        { name: "WMS đầy đủ", included: true },
-        { name: "TMS tích hợp", included: true },
-        { name: "Multi-warehouse", included: true },
-        { name: "AI dự báo tồn kho", included: true },
+        { name: "Full system", included: true },
+        { name: "API tích hợp", included: true },
+        { name: "Automation", included: true },
+        { name: "Quản lý chứng từ", included: true },
+        { name: "Báo cáo nâng cao", included: true },
+        { name: "Hỗ trợ 24/7", included: true },
+      ],
+      cta: "Liên hệ",
+      popular: false,
+    },
+  ],
+  // Mobile App (from app.md)
+  mobile: [
+    {
+      name: "Starter",
+      price: "29.9M",
+      unit: "VNĐ",
+      description: "Phù hợp doanh nghiệp nhỏ",
+      features: [
+        { name: "Driver App cơ bản", included: true },
+        { name: "Nhận chuyến", included: true },
+        { name: "Cập nhật trạng thái", included: true },
+        { name: "Customer App", included: false },
+        { name: "GPS tracking", included: false },
+        { name: "Scan POD", included: false },
+      ],
+      cta: "Bắt đầu",
+      popular: false,
+    },
+    {
+      name: "Business",
+      price: "59.9M",
+      unit: "VNĐ",
+      description: "Phù hợp doanh nghiệp vừa",
+      features: [
+        { name: "Driver App", included: true },
+        { name: "Customer App", included: true },
+        { name: "GPS real-time", included: true },
+        { name: "Scan POD", included: true },
+        { name: "Thông báo tự động", included: true },
+        { name: "Tích hợp API", included: false },
+      ],
+      cta: "Bắt đầu",
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      price: "Liên hệ",
+      unit: "",
+      description: "Phù hợp doanh nghiệp lớn",
+      features: [
+        { name: "Full Mobile System", included: true },
+        { name: "Tích hợp API", included: true },
+        { name: "AI/Chatbot", included: true },
+        { name: "Custom features", included: true },
         { name: "Bảo hành trọn đời", included: true },
         { name: "Hỗ trợ 24/7", included: true },
       ],
@@ -165,51 +168,52 @@ const pricingData: Record<string, Array<{
       popular: false,
     },
   ],
+  // Custom System (from app.md)
   custom: [
     {
-      name: "Basic Custom",
-      price: "39.9M",
+      name: "Basic",
+      price: "49.9M",
       unit: "VNĐ",
-      description: "Thiết kế theo yêu cầu cơ bản",
+      description: "Phù hợp doanh nghiệp nhỏ",
       features: [
-        { name: "Thiết kế theo yêu cầu", included: true },
-        { name: "1 năm bảo hành", included: true },
-        { name: "Hỗ trợ cơ bản", included: true },
-        { name: "Code sạch", included: true },
-        { name: "Tài liệu kỹ thuật", included: false },
-        { name: "Đào tạo sử dụng", included: false },
+        { name: "Freight forwarding system", included: true },
+        { name: "Giao diện cơ bản", included: true },
+        { name: "Quản lý đơn hàng", included: true },
+        { name: "Warehouse management", included: false },
+        { name: "CRM logistics", included: false },
+        { name: "Tích hợp API", included: false },
       ],
       cta: "Bắt đầu",
       popular: false,
     },
     {
-      name: "Premium Custom",
-      price: "79.9M",
+      name: "Pro",
+      price: "99.9M",
       unit: "VNĐ",
-      description: "Giải pháp tùy chỉnh cao cấp",
+      description: "Phù hợp doanh nghiệp vừa",
       features: [
-        { name: "Thiết kế theo yêu cầu", included: true },
-        { name: "2 năm bảo hành", included: true },
-        { name: "Hỗ trợ 24/7", included: true },
-        { name: "Code sạch, scalable", included: true },
-        { name: "Tài liệu kỹ thuật", included: true },
-        { name: "Đào tạo sử dụng", included: true },
+        { name: "Full Freight forwarding", included: true },
+        { name: "Warehouse management (WMS)", included: true },
+        { name: "CRM logistics", included: true },
+        { name: "Booking system", included: true },
+        { name: "Tích hợp API", included: true },
+        { name: "Báo cáo nâng cao", included: false },
       ],
       cta: "Bắt đầu",
       popular: true,
     },
     {
-      name: "Enterprise Custom",
+      name: "Enterprise",
       price: "Liên hệ",
       unit: "",
-      description: "Giải pháp doanh nghiệp",
+      description: "Phù hợp doanh nghiệp lớn",
       features: [
-        { name: "Thiết kế theo yêu cầu", included: true },
+        { name: "Full system theo yêu cầu", included: true },
+        { name: "Tích hợp ERP/CRM", included: true },
+        { name: "Automation workflow", included: true },
+        { name: "AI/Analytics", included: true },
         { name: "Bảo hành trọn đời", included: true },
         { name: "Hỗ trợ 24/7", included: true },
-        { name: "Team riêng", included: true },
-        { name: "Phát triển liên tục", included: true },
-        { name: "SLA cam kết", included: true },
       ],
       cta: "Liên hệ",
       popular: false,
@@ -218,12 +222,12 @@ const pricingData: Record<string, Array<{
 };
 
 export default function PricingPage() {
-  const [activeService, setActiveService] = useState("web");
+  const [activeService, setActiveService] = useState("website");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
 
-  const currentPackages = pricingData[activeService] || pricingData.web;
+  const currentPackages = pricingData[activeService] || pricingData.website;
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % currentPackages.length);
@@ -249,34 +253,34 @@ export default function PricingPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex flex-wrap items-center justify-center gap-2">
             <button
-              onClick={() => { setActiveService("web"); setCurrentSlide(0); }}
+              onClick={() => { setActiveService("website"); setCurrentSlide(0); }}
               className={`px-6 py-3 rounded-full transition-all ${
-                activeService === "web"
+                activeService === "website"
                   ? 'bg-[#356df1] text-[#ffffff]'
                   : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
               }`}
             >
-              <span className="text-base font-medium font-[family-name:var(--font-body)]">Thiết kế Web</span>
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Website Logistics</span>
             </button>
             <button
-              onClick={() => { setActiveService("app"); setCurrentSlide(0); }}
+              onClick={() => { setActiveService("lms"); setCurrentSlide(0); }}
               className={`px-6 py-3 rounded-full transition-all ${
-                activeService === "app"
+                activeService === "lms"
                   ? 'bg-[#356df1] text-[#ffffff]'
                   : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
               }`}
             >
-              <span className="text-base font-medium font-[family-name:var(--font-body)]">Phát triển App</span>
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Phần mềm LMS</span>
             </button>
             <button
-              onClick={() => { setActiveService("wms"); setCurrentSlide(0); }}
+              onClick={() => { setActiveService("mobile"); setCurrentSlide(0); }}
               className={`px-6 py-3 rounded-full transition-all ${
-                activeService === "wms"
+                activeService === "mobile"
                   ? 'bg-[#356df1] text-[#ffffff]'
                   : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
               }`}
             >
-              <span className="text-base font-medium font-[family-name:var(--font-body)]">Phần mềm WMS/TMS</span>
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Mobile App</span>
             </button>
             <button
               onClick={() => { setActiveService("custom"); setCurrentSlide(0); }}
@@ -286,7 +290,7 @@ export default function PricingPage() {
                   : 'bg-[#f8fafc] text-[#666666] hover:bg-[#e8eef5]'
               }`}
             >
-              <span className="text-base font-medium font-[family-name:var(--font-body)]">Thiết kế theo yêu cầu</span>
+              <span className="text-base font-medium font-[family-name:var(--font-body)]">Custom System</span>
             </button>
           </div>
 
