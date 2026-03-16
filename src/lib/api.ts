@@ -1,26 +1,42 @@
-import { supabase } from './supabase'
+import { supabase, isSupabaseConfigured } from './supabase'
 
 // ============================================
 // News API
 // ============================================
 export async function getNews() {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning empty array for getNews')
+    return []
+  }
+  
   const { data, error } = await supabase
     .from('news')
     .select('*')
     .order('id', { ascending: false })
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching news:', error)
+    return []
+  }
   return data
 }
 
 export async function getNewsById(id: number) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning null for getNewsById')
+    return null
+  }
+  
   const { data, error } = await supabase
     .from('news')
     .select('*')
     .eq('id', id)
     .single()
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching news by id:', error)
+    return null
+  }
   return data
 }
 
@@ -28,12 +44,20 @@ export async function getNewsById(id: number) {
 // Services API
 // ============================================
 export async function getServices() {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning empty array for getServices')
+    return []
+  }
+  
   const { data, error } = await supabase
     .from('services')
     .select('*')
     .order('id', { ascending: true })
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching services:', error)
+    return []
+  }
   return data
 }
 
@@ -41,12 +65,20 @@ export async function getServices() {
 // Solutions API
 // ============================================
 export async function getSolutions() {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning empty array for getSolutions')
+    return []
+  }
+  
   const { data, error } = await supabase
     .from('solutions')
     .select('*')
     .order('id', { ascending: true })
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching solutions:', error)
+    return []
+  }
   return data
 }
 
@@ -60,12 +92,20 @@ export async function submitContact(formData: {
   service: string
   message: string
 }) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, cannot submit contact form')
+    throw new Error('Database not configured. Please contact support.')
+  }
+  
   const { data, error } = await supabase
     .from('contacts')
     .insert([formData])
     .select()
   
-  if (error) throw error
+  if (error) {
+    console.error('Error submitting contact:', error)
+    throw error
+  }
   return data
 }
 
@@ -91,6 +131,11 @@ export async function getPortfolio(options?: {
   category?: string 
   featured?: boolean 
 }) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning empty array for getPortfolio')
+    return []
+  }
+  
   let query = supabase
     .from('portfolio')
     .select('*')
@@ -106,11 +151,19 @@ export async function getPortfolio(options?: {
 
   const { data, error } = await query
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching portfolio:', error)
+    return []
+  }
   return data
 }
 
 export async function getPortfolioById(id: number) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning null for getPortfolioById')
+    return null
+  }
+  
   const { data, error } = await supabase
     .from('portfolio')
     .select('*')
@@ -118,7 +171,10 @@ export async function getPortfolioById(id: number) {
     .eq('is_published', true)
     .single()
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching portfolio by id:', error)
+    return null
+  }
   return data
 }
 
@@ -143,6 +199,11 @@ export interface Testimonial {
 export async function getTestimonials(options?: {
   featured?: boolean
 }) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning empty array for getTestimonials')
+    return []
+  }
+  
   let query = supabase
     .from('testimonials')
     .select('*')
@@ -155,7 +216,10 @@ export async function getTestimonials(options?: {
 
   const { data, error } = await query
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching testimonials:', error)
+    return []
+  }
   return data
 }
 
@@ -173,6 +237,11 @@ export interface FAQ {
 }
 
 export async function getFAQs(category?: string) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, returning empty array for getFAQs')
+    return []
+  }
+  
   let query = supabase
     .from('faq')
     .select('*')
@@ -185,7 +254,10 @@ export async function getFAQs(category?: string) {
 
   const { data, error } = await query
   
-  if (error) throw error
+  if (error) {
+    console.error('Error fetching FAQs:', error)
+    return []
+  }
   return data
 }
 
@@ -204,6 +276,11 @@ export interface Lead {
 }
 
 export async function submitLead(formData: Lead) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, cannot submit lead')
+    throw new Error('Database not configured. Please contact support.')
+  }
+  
   const { data, error } = await supabase
     .from('leads')
     .insert([{
@@ -213,7 +290,10 @@ export async function submitLead(formData: Lead) {
     }])
     .select()
   
-  if (error) throw error
+  if (error) {
+    console.error('Error submitting lead:', error)
+    throw error
+  }
   return data
 }
 
@@ -221,6 +301,11 @@ export async function submitLead(formData: Lead) {
 // Newsletter API
 // ============================================
 export async function subscribeNewsletter(email: string, name?: string) {
+  if (!supabase || !isSupabaseConfigured()) {
+    console.warn('Supabase not configured, cannot subscribe newsletter')
+    throw new Error('Database not configured. Please contact support.')
+  }
+  
   const { data, error } = await supabase
     .from('newsletter_subscribers')
     .insert([{
@@ -232,6 +317,9 @@ export async function subscribeNewsletter(email: string, name?: string) {
     .select()
     .single()
   
-  if (error) throw error
+  if (error) {
+    console.error('Error subscribing newsletter:', error)
+    throw error
+  }
   return data
 }
