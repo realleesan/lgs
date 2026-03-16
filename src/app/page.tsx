@@ -2,57 +2,70 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe, Star, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Check, Zap, BarChart3, Truck, Package, Globe, Star, ArrowUpRight, Settings, Users, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
-  const stats = [
-    { value: "100+", label: "Khách hàng" },
-    { value: "50+", label: "Dự án hoàn thành" },
-    { value: "99%", label: "Hài lòng" },
-    { value: "24/7", label: "Hỗ trợ" },
+  // Pain points for logistics companies
+  const painPoints = [
+    { icon: Package, title: "Quản lý kho lộn xộn", desc: "Không biết hàng tồn kho bao nhiêu, nhập xuất thủ công" },
+    { icon: Truck, title: "Điều xe không hiệu quả", desc: "Xe chạy rỗng, không tối ưu lộ trình, chi phí vận chuyển cao" },
+    { icon: Globe, title: "Khách hàng không theo dõi được đơn", desc: "Khách hàng gọi điện hỏi liên tục, tốn thời gian" },
+    { icon: Settings, title: "Hệ thống rời rạc", desc: "Nhiều phần mềm riêng lẻ, không tích hợp được với nhau" },
   ];
 
-  const features = [
-    { title: "Web Logistics", desc: "Website chuyên nghiệp, tối ưu SEO", icon: Globe, href: "/web-logistics" },
-    { title: "App Quản lý", desc: "Quản lý vận tải, kho bãi hiệu quả", icon: Package, href: "/app" },
-    { title: "Phần mềm WMS", desc: "Quản lý kho bãi thông minh", icon: BarChart3, href: "/wms" },
-    { title: "Phần mềm TMS", desc: "Tối ưu vận tải, tiết kiệm chi phí", icon: Truck, href: "/tms" },
+  // Services/Products offered
+  const services = [
+    { 
+      title: "Thiết kế Web Logistics", 
+      desc: "Website chuyên nghiệp cho công ty vận tải, logistics. Tích hợp tra cứu vận đơn, bảng giá tự động, SEO hiệu quả.",
+      icon: Globe, 
+      href: "/web-logistics",
+      features: ["Tra cứu vận đơn online", "Bảng giá tự động", "Tối ưu SEO Google"]
+    },
+    { 
+      title: "App Quản lý Logistics", 
+      desc: "Ứng dụng di động cho driver, kho bãi, dispatch. Quản lý đơn hàng, theo dõi GPS, thông báo tự động.",
+      icon: Truck, 
+      href: "/app",
+      features: ["Quản lý driver", "Theo dõi GPS real-time", "Thông báo tự động"]
+    },
+    { 
+      title: "Phần mềm WMS", 
+      desc: "Hệ thống quản lý kho bãi thông minh. Kiểm soát tồn kho, quy trình nhập xuất, barcode scanning.",
+      icon: Package, 
+      href: "/wms",
+      features: ["Quản lý tồn kho", "Quy trình nhập/xuất", "Tích hợp barcode"]
+    },
+    { 
+      title: "Phần mềm TMS", 
+      desc: "Hệ thống quản lý vận tải toàn diện. Điều phối xe, tối ưu lộ trình, tính cước tự động.",
+      icon: BarChart3, 
+      href: "/tms",
+      features: ["Điều phối xe tự động", "Tối ưu lộ trình", "Tính cước tự động"]
+    },
   ];
 
-  const testimonials = [
-    {
-      name: "Nguyễn Văn A",
-      company: "Viettrans Logistics",
-      content: "Misty LGS đã giúp chúng tôi tăng 40% hiệu suất kho. Hệ thống rất dễ sử dụng.",
-      rating: 5,
-    },
-    {
-      name: "Trần Thị B",
-      company: "GreenLogistics",
-      content: "Website mới giúp doanh thu online tăng 60% chỉ sau 3 tháng. Rất hài lòng!",
-      rating: 5,
-    },
-    {
-      name: "Lê Hoàng C",
-      company: "ShipTech Inc",
-      content: "App quản lý giao hàng vận hành rất mượt. Đội ngũ dev hiểu nghiệp vụ rất kỹ.",
-      rating: 5,
-    },
-  ];
-
+  // Benefits
   const benefits = [
-    { title: "Nhanh chóng", desc: "Triển khai trong thời gian ngắn", icon: Zap },
-    { title: "An toàn", desc: "Dữ liệu được mã hóa và backup", icon: Check },
-    { title: "Tiết kiệm", desc: "Giảm 30% chi phí vận hành", icon: BarChart3 },
-    { title: "Hỗ trợ 24/7", desc: "Đội ngũ hỗ trợ luôn sẵn sàng", icon: Truck },
+    { title: "Thiết kế theo yêu cầu", desc: "100% cá nhân hóa theo quy trình kinh doanh của bạn", icon: Settings },
+    { title: "Dễ sử dụng", desc: "Giao diện trực quan, không cần đào tạo phức tạp", icon: Users },
+    { title: "Tiết kiệm 30% chi phí", desc: "Giảm nhân sự, tăng hiệu suất vận hành", icon: TrendingUp },
+    { title: "Hỗ trợ 24/7", desc: "Đội ngũ kỹ thuật luôn sẵn sàng hỗ trợ", icon: Zap },
+  ];
+
+  // Social proof
+  const stats = [
+    { value: "100+", label: "Doanh nghiệp Logistics" },
+    { value: "50+", label: "Dự án triển khai" },
+    { value: "30%", label: "Giảm chi phí vận hành" },
+    { value: "24/7", label: "Hỗ trợ liên tục" },
   ];
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section - Focused on pain points */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#ffffff]">
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&h=1080&fit=crop&q=80" 
@@ -64,7 +77,6 @@ export default function HomePage() {
         
         <div className="max-w-7xl mx-auto px-6 py-20 w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,18 +86,19 @@ export default function HomePage() {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#356df1]/10 border border-[#356df1]/20">
                 <span className="w-2 h-2 bg-[#356df1] rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-[#356df1]">Logistics 4.0 Solution</span>
+                <span className="text-sm font-medium text-[#356df1]">Chuyên gia Logistics 10+ năm</span>
               </div>
 
-              {/* Headline */}
+              {/* Headline - Pain point focused */}
               <h1 className="text-5xl lg:text-6xl font-bold text-[#000000] leading-[1.1] font-[family-name:var(--font-heading)]">
-                Chuyển đổi số
-                <span className="block text-[#356df1]">Logistics</span>
+                Giải quyết mọi
+                <span className="block text-[#356df1]">bài toán Logistics</span>
               </h1>
 
               {/* Subheadline */}
               <p className="text-lg text-[#666666] max-w-lg leading-relaxed font-[family-name:var(--font-body)]">
-                Giải pháp All-in-one giúp doanh nghiệp tối ưu vận hành, giảm chi phí và tăng trưởng bền vững.
+                Từ thiết kế web, app đến phần mềm quản lý kho & vận tải. 
+                Giải pháp trọn gói theo yêu cầu riêng của doanh nghiệp bạn.
               </p>
 
               {/* CTA Buttons */}
@@ -94,7 +107,7 @@ export default function HomePage() {
                   href="/contact" 
                   className="group bg-[#356df1] text-[#ffffff] px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-[#2a5ad9] transition-all"
                 >
-                  Dùng thử miễn phí
+                  Nhận tư vấn miễn phí
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link 
@@ -105,20 +118,20 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Stats */}
-              <div className="pt-8">
-                <div className="flex flex-wrap gap-8">
-                  {stats.map((stat, index) => (
-                    <div key={index}>
-                      <div className="text-2xl font-bold text-[#356df1] font-[family-name:var(--font-heading)]">{stat.value}</div>
-                      <div className="text-sm text-[#999999] font-[family-name:var(--font-body)]">{stat.label}</div>
-                    </div>
-                  ))}
+              {/* Trust indicators */}
+              <div className="pt-4 flex flex-wrap gap-6 items-center">
+                <div className="flex items-center gap-2">
+                  <Check className="w-5 h-5 text-green-600" />
+                  <span className="text-sm text-[#666666]">Thiết kế theo yêu cầu</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-5 h-5 text-green-600" />
+                  <span className="text-sm text-[#666666]">Bảo hành 24 tháng</span>
                 </div>
               </div>
             </motion.div>
 
-            {/* Right Visual - Image */}
+            {/* Right Visual */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -144,8 +157,8 @@ export default function HomePage() {
                       <Check className="w-5 h-5 text-green-600" />
                     </div>
                     <div>
-                      <div className="text-xs text-[#999999]">Đơn hàng mới</div>
-                      <div className="font-bold text-[#000000]">+127 hôm nay</div>
+                      <div className="text-xs text-[#999999]">Đơn hàng hôm nay</div>
+                      <div className="font-bold text-[#000000]">+127 đơn</div>
                     </div>
                   </div>
                 </motion.div>
@@ -155,21 +168,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Products Section */}
+      {/* Pain Points Section */}
+      <section className="py-20 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
+              Doanh nghiệp Logistics đang gặp khó khăn gì?
+            </h2>
+            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
+              Chúng tôi hiểu những thách thức của ngành logistics và có giải pháp phù hợp
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {painPoints.map((point, index) => {
+              const Icon = point.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-[#ffffff] p-6 rounded-2xl border border-gray-100"
+                >
+                  <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                    {point.title}
+                  </h3>
+                  <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">
+                    {point.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
       <section className="py-24 bg-[#ffffff]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-              Sản phẩm của chúng tôi
+              Giải pháp toàn diện cho Logistics
             </h2>
             <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
-              Giải pháp toàn diện cho doanh nghiệp Logistics
+              Từ website đến phần mềm quản lý - tất cả đều có thể thiết kế theo yêu cầu riêng của bạn
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
+          <div className="grid md:grid-cols-2 gap-8">
+            {services.map((service, index) => {
+              const Icon = service.icon;
               return (
                 <motion.div
                   key={index}
@@ -179,18 +232,32 @@ export default function HomePage() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link 
-                    href={feature.href}
-                    className="block bg-[#ffffff] p-6 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group h-full"
+                    href={service.href}
+                    className="block bg-[#ffffff] p-8 rounded-2xl border border-gray-100 hover:border-[#356df1] transition-colors group h-full"
                   >
-                    <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#356df1] transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">{feature.desc}</p>
-                    <div className="mt-4 flex items-center gap-1 text-[#356df1] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      Tìm hiểu thêm <ArrowUpRight size={14} />
+                    <div className="flex items-start gap-4">
+                      <div className="w-14 h-14 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] shrink-0 group-hover:bg-[#356df1] group-hover:text-[#ffffff] transition-colors">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#356df1] transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="text-[#666666] mb-4 font-[family-name:var(--font-body)]">
+                          {service.desc}
+                        </p>
+                        <ul className="space-y-2 mb-4">
+                          {service.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-sm text-[#666666]">
+                              <Check className="w-4 h-4 text-[#356df1]" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex items-center gap-1 text-[#356df1] text-sm font-medium">
+                          Tìm hiểu thêm <ArrowUpRight size={14} />
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 </motion.div>
@@ -201,9 +268,9 @@ export default function HomePage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-[#f8fafc]">
+      <section className="py-20 bg-[#356df1]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
@@ -215,13 +282,13 @@ export default function HomePage() {
                   transition={{ delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="w-16 h-16 bg-[#356df1]/10 rounded-full flex items-center justify-center text-[#356df1] mx-auto mb-4">
+                  <div className="w-16 h-16 bg-[#ffffff]/10 rounded-full flex items-center justify-center text-[#ffffff] mx-auto mb-4">
                     <Icon className="w-8 h-8" />
                   </div>
-                  <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">
+                  <h3 className="text-lg font-bold text-[#ffffff] mb-2 font-[family-name:var(--font-heading)]">
                     {benefit.title}
                   </h3>
-                  <p className="text-sm text-[#666666] font-[family-name:var(--font-body)]">
+                  <p className="text-sm text-[#ffffff]/80 font-[family-name:var(--font-body)]">
                     {benefit.desc}
                   </p>
                 </motion.div>
@@ -231,51 +298,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Preview */}
-      <section className="py-24 bg-[#ffffff]">
+      {/* Stats Section */}
+      <section className="py-16 bg-[#f8fafc]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-              Khách hàng nói gì?
-            </h2>
-            <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
-              Những đánh giá chân thực từ khách hàng đã tin tưởng Misty LGS
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-[#f8fafc] p-6 rounded-2xl"
-              >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-[#fbbf24] text-[#fbbf24]" />
-                  ))}
+          <div className="grid md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl lg:text-5xl font-bold text-[#356df1] font-[family-name:var(--font-heading)]">
+                  {stat.value}
                 </div>
-                <p className="text-[#666666] mb-6 font-[family-name:var(--font-body)]">
-                  "{testimonial.content}"
-                </p>
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="font-bold text-[#000000]">{testimonial.name}</div>
-                  <div className="text-sm text-[#999999]">{testimonial.company}</div>
+                <div className="text-[#666666] font-[family-name:var(--font-body)]">
+                  {stat.label}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link 
-              href="/testimonials" 
-              className="inline-flex items-center gap-2 text-[#356df1] font-semibold hover:gap-3 transition-all"
-            >
-              Xem tất cả đánh giá <ArrowRight size={18} />
-            </Link>
           </div>
         </div>
       </section>
@@ -290,17 +326,17 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[#356df1]/90" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#ffffff] mb-4 font-[family-name:var(--font-heading)]">
-            Sẵn sàng chuyển đổi số?
+            Sẵn sàng chuyển đổi số cho doanh nghiệp?
           </h2>
           <p className="text-[#ffffff]/80 text-lg mb-8 font-[family-name:var(--font-body)]">
-            Bắt đầu miễn phí ngay hôm nay. Không cần thẻ tín dụng.
+            Liên hệ ngay để được tư vấn giải pháp phù hợp với quy mô và ngân sách của bạn
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               href="/contact" 
               className="bg-[#ffffff] text-[#356df1] px-8 py-4 rounded-full font-semibold hover:bg-[#f8fafc] transition-all"
             >
-              Dùng thử miễn phí
+              Nhận tư vấn miễn phí
             </Link>
             <Link 
               href="/pricing" 
