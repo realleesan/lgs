@@ -133,7 +133,7 @@ export default function HomePage() {
               </div>
 
               {/* Headline - Pain point focused */}
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#000000] leading-[1.1] font-[family-name:var(--font-heading)]">
+              <h1 className="text-4xl lg:text-5xl font-bold text-[#000000] leading-[1.2] font-[family-name:var(--font-heading)]">
                 Giải quyết mọi
                 <span className="block text-[#356df1]">bài toán Logistics</span>
               </h1>
@@ -216,7 +216,6 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#000000] mb-4 font-[family-name:var(--font-heading)]">
-              Doanh nghiệp Logistics đang gặp khó khăn gì?
             </h2>
             <p className="text-[#666666] max-w-2xl mx-auto font-[family-name:var(--font-body)]">
               Chúng tôi hiểu những thách thức của ngành logistics và có giải pháp phù hợp
