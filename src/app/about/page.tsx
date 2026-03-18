@@ -81,33 +81,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-16 bg-dot-pattern">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-[#000000] text-center mb-12 font-[family-name:var(--font-heading)]">
-            Giá trị cốt lõi
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-[#ffffff] p-6 rounded-2xl border border-gray-100"
-              >
-                <div className="w-12 h-12 bg-[#356df1]/10 rounded-xl flex items-center justify-center text-[#356df1] mb-4">
-                  {index === 0 ? <Users className="w-6 h-6" /> : index === 1 ? <Award className="w-6 h-6" /> : <TrendingUp className="w-6 h-6" />}
-                </div>
-                <h3 className="text-lg font-bold text-[#000000] mb-2 font-[family-name:var(--font-heading)]">{value.title}</h3>
-                <p className="text-[#666666] text-sm font-[family-name:var(--font-body)]">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="relative py-20 overflow-hidden">
         <img 

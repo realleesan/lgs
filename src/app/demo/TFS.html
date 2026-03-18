@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fore Station | Trạm Tập Trung & Phục Hồi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .focus-bg { background-color: #0f172a; color: white; }
+        
+        /* Hiệu ứng kéo thả */
+        .slot-item { cursor: grab; transition: all 0.2s ease; }
+        .slot-item:active { cursor: grabbing; transform: scale(0.95); }
+        .slot-focus { background-color: #1e293b; color: #94a3b8; border: 2px dashed #334155; }
+        .slot-relax { background-color: #10b981; color: white; border: 2px solid #059669; font-weight: bold; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+        .drag-over { border-color: #3b82f6 !important; background-color: #1e3a8a !important; }
+        
+        /* Ghế Ngồi (Seat Map) */
+        .seat-btn { transition: all 0.2s; font-size: 0.75rem; font-weight: 700; border-radius: 0.5rem; padding: 0.6rem 0; border: 1px solid #cbd5e1; background: white; cursor: pointer; color: #475569;}
+        .seat-btn:hover:not(.occupied) { border-color: #64748b; transform: translateY(-2px); }
+        .seat-btn.occupied { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; border-color: #f1f5f9; text-decoration: line-through;}
+        .seat-btn.focus-active { background: #2563eb; color: white; border-color: #2563eb; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transform: translateY(-2px); }
+        .seat-btn.relax-active { background: #059669; color: white; border-color: #059669; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3); transform: translateY(-2px); }
+
+        /* Modal & Phone Simulator */
+        .modal-overlay { background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); }
+        
+        /* Màn hình điện thoại giả lập */
+        .phone-mockup {
+            width: 340px; height: 680px;
+            border-radius: 45px; border: 12px solid #0f172a;
+            background-color: #1e293b; overflow: hidden; position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.8s ease;
+        }
+        
+        .bg-state-focus { background-color: #0f172a; } 
+        .bg-state-relax { background-color: #059669; } 
+        
+        /* Push Notification (Giống iOS) */
+        .ios-notification {
+            position: absolute; top: -100px; left: 16px; right: 16px;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            border-radius: 20px; padding: 16px; z-index: 100;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .ios-notification.show { top: 16px; }
+
+        /* Vòng tròn đếm ngược */
+        .timer-circle {
+            width: 220px; height: 220px;
+            border-radius: 50%; border: 8px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; margin: 0 auto; position: relative;
+        }
+        .timer-circle::before {
+            content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px;
+            border-radius: 50%; border: 8px solid white;
+            border-color: white transparent transparent transparent;
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <div id="main-landing">
+        
+        <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <div class="flex-shrink-0 font-bold text-2xl tracking-tighter">
+                        THE <span class="text-blue-600">FORE</span> STATION
+                    </div>
+                    <div class="hidden md:flex space-x-8 font-semibold text-sm items-center">
+                        <a href="#about" class="hover:text-blue-600 transition">Về chúng tôi</a>
+                        <a href="#spaces" class="hover:text-blue-600 transition">Không Gian</a>
+                        <a href="#pricing" class="hover:text-blue-600 transition">Bảng Giá</a>
+                        <a href="#careers" class="hover:text-blue-600 transition">Tuyển dụng</a>
+                        <a href="#in-seat-order" class="hover:text-blue-600 transition font-bold"> Order Tại Chỗ</a>
+                        <a href="#tfs-insights" class="text-emerald-600 hover:text-emerald-800 transition flex items-center gap-1"> Insights</a>
+                        <a href="#tfs-leaderboard" class="text-amber-500 hover:text-amber-600 transition font-bold flex items-center gap-1"> Đua Top</a>
+                        <a href="#study-date" class="text-blue-600 flex items-center gap-1 hover:text-blue-800 transition"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span></span>Ghép Cặp</a>
+                        <a href="#booking-demo" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition shadow-md">Đặt Chỗ Ngay</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="pt-32 pb-16 px-4 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+                Tập Trung Tuyệt Đối.<br>
+                <span class="gradient-text">Phục Hồi Khoa Học.</span>
+            </h1>
+            <p class="text-gray-600 max-w-2xl mx-auto text-lg mb-10">
+                Không gian làm việc áp dụng nguyên lý Pomodoro & Khoa học giấc ngủ. Tối đa hóa hiệu suất của bạn tại trung tâm Cầu Giấy.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#booking-demo" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg text-lg">Trải Nghiệm Đặt Chỗ</a>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 px-4 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="bg-gray-100 text-gray-600 text-sm font-semibold px-5 py-2 rounded-full border border-gray-200">Về chúng tôi</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-6 mb-4">The Fore Station là gì?</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                        The Fore Station ra đời với sứ mệnh tạo ra một không gian làm việc triệt tiêu sự xao nhãng. Nơi cộng đồng những người trẻ đầy đam mê có thể tìm thấy sự cân bằng hoàn hảo giữa cường độ làm việc sâu và sự phục hồi năng lượng khoa học.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition duration-300">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-2xl flex items-center justify-center mb-5 border border-amber-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Không gian tĩnh lặng</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Ưu tiên sự yên tĩnh & tập trung tuyệt đối với hệ thống Box làm việc cá nhân được cách âm chuẩn mực.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition duration-300">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mb-5 border border-blue-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Kỷ luật Pomodoro</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Hệ thống đồng bộ tự động nhắc nhở giờ nghỉ, giúp bạn tối ưu hóa hiệu suất theo từng chu kỳ 25 phút.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition duration-300">
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-2xl flex items-center justify-center mb-5 border border-emerald-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Phục hồi khoa học</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Sạc lại năng lượng tại Trạm Relax với ghế Zero Gravity, tinh dầu và âm nhạc tần số sóng não Alpha.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition duration-300">
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-700 rounded-2xl flex items-center justify-center mb-5 border border-indigo-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Thiết kế công thái học</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Bàn, ghế, đèn chiếu sáng được thiết kế và tính toán kỹ lưỡng để bảo vệ cột sống, thị lực trong thời gian dài.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition duration-300">
+                        <div class="w-12 h-12 bg-orange-50 text-orange-700 rounded-2xl flex items-center justify-center mb-5 border border-orange-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Đầy đủ tiện nghi</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Mở cửa 8h-23h hàng ngày, wifi tốc độ cao & ổn định và các tiện nghi khác thiết kế riêng cho năng suất học tập - làm việc</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition duration-300">
+                        <div class="w-12 h-12 bg-purple-50 text-purple-700 rounded-2xl flex items-center justify-center mb-5 border border-purple-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Cộng đồng hiệu suất</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Xây dựng môi trường xung quanh bạn là những cá nhân kỷ luật, với các hoạt động định kì, tính tương tác cao giữa các nerdie, xây dựng cộng đồng cùng nhau phát triển tạo động lực thúc đẩy nhau cùng phát triển.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="spaces" class="focus-bg py-20 px-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">Hệ Sinh Thái Không Gian</h2>
+                    <p class="text-gray-400">Thiết kế phân tầng kiểm soát tiếng ồn hoàn hảo cho mọi nhu cầu.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition">
+                        <div class="text-4xl mb-4">☕</div>
+                        <h3 class="text-xl font-bold mb-3">Tầng 1: Open Space</h3>
+                        <p class="text-gray-400 text-sm">Khu vực năng động, thảo luận nhóm (Phòng 4-8 người) và quầy Bar.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition relative">
+                        <div class="absolute top-0 right-0 bg-blue-600 text-xs font-bold px-3 py-1 rounded-bl-lg">CORE</div>
+                        <div class="text-4xl mb-4">🎧</div>
+                        <h3 class="text-xl font-bold mb-3">Tầng 2: Deep Focus</h3>
+                        <p class="text-gray-400 text-sm">Cách âm tuyệt đối với 21 Box Đơn và 8 Box Đôi. Toàn bộ sử dụng ghế công thái học.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-emerald-500 transition">
+                        <div class="text-4xl mb-4">🧘‍♂️</div>
+                        <h3 class="text-xl font-bold mb-3">Tầng 3: Relax Station</h3>
+                        <p class="text-gray-400 text-sm">14 Ghế Zero Gravity cao cấp với rèm che riêng tư, xông tinh dầu & sóng não.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-20 px-4 bg-gray-50 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="text-center mb-16">
+                    <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bảng Giá Dịch Vụ</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Đầu Tư Cho Sự Tập Trung</h2>
+                    <p class="text-gray-500">Linh hoạt theo giờ, tiết kiệm với Combo hoặc cam kết hiệu suất với Thẻ Thành Viên.</p>
+                </div>
+
+                <div class="mb-20 max-w-5xl mx-auto">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">1</span>
+                        Giá Bán Lẻ Theo Giờ (Standard Rates)
+                    </h3>
+                    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-sm uppercase tracking-wider border-b border-gray-200">
+                                    <th class="p-4 font-bold">Hạng mục</th>
+                                    <th class="p-4 font-bold">Đơn giá ước tính</th>
+                                    <th class="p-4 font-bold hidden md:table-cell">Ghi chú</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-sm text-slate-700">
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-4 font-bold text-slate-900">Box Đơn</td>
+                                    <td class="p-4 font-semibold text-blue-600">25.000 VNĐ/giờ</td>
+                                    <td class="p-4 hidden md:table-cell text-gray-500">Tính block tối thiểu 1 giờ.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-4 font-bold text-slate-900">Box Đôi</td>
+                                    <td class="p-4 font-semibold text-blue-600">35.000 VNĐ/giờ</td>
+                                    <td class="p-4 hidden md:table-cell text-gray-500">Phù hợp pair-programming hoặc học nhóm 2 người.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-4 font-bold text-slate-900">Box 4 Người</td>
+                                    <td class="p-4 font-semibold text-blue-600">79.000 VNĐ/giờ</td>
+                                    <td class="p-4 hidden md:table-cell text-gray-500">Không gian thảo luận nhóm nhỏ.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-4 font-bold text-slate-900">Phòng Thảo luận (6-8 người)</td>
+                                    <td class="p-4 font-semibold text-blue-600">99.000 VNĐ/giờ</td>
+                                    <td class="p-4 hidden md:table-cell text-gray-500">Kèm bảng trắng, máy chiếu.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-4 font-bold text-slate-900 text-emerald-600">Ghế Relax (Zero Gravity)</td>
+                                    <td class="p-4 font-semibold text-emerald-600">25.000 - 40.000 VNĐ/giờ</td>
+                                    <td class="p-4 hidden md:table-cell text-gray-500"> Block 20 phút (25k) hoặc 1 giờ (40k) cho power nap.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-24">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2 max-w-6xl mx-auto">
+                        <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">2</span>
+                        Combo Pomodoro Chuyên Biệt
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-500">Deep Sprint</h4>
+                                <div class="text-4xl font-bold my-4 text-slate-800">99.000đ</div>
+                                <p class="text-sm text-gray-500 mb-6 border-b pb-6">Phù hợp cho 1 phiên làm việc ngắn, chốt hạ 1 task khó.</p>
+                                <ul class="text-sm text-gray-700 space-y-4 mb-8 font-medium">
+                                    <li class="flex items-center gap-2"><span class="text-blue-500">⏱️</span> 2 Giờ Focus Box Đơn</li>
+                                    <li class="flex items-center gap-2"><span class="text-emerald-500">🔋</span> 1 liệu trình relax với ghế Zero Gravity</li>
+                                    <li class="flex items-center gap-2"><span class="text-amber-500">☕</span> 1 Đồ uống tiêu chuẩn</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Wifi 7 cao cấp - không lo lag mạng</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Miễn phí nước detox refill fulltime</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> In ấn tài liệu 5 trang</li>
+                                </ul>
+                            </div>
+                            <a href="#booking-demo" class="block text-center w-full bg-blue-50 text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-100 transition">Demo Gói Này</a>
+                        </div>
+
+                        <div class="bg-blue-600 text-white p-8 rounded-2xl shadow-2xl transform md:-translate-y-4 relative border border-blue-500 flex flex-col justify-between">
+                            <div class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-emerald-400 to-teal-400 text-xs font-bold px-4 py-1 rounded-full text-slate-900 shadow-md">PHỔ BIẾN NHẤT</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-blue-200">Half-Day Resident</h4>
+                                <div class="text-4xl font-bold my-4">139.000đ</div>
+                                <p class="text-sm text-blue-200 mb-6 border-b border-blue-500 pb-6">Tiết kiệm 20% so với mua lẻ. Đủ cho nửa ngày cày cuốc.</p>
+                                <ul class="text-sm space-y-4 mb-8 font-medium">
+                                    <li class="flex items-center gap-2"><span>⏱️</span> 4 Giờ Focus Box Đơn</li>
+                                    <li class="flex items-center gap-2"><span>🔋</span> 2 liệu trình relax với ghế Zero Gravity </li>
+                                    <li class="flex items-center gap-2"><span>🍹</span> 1 Đồ uống tự chọn</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Wifi 7 cao cấp - không lo lag mạng</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Miễn phí nước detox refill fulltime</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> In ấn tài liệu 15 trang</li>
+                                </ul>
+                            </div>
+                            <a href="#booking-demo" class="block text-center w-full bg-white text-blue-600 font-bold py-3 rounded-xl hover:bg-gray-100 transition shadow-md">Demo Gói Này</a>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-500">The FoRe Signature</h4>
+                                <div class="text-4xl font-bold my-4 text-slate-800">219.000đ</div>
+                                <p class="text-sm text-gray-500 mb-6 border-b pb-6">Trọn vẹn 1 ngày không giới hạn. Dành cho mùa thi cử.</p>
+                                <ul class="text-sm text-gray-700 space-y-4 mb-8 font-medium">
+                                    <li class="flex items-center gap-2"><span class="text-blue-500">♾️</span> Không giới hạn giờ Focus</li>
+                                    <li class="flex items-center gap-2"><span class="text-emerald-500">🔋</span> 4 liệu trình relax với ghế Zero Gravity</li>
+                                    <li class="flex items-center gap-2"><span class="text-amber-500">☕</span> 2 Đồ uống tự chọn</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Wifi 7 cao cấp - không lo lag mạng</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Miễn phí nước detox refill fulltime</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> In ấn tài liệu thả ga</li>
+                                </ul>
+                            </div>
+                            <a href="#booking-demo" class="block text-center w-full bg-blue-50 text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-100 transition">Demo Gói Này</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end mb-6">
+                        <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">3</span>
+                            Thẻ Thành Viên (Membership)
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-2 md:mt-0"><span class="text-emerald-500 font-bold"> Tặng kèm mặc định:</span> Free Wifi tốc độ cao, In ấn tài liệu & Refill Detox water.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        
+                        <div class="bg-slate-900 text-white p-8 rounded-2xl shadow-lg border border-slate-800 flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-blue-600/20 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
+                            <div class="relative z-10">
+                                <h4 class="text-lg font-semibold text-slate-400">Gói Tháng (Focus Only)</h4>
+                                <div class="text-3xl font-bold my-4">1.499.000đ <span class="text-sm font-normal text-slate-500">/tháng</span></div>
+                                <p class="text-sm text-slate-400 mb-6 border-b border-slate-700 pb-6">Dành cho người chỉ cần sự tĩnh lặng tuyệt đối.</p>
+                                <ul class="text-sm text-slate-300 space-y-4 mb-8">
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> 8h Focus / ngày.</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Bao gồm chỗ ngồi tại Box Đơn/Đôi.</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Wifi 7 cao cấp - không lo lag mạng</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Miễn phí nước detox refill fulltime</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> In ấn tài liệu thả ga</li>
+                                    <li class="flex items-start gap-2"><span class="text-slate-600 mt-0.5">✕</span> <span class="text-slate-500 line-through">Không bao gồm Relax & Đồ uống.</span></li>
+                                </ul>
+                            </div>
+                            <button class="w-full bg-slate-800 text-white border border-slate-600 font-semibold py-3 rounded-xl hover:bg-blue-600 hover:border-blue-600 transition relative z-10">Đăng ký Gói Này</button>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 text-slate-900 p-8 rounded-2xl shadow-xl transform md:-translate-y-4 relative flex flex-col justify-between border border-amber-300">
+                            <div class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-bold px-4 py-1 rounded-full shadow-md uppercase tracking-wider">Đáng Đầu Tư Nhất</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800">Gói Tháng (Resident)</h4>
+                                <div class="text-4xl font-black my-4 text-slate-900">2.399.000đ <span class="text-base font-bold text-amber-800">/tháng</span></div>
+                                <p class="text-sm text-amber-900 mb-6 border-b border-amber-500/30 pb-6 font-medium">Làm việc như một công dân thực thụ của TFS.</p>
+                                <ul class="text-sm text-slate-900 space-y-4 mb-8 font-semibold">
+                                    <li class="flex items-start gap-2"><span>🎯</span> 1 Chỗ ngồi cố định riêng biệt (5h/ngày).</li>
+                                    <li class="flex items-start gap-2"><span>🧘</span> 2 Ca Relax trên ghế Zero Gravity mỗi ngày.</li>
+                                    <li class="flex items-start gap-2"><span>🍹</span> 1 Đồ uống tự chọn trong Menu Signature mỗi ngày.</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Wifi 7 cao cấp - không lo lag mạng</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> Miễn phí nước detox refill fulltime</li>
+                                    <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span> In ấn tài liệu thả ga</li>
+                                </ul>
+                            </div>
+                            <button class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition shadow-lg">Đăng ký Gói Này</button>
+                        </div>
+
+                        <div class="bg-slate-900 text-white p-8 rounded-2xl shadow-lg border border-slate-800 flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-emerald-600/20 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
+                            <div class="relative z-10">
+                                <h4 class="text-lg font-semibold text-slate-400">Gói Năm (Yearly Pass)</h4>
+                                <div class="text-3xl font-bold my-4 text-emerald-400">Giảm 20% gói Resident</div>
+                                <p class="text-sm text-slate-400 mb-6 border-b border-slate-700 pb-6">Tiết kiệm chi phí dài hạn, cam kết mục tiêu lớn.</p>
+                                <ul class="text-sm text-slate-300 space-y-4 mb-8">
+                                    <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Áp dụng quyền lợi cho cả Gói Focus và Resident.</li>
+                                    <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Thanh toán 1 lần sử dụng trọn 12 tháng.</li>
+                                    <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Có thể tùy chọn box đơn hoặc đôi</li>
+                                    <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Đặc quyền mời 1 bạn đi kèm (1 lần/tuần).</li>
+                                </ul>
+                            </div>
+                            <button class="w-full bg-slate-800 text-emerald-400 border border-emerald-600/50 font-semibold py-3 rounded-xl hover:bg-emerald-600 hover:text-white transition relative z-10">Liên hệ Tư vấn</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="booking-demo" class="py-20 px-4 bg-white border-t border-gray-200">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-2xl border border-gray-100">
+                <div class="text-center mb-8">
+                    <span class="bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Trải Nghiệm Booking</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Giữ Chỗ & Cá Nhân Hóa</h2>
+                    <p class="text-gray-500">Chọn vị trí ngồi và kéo thả để tùy chỉnh lịch trình của bạn.</p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl mb-8 border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">Gói đang chọn: Deep Sprint</h3>
+                        <p class="text-sm text-slate-500 mt-1">Tổng thời gian: 2.5 Giờ (2h Focus + 30p Relax)</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-slate-500 mb-1">Thời gian bắt đầu</p>
+                        <input type="time" id="startTime" value="08:00" class="border border-gray-300 rounded-lg px-4 py-2 font-bold text-lg focus:ring-2 focus:ring-blue-500 outline-none" onchange="generateTimeline()">
+                    </div>
+                </div>
+
+                <div class="mb-10">
+                    <p class="font-semibold mb-4 text-slate-700 text-center">Bước 1: Chọn vị trí ngồi của bạn</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
+                                <span class="text-sm font-bold text-slate-800">Tầng 2: Box Cá Nhân</span>
+                                <span id="lbl-focus" class="text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full border border-blue-200">F-01</span>
+                            </div>
+                            <div class="grid grid-cols-5 gap-2" id="grid-focus">
+                                </div>
+                        </div>
+                        
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
+                                <span class="text-sm font-bold text-slate-800">Tầng 3: Ghế Zero Gravity</span>
+                                <span id="lbl-relax" class="text-xs font-bold bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full border border-emerald-200">R-08</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2" id="grid-relax">
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center flex-wrap gap-4 mt-4 text-xs font-medium text-slate-500">
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 bg-white border border-slate-300 rounded-sm"></div> Trống</span>
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 bg-slate-200 rounded-sm"></div> Đã có người đặt</span>
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 bg-blue-600 rounded-sm"></div> Box Focus đang chọn</span>
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 bg-emerald-600 rounded-sm"></div> Ghế Relax đang chọn</span>
+                    </div>
+                </div>
+
+                <div class="mb-10 pt-8 border-t border-gray-100">
+                    <p class="font-semibold mb-4 text-slate-700 text-center">Bước 2: Tùy chỉnh lịch trình (Mỗi block = 30 phút)</p>
+                    <div id="timeline-container" class="grid grid-cols-5 gap-3"></div>
+                </div>
+
+                <button onclick="openCheckoutModal()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-blue-600 transition shadow-lg text-lg flex items-center justify-center gap-2">
+                    <span>Xác nhận Lịch trình & Thanh toán (89.000đ)</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+        </section>
+        <section id="study-date" class="py-20 px-4 bg-gray-50 border-t border-gray-200">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold mb-2">The FoRe Station <span class="text-blue-600">Match</span></h2>
+                    <p class="text-gray-500">Tìm bạn đồng hành, nhân đôi hiệu suất tại The Fore Station.</p>
+                </div>
+
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
+                    <div class="border-b border-gray-100 pb-4 mb-8">
+                        <h3 class="text-xl font-bold text-slate-800">Hồ sơ The FoRe Match</h3>
+                        <p class="text-sm text-gray-400 mt-1">Thiết lập hồ sơ để thuật toán tìm kiếm partner phù hợp nhất với bạn.</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); alert('Hồ sơ đã được lưu! Hệ thống đang quét partner phù hợp...');" class="space-y-8">
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3">Mục tiêu tìm kiếm</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <label class="border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-500 flex gap-3 items-start transition">
+                                    <input type="checkbox" class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                    <div>
+                                        <p class="font-bold text-slate-800 text-sm">Study Buddy</p>
+                                        <p class="text-xs text-gray-500 mt-1">Cùng học, ôn thi</p>
+                                    </div>
+                                </label>
+                                <label class="border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-500 flex gap-3 items-start transition">
+                                    <input type="checkbox" class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                    <div>
+                                        <p class="font-bold text-slate-800 text-sm">Work Buddy</p>
+                                        <p class="text-xs text-gray-500 mt-1">Chạy deadline, dự án</p>
+                                    </div>
+                                </label>
+                                <label class="border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-500 flex gap-3 items-start transition">
+                                    <input type="checkbox" class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                    <div>
+                                        <p class="font-bold text-slate-800 text-sm">Couple Maker</p>
+                                        <p class="text-xs text-gray-500 mt-1">Học cùng nhau, và tìm hiểu nhau</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Phong cách làm việc</label>
+                                <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-slate-600 bg-gray-50">
+                                    <option>Tuyệt đối im lặng</option>
+                                    <option>Pomodoro (25p/5p)</option>
+                                    <option>Casual chat, thoải mái chill chill </option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Mức độ tương tác</label>
+                                <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-slate-600 bg-gray-50">
+                                    <option>Im lặng tuyệt đối (Silent)</option>
+                                    <option>50/50</option>
+                                    <option>Thích vừa làm vừa thảo luận</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Chủ đề / Mục tiêu chính tuần tới</label>
+                            <input type="text" placeholder="VD: Ôn thi IELTS, Code đồ án React, Viết Thesis..." class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-gray-50">
+                            <p class="text-xs text-gray-400 mt-2">Giúp TFS tìm cho bạn người đang có cùng mục tiêu để dễ đồng cảm.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Tính cách của bạn</label>
+                                <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-slate-600 bg-gray-50">
+                                    <option>Hướng nội (Introvert)</option>
+                                    <option>Hướng ngoại (Extrovert)</option>
+                                    <option>Linh hoạt (Ambivert)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Môi trường Match mong muốn</label>
+                                <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-slate-600 bg-gray-50">
+                                    <option>Ghép cặp ngồi Box Đôi (Tầng 2)</option>
+                                    <option>Ngồi chung nhóm nhỏ 3-4 người (Tầng 1)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                            <h4 class="font-bold text-slate-700 text-sm mb-4">Cài đặt kết nối</h4>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1">Độ tuổi Min</label>
+                                    <input type="number" value="18" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1">Độ tuổi Max</label>
+                                    <input type="number" value="30" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
+                            </div>
+                            <label class="flex gap-2 items-start cursor-pointer">
+                                <input type="checkbox" class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-700">Chia sẻ liên hệ (Zalo/Tele)</p>
+                                    <p class="text-xs text-gray-500">Đồng ý chia sẻ phương thức liên lạc nếu Match thành công.</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 space-y-4">
+                            <label class="flex gap-3 items-start cursor-pointer">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-700">Tôi đồng ý với <span class="font-bold">Quy tắc ứng xử</span> tại The Fore Station.</p>
+                                    <p class="text-xs text-gray-500">Giữ thái độ tôn trọng, không quấy rối, giữ vệ sinh chung.</p>
+                                </div>
+                            </label>
+                            <label class="flex gap-3 items-start cursor-pointer">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-700">Report Consent</p>
+                                    <p class="text-xs text-gray-500">Tôi hiểu rằng mình có thể bị ban (cấm cửa) nếu có hành vi không phù hợp.</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="flex justify-end pt-4">
+                            <button type="submit" class="bg-slate-900 text-white font-bold px-8 py-3 rounded-xl hover:bg-blue-600 transition shadow-lg flex items-center gap-2">
+                                <span>Lưu Hồ Sơ & Bắt Đầu Match</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="in-seat-order" class="py-20 px-4 bg-gray-50 border-t border-gray-200 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">In-Seat Service</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Tiếp Tế Năng Lượng</h2>
+                    <p class="text-gray-500">Đừng ngắt quãng sự tập trung. Quản gia của TFS sẽ mang mọi thứ đến tận Box của bạn.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">☕ Đồ uống (Signatures)</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Cà phê Muối Focus</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Đậm đà, siêu tỉnh táo</p>
+                                    <p class="text-blue-600 font-bold text-sm mt-1">45.000đ</p>
+                                </div>
+                                <button onclick="addToCart('Cà phê Muối', 45000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Trà Đào Cam Sả Relax</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Thanh mát, giải nhiệt</p>
+                                    <p class="text-blue-600 font-bold text-sm mt-1">50.000đ</p>
+                                </div>
+                                <button onclick="addToCart('Trà Đào Cam Sả', 50000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">🥐 Đồ ăn nhẹ (Snacks)</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Bánh Sừng Bò (Croissant)</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Nướng nóng giòn</p>
+                                    <p class="text-blue-600 font-bold text-sm mt-1">35.000đ</p>
+                                </div>
+                                <button onclick="addToCart('Bánh Sừng Bò', 35000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Mix Hạt Dinh Dưỡng</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Hạnh nhân, óc chó, macca</p>
+                                    <p class="text-blue-600 font-bold text-sm mt-1">30.000đ</p>
+                                </div>
+                                <button onclick="addToCart('Mix Hạt', 30000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">🎧 Thuê Phụ Kiện</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Tai nghe Chống ồn Sony</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Cách ly hoàn toàn thế giới</p>
+                                    <p class="text-emerald-600 font-bold text-sm mt-1">20.000đ / lần thuê</p>
+                                </div>
+                                <button onclick="addToCart('Thuê Tai nghe Sony', 20000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Giá để chân (Footrest)</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Chuẩn công thái học</p>
+                                    <p class="text-emerald-600 font-bold text-sm mt-1">Miễn phí</p>
+                                </div>
+                                <button onclick="addToCart('Mượn Giá để chân', 0)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="floatingCartBtn" onclick="openCartModal()" class="hidden fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition transform hover:scale-105 z-40 flex items-center gap-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <span id="cartCount" class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full absolute -top-2 -right-2">0</span>
+            </button>
+        </section>
+
+        <section id="tfs-insights" class="py-20 px-4 bg-white border-t border-gray-200">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">TFS Insights</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Báo Cáo Hiệu Suất Cá Nhân</h2>
+                    <p class="text-gray-500">Đo lường sự tập trung, theo dõi tiến độ và mở khóa các huy hiệu thành tựu.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-center">
+                        <h3 class="text-lg font-bold text-slate-800 mb-6 border-b pb-3">Thống kê Tuần này</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Tổng giờ Deep Focus</p>
+                                <p class="text-3xl font-black text-blue-600 flex items-end gap-2">24h <span class="text-sm font-medium text-emerald-500 mb-1">↑ 12%</span></p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Số chu kỳ Pomodoro hoàn thành</p>
+                                <p class="text-3xl font-black text-slate-800">48 <span class="text-base font-medium text-gray-400">chu kỳ</span></p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Giờ vàng hiệu suất cao nhất</p>
+                                <p class="text-xl font-bold text-amber-600">08:00 - 11:30 Sáng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:col-span-2">
+                        <div class="flex justify-between items-center mb-8">
+                            <h3 class="text-lg font-bold text-slate-800">Biểu đồ Tập trung (7 ngày qua)</h3>
+                            <button class="text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-lg hover:bg-blue-100 transition">Tải báo cáo PDF</button>
+                        </div>
+                        
+                        <div class="h-48 flex items-end justify-between gap-2 md:gap-4 border-b border-gray-200 pb-2 relative">
+                            <div class="absolute w-full border-t border-dashed border-gray-200 bottom-1/2 -z-10"></div>
+                            <div class="absolute w-full border-t border-dashed border-gray-200 top-0 -z-10"></div>
+                            
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-blue-100 group-hover:bg-blue-300 transition rounded-t-md h-[40%] relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100">3h</span></div><span class="text-xs font-semibold text-gray-500">T2</span></div>
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-blue-100 group-hover:bg-blue-300 transition rounded-t-md h-[60%] relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100">4.5h</span></div><span class="text-xs font-semibold text-gray-500">T3</span></div>
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-blue-500 group-hover:bg-blue-600 transition rounded-t-md h-[90%] shadow-lg relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-blue-600">7h</span></div><span class="text-xs font-bold text-blue-600">T4</span></div>
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-blue-100 group-hover:bg-blue-300 transition rounded-t-md h-[50%] relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100">3.5h</span></div><span class="text-xs font-semibold text-gray-500">T5</span></div>
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-blue-100 group-hover:bg-blue-300 transition rounded-t-md h-[75%] relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100">5.5h</span></div><span class="text-xs font-semibold text-gray-500">T6</span></div>
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-blue-100 group-hover:bg-blue-300 transition rounded-t-md h-[30%] relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100">2h</span></div><span class="text-xs font-semibold text-gray-500">T7</span></div>
+                            <div class="w-full flex flex-col items-center gap-2 group"><div class="w-full bg-emerald-400 group-hover:bg-emerald-500 transition rounded-t-md h-[15%] relative"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-emerald-600">Rest</span></div><span class="text-xs font-semibold text-emerald-600">CN</span></div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="text-sm font-bold text-slate-700 mb-4">Bộ sưu tập Huy hiệu (Badges)</h4>
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center gap-2 cursor-pointer group">
+                                    <div class="w-14 h-14 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(251,191,36,0.5)] group-hover:scale-110 transition">🏆</div>
+                                    <span class="text-[10px] font-bold text-slate-700 uppercase">Chiến Thần</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 cursor-pointer group">
+                                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-400 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(52,211,153,0.5)] group-hover:scale-110 transition">🧘</div>
+                                    <span class="text-[10px] font-bold text-slate-700 uppercase">Master Relax</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 cursor-pointer group opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition">
+                                    <div class="w-14 h-14 rounded-full bg-gray-100 border-2 border-gray-300 flex items-center justify-center text-2xl">🦉</div>
+                                    <span class="text-[10px] font-bold text-slate-500 uppercase">Cú Đêm (Khóa)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tfs-leaderboard" class="py-20 px-4 bg-[#0a0f1c] text-white border-t border-slate-800 relative overflow-hidden">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-64 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto relative z-10">
+                <div class="text-center mb-12">
+                    <span class="bg-blue-900/50 text-blue-400 border border-blue-700/50 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(59,130,246,0.5)]">Live Leaderboard</span>
+                    <h2 class="text-3xl md:text-5xl font-black mt-6 mb-3 tracking-tight">Đấu Trường <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Hiệu Suất</span></h2>
+                    <p class="text-slate-400">Nếu thấy nản rồi, nên nhớ những người xung quanh bạn vẫn đang miệt mài cày cuốc hihi</p>
+                </div>
+
+                <div class="bg-[#131b2f] rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
+                    <div class="grid grid-cols-12 gap-4 px-6 py-4 bg-[#1a233a] border-b border-slate-700/50 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        <div class="col-span-2 text-center">Hạng</div>
+                        <div class="col-span-5">Nerdie này tên là:</div>
+                        <div class="col-span-3 text-center">Chuỗi Focus</div>
+                        <div class="col-span-2 text-center">Trạng thái</div>
+                    </div>
+
+                    <div class="divide-y divide-slate-800/50">
+                        
+                        <div class="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-[#1a233a] transition group cursor-default">
+                            <div class="col-span-2 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-600 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(234,179,8,0.4)] transform group-hover:scale-110 transition">🥇</div>
+                            </div>
+                            <div class="col-span-5 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">TFS</div>
+                                <div>
+                                    <p class="font-bold text-white text-base">Hoàng Nam =))) </p>
+                                    <p class="text-xs text-blue-400 font-mono">Box F-12</p>
+                                </div>
+                            </div>
+                            <div class="col-span-3 text-center">
+                                <p class="text-xl font-black text-white font-mono tracking-tighter">05:24 h</p>
+                            </div>
+                            <div class="col-span-2 flex justify-center">
+                                <span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Focus</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-[#1a233a] transition group cursor-default">
+                            <div class="col-span-2 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(148,163,184,0.3)]">🥈</div>
+                            </div>
+                            <div class="col-span-5 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">HN</div>
+                                <div>
+                                    <p class="font-bold text-white text-base">Hustle_My</p>
+                                    <p class="text-xs text-blue-400 font-mono">Box F-05</p>
+                                </div>
+                            </div>
+                            <div class="col-span-3 text-center">
+                                <p class="text-xl font-black text-white font-mono tracking-tighter">04:15 h</p>
+                            </div>
+                            <div class="col-span-2 flex justify-center">
+                                <span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Focus</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-[#1a233a] transition group cursor-default">
+                            <div class="col-span-2 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(217,119,6,0.3)]">🥉</div>
+                            </div>
+                            <div class="col-span-5 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm">MC</div>
+                                <div>
+                                    <p class="font-bold text-white text-base">Mai_Chạy_Deadline</p>
+                                    <p class="text-xs text-emerald-400 font-mono">Box R-02</p>
+                                </div>
+                            </div>
+                            <div class="col-span-3 text-center">
+                                <p class="text-xl font-black text-white font-mono tracking-tighter">03:50 h</p>
+                            </div>
+                            <div class="col-span-2 flex justify-center">
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Relax</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-4 px-6 py-5 items-center bg-blue-900/20 border-l-4 border-blue-500 cursor-default">
+                            <div class="col-span-2 flex justify-center">
+                                <span class="font-bold text-slate-400 text-lg">4</span>
+                            </div>
+                            <div class="col-span-5 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white border-2 border-white/20">Bạn</div>
+                                <div>
+                                    <p class="font-bold text-blue-400 text-base">Tôi</p>
+                                    <p class="text-xs text-blue-400 font-mono">Box F-01</p>
+                                </div>
+                            </div>
+                            <div class="col-span-3 text-center">
+                                <p class="text-xl font-black text-blue-400 font-mono tracking-tighter">02:10 h</p>
+                            </div>
+                            <div class="col-span-2 flex justify-center">
+                                <span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Focus</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button class="bg-transparent border border-slate-600 text-slate-300 font-bold px-8 py-3 rounded-full hover:bg-slate-800 transition">
+                        Xem toàn bộ bảng xếp hạng ↓
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="careers" class="py-20 px-4 bg-[#0a0a0a] text-white font-sans border-t border-gray-900">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-3 tracking-tight">Vị trí đang tuyển</h2>
+                    <p class="text-gray-400">Gia nhập đội ngũ The Fore Station - Tìm kiếm cơ hội phù hợp với bạn</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="bg-[#141414] p-6 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-4 leading-snug">[Hồ Tùng Mậu] Quản lý Vận hành (Full-time)</h3>
+                            <div class="space-y-2 mb-4 text-sm text-gray-400">
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> Hồ Tùng Mậu</p>
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 10.000.000 VNĐ / tháng</p>
+                            </div>
+                            <p class="text-sm text-gray-400 line-clamp-4 mb-6 leading-relaxed">
+                                Bạn sẽ làm... Quản lý và điều phối toàn bộ hoạt động vận hành của không gian. Sắp xếp ca làm việc cho nhân sự, kiểm soát chất lượng dịch vụ chuẩn Pomodoro, giải quyết các sự cố phát sinh tại điểm, tối ưu doanh thu ca.
+                            </p>
+                        </div>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-300 group-hover:text-white transition" onclick="alert('Mở form ứng tuyển Quản lý!')">
+                            Xem chi tiết & Ứng tuyển
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition">→</div>
+                        </a>
+                    </div>
+
+                    <div class="bg-[#141414] p-6 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-4 leading-snug">[Hồ Tùng Mậu] Lễ tân / Cashier (Full-time)</h3>
+                            <div class="space-y-2 mb-4 text-sm text-gray-400">
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Hồ Tùng Mậu</p>
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Lương thỏa thuận + Thưởng KPI</p>
+                            </div>
+                            <p class="text-sm text-gray-400 line-clamp-4 mb-6 leading-relaxed">
+                                Bạn sẽ làm... Check-in/out cho khách, tư vấn bán chéo (up-sale) các gói Combo Pomodoro (Deep Sprint, Half-Day). Tiếp nhận thông tin, quản lý hóa đơn trên hệ thống POS và hướng dẫn sử dụng mã QR cửa từ.
+                            </p>
+                        </div>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-300 group-hover:text-white transition">
+                            Xem chi tiết & Ứng tuyển
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition">→</div>
+                        </a>
+                    </div>
+
+                    <div class="bg-[#141414] p-6 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-4 leading-snug">[Hồ Tùng Mậu] Service / Runner (Part-time)</h3>
+                            <div class="space-y-2 mb-4 text-sm text-gray-400">
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Hồ Tùng Mậu (Số lượng: 03)</p>
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 22.000 VNĐ / giờ</p>
+                            </div>
+                            <p class="text-sm text-gray-400 line-clamp-4 mb-6 leading-relaxed">
+                                Bạn sẽ làm... Hỗ trợ dẫn khách vào vị trí Box Focus, bưng đồ uống lên tận nơi. Set up và hướng dẫn khách sử dụng ghế Zero Gravity ở Tầng Relax. Đảm bảo khu vực không gian mở luôn gọn gàng, sẵn sàng đón khách mới.
+                            </p>
+                        </div>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-300 group-hover:text-white transition">
+                            Xem chi tiết & Ứng tuyển
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition">→</div>
+                        </a>
+                    </div>
+
+                    <div class="bg-[#141414] p-6 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-4 leading-snug">[Hồ Tùng Mậu] Barista / Pha chế (Part-time)</h3>
+                            <div class="space-y-2 mb-4 text-sm text-gray-400">
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Hồ Tùng Mậu (Số lượng: 02)</p>
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 25.000 VNĐ / giờ</p>
+                            </div>
+                            <p class="text-sm text-gray-400 line-clamp-4 mb-6 leading-relaxed">
+                                Bạn sẽ làm... Phụ trách quầy Bar tại Tầng 1. Pha chế các loại đồ uống theo công thức chuẩn (Trà, Cafe máy). Kiểm kê nguyên vật liệu, đảm bảo vệ sinh an toàn thực phẩm khu vực quầy pha chế.
+                            </p>
+                        </div>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-300 group-hover:text-white transition">
+                            Xem chi tiết & Ứng tuyển
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition">→</div>
+                        </a>
+                    </div>
+
+                    <div class="bg-[#141414] p-6 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-100 mb-4 leading-snug">[Hồ Tùng Mậu] Kỹ thuật viên (Part-time)</h3>
+                            <div class="space-y-2 mb-4 text-sm text-gray-400">
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Hỗ trợ linh hoạt</p>
+                                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 3.000.000 VNĐ / tháng</p>
+                            </div>
+                            <p class="text-sm text-gray-400 line-clamp-4 mb-6 leading-relaxed">
+                                Bạn sẽ làm... Bảo trì định kỳ hệ thống Wifi Mesh, camera an ninh, cửa từ (Access Control). Khắc phục nhanh các sự cố về điện, nước, máy điều hòa và hỗ trợ hệ thống phần mềm POS khi cần thiết. (Phù hợp sinh viên IT/Điện tử).
+                            </p>
+                        </div>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-300 group-hover:text-white transition">
+                            Xem chi tiết & Ứng tuyển
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition">→</div>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-rows-2 gap-6">
+                        <div class="bg-[#141414] p-5 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                            <div>
+                                <h3 class="text-base font-bold text-gray-100 mb-2 leading-snug">Tạp vụ / Cleaner (Full-time)</h3>
+                                <p class="text-sm text-gray-400 mb-3 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Lương thỏa thuận</p>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-3">
+                                    Đảm bảo vệ sinh Box cá nhân, khu Relax. Vệ sinh thảm, kính và thay vỏ gối định kỳ để giữ không gian thơm tho.
+                                </p>
+                            </div>
+                            <a href="#" class="flex justify-between items-center text-xs font-semibold text-gray-300 group-hover:text-white transition">Ứng tuyển ngay <span class="text-lg">→</span></a>
+                        </div>
+                        
+                        <div class="bg-[#141414] p-5 rounded-2xl border border-gray-800 hover:border-gray-600 transition flex flex-col justify-between group">
+                            <div>
+                                <h3 class="text-base font-bold text-gray-100 mb-2 leading-snug">Bảo vệ Không gian (Full-time)</h3>
+                                <p class="text-sm text-gray-400 mb-3 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Lương thỏa thuận</p>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-3">
+                                    Trông giữ xe, đảm bảo an ninh trật tự mặt tiền. Hỗ trợ dắt xe cho khách hàng và sinh viên vào các giờ cao điểm.
+                                </p>
+                            </div>
+                            <a href="#" class="flex justify-between items-center text-xs font-semibold text-gray-300 group-hover:text-white transition">Ứng tuyển ngay <span class="text-lg">→</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+            <p>© 2026 The Fore Station. Thiết kế dành riêng cho hiệu suất.</p>
+        </footer>
+    </div>
+
+    <div id="checkoutModal" class="fixed inset-0 modal-overlay hidden z-[60] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="bg-slate-900 p-6 text-center text-white relative">
+                <button onclick="closeModals()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">✕</button>
+                <h3 class="text-xl font-bold">Cổng Thanh Toán VNPay</h3>
+            </div>
+            <div class="p-8 text-center">
+                <p class="mb-4 text-gray-600">Quét mã QR bên dưới để thanh toán <strong class="text-blue-600">89.000đ</strong></p>
+                <div class="w-40 h-40 mx-auto bg-gray-50 border-2 border-slate-800 p-2 mb-6 flex flex-wrap gap-1 items-center justify-center relative">
+                    <div class="absolute inset-0 flex items-center justify-center"><div class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">VNPay</div></div>
+                    <div class="w-6 h-6 bg-slate-800 rounded-sm"></div><div class="w-6 h-6 bg-slate-800 rounded-sm"></div><div class="w-6 h-6 bg-slate-800 rounded-sm"></div><div class="w-6 h-6 bg-slate-800 rounded-sm"></div>
+                    <div class="w-6 h-6 bg-slate-800 rounded-sm"></div><div class="w-6 h-6 bg-slate-300 rounded-sm"></div><div class="w-6 h-6 bg-slate-800 rounded-sm"></div><div class="w-6 h-6 bg-slate-300 rounded-sm"></div>
+                </div>
+                <button onclick="processPayment()" class="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl hover:bg-emerald-600 transition shadow-md">
+                    Giả lập: Đã quét mã thành công
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 modal-overlay hidden z-[70] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl text-center relative">
+            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-xl">✕</button>
+            <div class="p-8">
+                <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Đã nhận chỗ thành công!</h2>
+                <p class="text-gray-500 text-sm mb-6">Lịch trình & Mã QR Cửa (TFS-8921) đã được đồng bộ vào App.</p>
+                
+                <div class="flex justify-center gap-6 mb-6 pb-6 border-b border-gray-100">
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Ghế Focus</p>
+                        <p class="text-lg font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg" id="final-focus-seat">F-01</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Ghế Relax</p>
+                        <p class="text-lg font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg" id="final-relax-seat">R-08</p>
+                    </div>
+                </div>
+
+                <button onclick="startPhoneSimulation()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-blue-600 transition shadow-lg text-lg flex items-center justify-center gap-2 animate-pulse">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    <span>Mở App Điệm Thoại (Bắt đầu)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="fixed inset-0 modal-overlay hidden z-[80] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="bg-slate-900 p-6 text-white relative flex justify-between items-center">
+                <h3 class="text-xl font-bold flex items-center gap-2">🛒 Giỏ hàng của bạn</h3>
+                <button onclick="closeCartModal()" class="text-slate-400 hover:text-white text-xl">✕</button>
+            </div>
+            <div class="p-6">
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 mb-6 flex justify-between items-center">
+                    <div>
+                        <p class="text-xs text-blue-600 font-bold uppercase tracking-wide">Vị trí giao hàng hiện tại</p>
+                        <p class="text-sm font-bold text-slate-800" id="order-delivery-seat">Box F-01 (Tầng 2)</p>
+                    </div>
+                    <span class="text-2xl">📍</span>
+                </div>
+
+                <ul id="cartItemsList" class="space-y-3 mb-6 max-h-40 overflow-y-auto border-b border-gray-100 pb-4">
+                    </ul>
+
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-600 font-medium">Tổng thanh toán:</span>
+                    <span id="cartTotalDisplay" class="font-bold text-blue-600 text-2xl">0đ</span>
+                </div>
+
+                <button onclick="processOrderPayment()" class="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl hover:bg-emerald-600 transition shadow-md">
+                    Thanh toán VNPay (Quét mã)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="orderSuccessModal" class="fixed inset-0 modal-overlay hidden z-[90] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl text-center relative">
+            <div class="p-8">
+                <div class="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 relative">
+                    <span class="text-4xl absolute animate-bounce">🏃</span>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Đơn hàng đang tới!</h2>
+                <p class="text-gray-500 text-sm mb-6">Thanh toán thành công. Nhân viên Runner của chúng tôi sẽ mang đồ đến vị trí <strong class="text-blue-600" id="success-delivery-seat">F-01</strong> cho bạn trong vòng <strong class="text-red-500">5 phút</strong> nữa.</p>
+                
+                <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 border border-gray-200 mb-6 text-left">
+                    <p class="font-bold mb-2 border-b pb-2">Ghi chú nhỏ:</p>
+                    <ul class="list-disc pl-4 space-y-1 text-xs">
+                        <li>Runner sẽ gõ cửa nhẹ nhàng để không làm bạn giật mình.</li>
+                        <li>Phụ kiện thuê vui lòng để lại bàn khi ra về.</li>
+                    </ul>
+                </div>
+
+                <button onclick="closeOrderSuccessModal()" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition shadow-md">
+                    Tiếp tục làm việc
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="phoneSimulatorArea" class="fixed inset-0 bg-gray-900 z-[100] hidden flex flex-col items-center justify-center">
+        <div class="text-white text-center mb-6">
+            <h2 class="text-2xl font-bold">Trải Nghiệm Khách Hàng Tại Điểm</h2>
+            <p class="text-gray-400">Ứng dụng tự động chuyển đổi trạng thái theo lịch trình</p>
+        </div>
+
+        <div id="phoneBody" class="phone-mockup bg-state-focus flex flex-col text-white">
+            <div class="h-6 w-full flex justify-between px-6 pt-2 text-[10px] font-bold opacity-80">
+                <span id="phoneTime">09:41</span>
+                <div class="w-32 h-6 bg-black rounded-b-2xl absolute top-0 left-1/2 -translate-x-1/2"></div>
+                <span>100% 🔋</span>
+            </div>
+
+            <div id="iosNotification" class="ios-notification flex gap-3 items-center text-slate-800">
+                <div id="notifIcon" class="w-10 h-10 rounded-lg flex items-center justify-center text-2xl bg-emerald-100">🌿</div>
+                <div>
+                    <p class="text-xs font-bold text-slate-500 uppercase">TFS Companion</p>
+                    <p id="notifTitle" class="font-bold text-sm leading-tight">Đến giờ Relax rồi!</p>
+                    <p id="notifDesc" class="text-xs mt-1 text-slate-600">Ghế đã sẵn sàng.</p>
+                </div>
+            </div>
+
+            <div class="px-6 pt-8 pb-4 text-center">
+                <p class="text-xs tracking-widest uppercase opacity-70 mb-1" id="currentBlockLabel">Khung giờ: 08:00 - 08:30</p>
+                <h1 class="text-2xl font-bold" id="appStateTitle">Tập Trung Sâu</h1>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center items-center">
+                <div class="timer-circle">
+                    <span id="timerDisplay" class="text-5xl font-black tracking-tighter">30:00</span>
+                    <span class="text-sm opacity-80 mt-2">Phút còn lại</span>
+                </div>
+            </div>
+
+            <div class="px-6 pb-6">
+                <div class="bg-black/20 rounded-2xl p-4 backdrop-blur-sm">
+                    <p class="text-xs font-bold mb-3 uppercase tracking-wider opacity-80">Lịch trình của bạn</p>
+                    <div id="miniTimeline" class="flex gap-1"></div>
+                </div>
+            </div>
+
+            <div class="pb-8 px-6 flex gap-3">
+                <button onclick="skipTimer()" class="flex-1 bg-white text-slate-900 font-bold py-4 rounded-2xl hover:bg-gray-200 transition active:scale-95 flex justify-center items-center gap-2">
+                    ⏩ Tua nhanh (Demo)
+                </button>
+                <button onclick="exitPhoneSimulation()" title="Đóng App" class="w-14 bg-red-500/20 text-red-400 rounded-2xl flex items-center justify-center font-bold text-xl hover:bg-red-500/40 transition">
+                    ✕
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet"> <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .font-handwriting { font-family: 'Caveat', cursive; font-size: 1.25rem; leading: 1.2; }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .focus-bg { background-color: #0f172a; color: white; }
+        
+        /* Hiệu ứng kéo thả */
+        .slot-item { cursor: grab; transition: all 0.2s ease; }
+        .slot-item:active { cursor: grabbing; transform: scale(0.95); }
+        .slot-focus { background-color: #1e293b; color: #94a3b8; border: 2px dashed #334155; }
+        .slot-relax { background-color: #10b981; color: white; border: 2px solid #059669; font-weight: bold; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+        .drag-over { border-color: #3b82f6 !important; background-color: #1e3a8a !important; }
+        
+        /* Ghế Ngồi (Seat Map) */
+        .seat-btn { transition: all 0.2s; font-size: 0.75rem; font-weight: 700; border-radius: 0.5rem; padding: 0.6rem 0; border: 1px solid #cbd5e1; background: white; cursor: pointer; color: #475569;}
+        .seat-btn:hover:not(.occupied) { border-color: #64748b; transform: translateY(-2px); }
+        .seat-btn.occupied { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; border-color: #f1f5f9; text-decoration: line-through;}
+        .seat-btn.focus-active { background: #2563eb; color: white; border-color: #2563eb; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transform: translateY(-2px); }
+        .seat-btn.relax-active { background: #059669; color: white; border-color: #059669; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3); transform: translateY(-2px); }
+
+        /* Modal & Phone Simulator */
+        .modal-overlay { background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); }
+        
+        .phone-mockup {
+            width: 340px; height: 680px;
+            border-radius: 45px; border: 12px solid #0f172a;
+            background-color: #1e293b; overflow: hidden; position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.8s ease;
+        }
+        .bg-state-focus { background-color: #0f172a; } 
+        .bg-state-relax { background-color: #059669; } 
+        
+        /* Push Notification (Giống iOS) */
+        .ios-notification {
+            position: absolute; top: -100px; left: 16px; right: 16px;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            border-radius: 20px; padding: 16px; z-index: 100;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .ios-notification.show { top: 16px; }
+
+        .timer-circle {
+            width: 220px; height: 220px;
+            border-radius: 50%; border: 8px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; margin: 0 auto; position: relative;
+        }
+        .timer-circle::before {
+            content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px;
+            border-radius: 50%; border: 8px solid white; border-color: white transparent transparent transparent;
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        /* Box Notes Effect */
+        .sticky-note { transition: transform 0.3s; }
+        .sticky-note:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <div id="main-landing">
+        <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <div class="flex-shrink-0 font-bold text-2xl tracking-tighter">
+                        THE <span class="text-blue-600">FORE</span> STATION
+                    </div>
+                    <div class="hidden lg:flex space-x-5 font-semibold text-sm items-center">
+                        <a href="#about" class="hover:text-blue-600 transition">Về chúng tôi</a>
+                        <a href="#pricing" class="hover:text-blue-600 transition">Bảng Giá</a>
+                        <a href="#booking-demo" class="hover:text-blue-600 transition">Đặt Chỗ</a>
+                        <a href="#in-seat-order" class="hover:text-blue-600 transition">Order</a>
+                        <a href="#tfs-insights" class="hover:text-emerald-600 transition">Insights</a>
+                        <a href="#tfs-leaderboard" class="hover:text-amber-500 transition">Đua Top</a>
+                        <a href="#box-notes" class="hover:text-pink-500 transition font-bold">Ký Sự</a>
+                        
+                        <div class="ml-4 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-full flex items-center gap-1 cursor-help group relative">
+                            <span class="text-amber-500 text-lg">🪙</span>
+                            <span class="font-bold text-amber-700" id="nav-coin-balance">450</span>
+                            <div class="absolute top-10 right-0 w-48 bg-slate-900 text-white text-xs p-2 rounded-lg opacity-0 group-hover:opacity-100 transition pointer-events-none z-50 text-center">
+                                Tích lũy Pomo-Coin để đổi đồ uống và phụ kiện!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section id="in-seat-order" class="py-20 px-4 bg-gray-50 border-t border-gray-200 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">In-Seat Service</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Tiếp Tế Năng Lượng</h2>
+                    <p class="text-gray-500">Dùng VNĐ hoặc <strong class="text-amber-500">Pomo-Coins</strong> bạn cày được để mua đồ ăn/thức uống tại ghế.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">☕ Đồ uống (Signatures)</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Cà phê Muối Focus</h4>
+                                    <p class="text-blue-600 font-bold text-sm mt-1">45.000đ <span class="text-gray-400 font-normal text-xs ml-1">hoặc 450 🪙</span></p>
+                                </div>
+                                <button onclick="addToCart('Cà phê Muối Focus', 45000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Trà Đào Cam Sả Relax</h4>
+                                    <p class="text-blue-600 font-bold text-sm mt-1">50.000đ <span class="text-gray-400 font-normal text-xs ml-1">hoặc 500 🪙</span></p>
+                                </div>
+                                <button onclick="addToCart('Trà Đào Cam Sả', 50000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">🎧 Phụ Kiện Hỗ Trợ</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Tai nghe Chống ồn Sony</h4>
+                                    <p class="text-emerald-600 font-bold text-sm mt-1">20.000đ <span class="text-gray-400 font-normal text-xs ml-1">hoặc 200 🪙</span></p>
+                                </div>
+                                <button onclick="addToCart('Thuê Tai nghe Sony', 20000)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
+                                <div>
+                                    <h4 class="font-bold text-slate-700">Giá để chân (Footrest)</h4>
+                                    <p class="text-emerald-600 font-bold text-sm mt-1">Miễn phí</p>
+                                </div>
+                                <button onclick="addToCart('Mượn Giá để chân', 0)" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white font-bold flex items-center justify-center transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="floatingCartBtn" onclick="openCartModal()" class="hidden fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-2xl z-40 flex items-center gap-3 hover:scale-105 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <span id="cartCount" class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full absolute -top-2 -right-2">0</span>
+            </button>
+        </section>
+
+        <section id="tfs-insights" class="py-20 px-4 bg-white border-t border-gray-200">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">TFS Insights</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Báo Cáo Hiệu Suất & Pomo-Coin</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 text-9xl opacity-5">🪙</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-6 border-b pb-3">Thống kê Tuần này</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Ví Pomo-Coin hiện tại</p>
+                                <p class="text-4xl font-black text-amber-500 flex items-center gap-2" id="walletBalance">450 <span class="text-xl">🪙</span></p>
+                                <p class="text-xs text-gray-400 mt-1">(Tương đương ~45.000 VNĐ quy đổi đồ uống)</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Tổng giờ Deep Focus</p>
+                                <p class="text-2xl font-bold text-blue-600">24h 30m</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:col-span-2">
+                        <div class="flex justify-between items-center mb-8">
+                            <h3 class="text-lg font-bold text-slate-800">Bộ sưu tập Huy hiệu (Badges)</h3>
+                        </div>
+                        <div class="flex gap-6 flex-wrap">
+                            <div class="flex flex-col items-center gap-2 cursor-pointer group">
+                                <div class="w-20 h-20 rounded-full bg-amber-100 border-4 border-amber-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(251,191,36,0.6)] group-hover:scale-110 transition">🏆</div>
+                                <span class="text-xs font-bold text-slate-700 uppercase mt-2">Chiến Thần</span>
+                                <span class="text-[10px] text-gray-500">Focus > 20h/tuần</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 cursor-pointer group">
+                                <div class="w-20 h-20 rounded-full bg-emerald-100 border-4 border-emerald-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(52,211,153,0.6)] group-hover:scale-110 transition">🧘</div>
+                                <span class="text-xs font-bold text-slate-700 uppercase mt-2">Master Relax</span>
+                                <span class="text-[10px] text-gray-500">Ngủ 5 giấc/tuần</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 cursor-pointer opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition">
+                                <div class="w-20 h-20 rounded-full bg-gray-100 border-4 border-gray-300 flex items-center justify-center text-3xl">🦉</div>
+                                <span class="text-xs font-bold text-slate-500 uppercase mt-2">Cú Đêm (Khóa)</span>
+                                <span class="text-[10px] text-gray-400">Chưa đạt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="box-notes" class="py-20 px-4 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+            
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="text-center mb-16">
+                    <span class="bg-pink-500/20 text-pink-400 border border-pink-500/50 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(236,72,153,0.5)]">Viên Nang Thời Gian</span>
+                    <h2 class="text-3xl md:text-5xl font-black mt-6 mb-3 text-white tracking-tight">TFS <span class="text-pink-400">Box Notes</span></h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto">Khi rời đi, hãy để lại một lời nhắn ẩn danh cho người ngồi chiếc ghế này tiếp theo nhé! Một lời động viên nhỏ có thể cứu rỗi một ngày chạy deadline mệt mỏi của ai đó.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="sticky-notes-grid">
+                    <div class="sticky-note bg-yellow-200 p-6 rounded-sm shadow-lg transform -rotate-3 hover:rotate-0 flex flex-col justify-between min-h-[200px] border-t-8 border-yellow-300">
+                        <p class="font-handwriting text-slate-800 text-xl leading-relaxed">"Vừa cày xong đồ án tốt nghiệp lúc 3h sáng tại chính cái Box này. Khóc xíu nhưng qua rồi. Chúc bạn ngồi sau may mắn nhé!"</p>
+                        <p class="text-xs text-yellow-800 font-sans font-bold mt-4 uppercase tracking-widest text-right">- Box F-12, hqua</p>
+                    </div>
+                    <div class="sticky-note bg-blue-200 p-6 rounded-sm shadow-lg transform rotate-2 hover:rotate-0 flex flex-col justify-between min-h-[200px] border-t-8 border-blue-300">
+                        <p class="font-handwriting text-slate-800 text-xl leading-relaxed">"Hôm nay thất tình nhưng sếp bắt chạy KPI gấp. Vừa gõ code vừa khóc rớt nước mắt. Ghế này hơi xu xíu nha sry T_T"</p>
+                        <p class="text-xs text-blue-800 font-sans font-bold mt-4 uppercase tracking-widest text-right">- Box F-05, sáng nay</p>
+                    </div>
+                    <div class="sticky-note bg-pink-200 p-6 rounded-sm shadow-lg transform -rotate-1 hover:rotate-0 flex flex-col justify-between min-h-[200px] border-t-8 border-pink-300">
+                        <p class="font-handwriting text-slate-800 text-xl leading-relaxed">"Lần đầu tiên ngủ trên ghế Zero Gravity mà đánh giấc sâu dã man. Cảm giác reset lại cả cuộc đời. Highly recommend!"</p>
+                        <p class="text-xs text-pink-800 font-sans font-bold mt-4 uppercase tracking-widest text-right">- Ghế R-02, 2h trước</p>
+                    </div>
+                    <div class="sticky-note bg-emerald-200 p-6 rounded-sm shadow-lg transform rotate-3 hover:rotate-0 flex flex-col justify-between min-h-[200px] border-t-8 border-emerald-300">
+                        <p class="font-handwriting text-slate-800 text-xl leading-relaxed">"Chỉ muốn nói là Cafe Muối ở đây đỉnh vãi... Uống xong code không có bug luôn ảo thật sự."</p>
+                        <p class="text-xs text-emerald-800 font-sans font-bold mt-4 uppercase tracking-widest text-right">- Box F-21, 5p trước</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 max-w-2xl mx-auto bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20">
+                    <p class="text-white font-bold mb-3 flex items-center gap-2">✍️ Để lại lời nhắn của bạn</p>
+                    <textarea id="newNoteContent" class="w-full bg-white/90 rounded-xl p-4 font-handwriting text-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-pink-400" rows="3" placeholder="Kể cho người ngồi sau nghe bạn đã chạy deadline vất vả thế nào..."></textarea>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-slate-400 text-sm">Gắn thẻ ẩn danh: <span id="currentNoteSeat" class="font-bold text-white bg-slate-800 px-2 py-1 rounded">Box F-01</span></span>
+                        <button onclick="addStickyNote()" class="bg-pink-500 text-white font-bold px-6 py-2 rounded-lg hover:bg-pink-600 transition shadow-lg">Dán Ghi chú</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-[#050505] text-slate-400 py-8 text-center text-sm border-t border-slate-900">
+            <p>© 2026 The Fore Station. Cộng đồng nerdie chiến thắng bản thân hahahahaha</p>
+        </footer>
+    </div>
+
+    <div id="cartModal" class="fixed inset-0 modal-overlay hidden z-[80] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="bg-slate-900 p-6 text-white flex justify-between items-center">
+                <h3 class="text-xl font-bold">🛒 Giỏ hàng In-Seat</h3>
+                <button onclick="closeCartModal()" class="text-slate-400 hover:text-white text-xl">✕</button>
+            </div>
+            <div class="p-6">
+                <p class="text-xs font-bold text-slate-500 uppercase mb-2">Giao đến: <span class="text-blue-600 text-lg" id="order-delivery-seat">Box F-01</span></p>
+                <ul id="cartItemsList" class="space-y-3 mb-6 max-h-40 overflow-y-auto border-y border-gray-100 py-4"></ul>
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-600 font-medium">Tổng VNĐ: <br><span class="text-xs text-amber-500">Hoặc thanh toán bằng Coin</span></span>
+                    <div class="text-right">
+                        <span id="cartTotalDisplay" class="font-bold text-blue-600 text-xl block">0đ</span>
+                        <span id="cartTotalCoinDisplay" class="font-bold text-amber-500 text-sm block">0 🪙</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="processOrderPayment()" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition shadow-md">Thanh toán VNPay</button>
+                    <button onclick="payWithCoins()" class="w-full bg-amber-500 text-white font-bold py-3 rounded-xl hover:bg-amber-600 transition shadow-md flex justify-center items-center gap-1">Dùng Pomo-Coin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="fixed inset-0 modal-overlay hidden z-[60] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="p-8 text-center">
+                <h3 class="text-xl font-bold mb-4">Quét QR VNPay</h3>
+                <div class="w-40 h-40 mx-auto bg-gray-100 border-2 border-slate-800 p-2 mb-6">QR CODE</div>
+                <button onclick="processPayment()" class="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl hover:bg-emerald-600 transition shadow-md">Giả lập: Quét thành công</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 modal-overlay hidden z-[70] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl text-center">
+            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400">✕</button>
+            <div class="p-8">
+                <div class="text-5xl mb-4">✅</div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Đã nhận chỗ!</h2>
+                <p class="text-gray-500 text-sm mb-6">Ghế Focus: <strong id="final-focus-seat" class="text-blue-600">F-01</strong> | Ghế Relax: <strong id="final-relax-seat" class="text-emerald-600">R-08</strong></p>
+                <button onclick="startPhoneSimulation()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-blue-600 transition animate-pulse">Mở App Điện Thoại (Bắt đầu)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="phoneSimulatorArea" class="fixed inset-0 bg-gray-900 z-[100] hidden flex flex-col items-center justify-center">
+        <div class="text-white text-center mb-6">
+            <h2 class="text-2xl font-bold">App TFS Companion</h2>
+            <p class="text-gray-400 text-sm">Giao diện điều khiển tại bàn</p>
+        </div>
+
+        <div id="phoneBody" class="phone-mockup bg-state-focus flex flex-col text-white">
+            <div class="h-6 w-full flex justify-between px-6 pt-2 text-[10px] font-bold opacity-80">
+                <span id="phoneTime">09:41</span><div class="w-32 h-6 bg-black rounded-b-2xl absolute top-0 left-1/2 -translate-x-1/2"></div><span>100% 🔋</span>
+            </div>
+
+            <div id="iosNotification" class="ios-notification flex gap-3 items-center text-slate-800">
+                <div id="notifIcon" class="w-10 h-10 rounded-lg flex items-center justify-center text-2xl bg-amber-100">🪙</div>
+                <div>
+                    <p class="text-xs font-bold text-slate-500 uppercase">TFS Hệ Thống</p>
+                    <p id="notifTitle" class="font-bold text-sm leading-tight">+10 Pomo-Coins!</p>
+                    <p id="notifDesc" class="text-xs mt-1 text-slate-600">Đã cộng vào ví vì hoàn thành Focus.</p>
+                </div>
+            </div>
+
+            <div class="px-6 pt-8 pb-4 text-center">
+                <p class="text-xs tracking-widest uppercase opacity-70 mb-1" id="currentBlockLabel">Khung giờ: 08:00 - 08:30</p>
+                <h1 class="text-2xl font-bold" id="appStateTitle">Tập Trung Sâu</h1>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-center items-center">
+                <div class="timer-circle">
+                    <span id="timerDisplay" class="text-5xl font-black tracking-tighter">30:00</span>
+                </div>
+            </div>
+
+            <div class="px-6 pb-6">
+                <div class="bg-black/20 rounded-2xl p-4 backdrop-blur-sm">
+                    <div id="miniTimeline" class="flex gap-1"></div>
+                </div>
+            </div>
+
+            <div class="pb-8 px-6 flex gap-3">
+                <button onclick="skipTimer()" class="flex-1 bg-white text-slate-900 font-bold py-4 rounded-2xl hover:bg-gray-200 transition active:scale-95 flex justify-center items-center gap-2">⏩ Tua nhanh (Demo)</button>
+                <button onclick="exitPhoneSimulation()" class="w-14 bg-red-500/20 text-red-400 rounded-2xl flex items-center justify-center font-bold text-xl hover:bg-red-500/40">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. CHỌN GHẾ NGỒI ---
+        let currentFocusSeat = 'F-01'; let currentRelaxSeat = 'R-08';
+        function renderSeats() {
+            const focusGrid = document.getElementById('grid-focus'); const relaxGrid = document.getElementById('grid-relax');
+            focusGrid.innerHTML = ''; relaxGrid.innerHTML = '';
+            for(let i=1; i<=15; i++) {
+                let seatId = 'F-' + i.toString().padStart(2, '0'); let isOccupied = [3, 7, 12].includes(i); 
+                let btn = document.createElement('button');
+                btn.className = `seat-btn ${isOccupied ? 'occupied' : ''} ${seatId === currentFocusSeat ? 'focus-active' : ''}`; btn.innerText = seatId;
+                if(!isOccupied) btn.onclick = () => { currentFocusSeat = seatId; renderSeats(); updateSeatLabels(); }; focusGrid.appendChild(btn);
+            }
+            for(let i=1; i<=8; i++) {
+                let seatId = 'R-' + i.toString().padStart(2, '0'); let isOccupied = [2, 5].includes(i); 
+                let btn = document.createElement('button');
+                btn.className = `seat-btn ${isOccupied ? 'occupied' : ''} ${seatId === currentRelaxSeat ? 'relax-active' : ''}`; btn.innerText = seatId;
+                if(!isOccupied) btn.onclick = () => { currentRelaxSeat = seatId; renderSeats(); updateSeatLabels(); }; relaxGrid.appendChild(btn);
+            }
+        }
+        function updateSeatLabels() {
+            document.getElementById('lbl-focus').innerText = currentFocusSeat; document.getElementById('lbl-relax').innerText = currentRelaxSeat;
+            document.getElementById('final-focus-seat').innerText = currentFocusSeat; document.getElementById('final-relax-seat').innerText = currentRelaxSeat;
+            document.getElementById('currentNoteSeat').innerText = `Box ${currentFocusSeat}`;
+        }
+
+        // --- 2. KÉO THẢ LỊCH TRÌNH ---
+        let scheduleData = [ {type:'focus',label:'Focus'},{type:'focus',label:'Focus'},{type:'relax',label:'Relax'},{type:'focus',label:'Focus'},{type:'focus',label:'Focus'} ];
+        let draggedIndex = null; let blockTimes = []; 
+        function generateTimeline() {
+            const container = document.getElementById('timeline-container'); const startTimeInput = document.getElementById('startTime').value;
+            container.innerHTML = ''; blockTimes = [];
+            let [hours, minutes] = startTimeInput.split(':').map(Number); let ct = new Date(); ct.setHours(hours, minutes, 0, 0);
+            scheduleData.forEach((block, index) => {
+                let s = ct.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'}); ct.setMinutes(ct.getMinutes() + 30); let e = ct.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
+                blockTimes.push(`${s} - ${e}`);
+                const div = document.createElement('div');
+                div.className = `slot-item rounded-xl p-3 text-center flex flex-col justify-center min-h-[100px] ${block.type === 'relax' ? 'slot-relax' : 'slot-focus'}`;
+                div.draggable = true; div.dataset.index = index; div.innerHTML = `<span class="text-xs opacity-80 mb-1">${s}</span><span class="font-semibold text-sm leading-tight">${block.label}</span>`;
+                div.ondragstart = function(e){ draggedIndex = parseInt(this.dataset.index); this.style.opacity = '0.4'; };
+                div.ondragover = function(e){ e.preventDefault(); this.classList.add('drag-over'); return false; };
+                div.ondragleave = function(e){ this.classList.remove('drag-over'); };
+                div.ondrop = function(e){ e.stopPropagation(); this.classList.remove('drag-over'); let dIdx = parseInt(this.dataset.index);
+                    if(draggedIndex !== dIdx){ let tmp = scheduleData[draggedIndex]; scheduleData[draggedIndex] = scheduleData[dIdx]; scheduleData[dIdx] = tmp; generateTimeline(); } return false; };
+                div.ondragend = function(e){ this.style.opacity = '1'; document.querySelectorAll('.slot-item').forEach(i => i.classList.remove('drag-over')); };
+                container.appendChild(div);
+            });
+        }
+
+        // --- 3. MODAL & ORDER ---
+        let cart = []; let cartTotalAmount = 0; let pomoCoins = 450;
+        function addToCart(name, price) {
+            cart.push({ name: name, price: price }); cartTotalAmount += price;
+            document.getElementById('cartCount').innerText = cart.length; document.getElementById('floatingCartBtn').classList.remove('hidden');
+        }
+        function openCartModal() {
+            document.getElementById('order-delivery-seat').innerText = `Box ${currentFocusSeat} (Tầng 2)`;
+            const list = document.getElementById('cartItemsList'); list.innerHTML = '';
+            cart.forEach(i => { list.innerHTML += `<li class="flex justify-between items-center text-sm"><span class="font-medium text-slate-700">${i.name}</span><span class="text-gray-500">${i.price===0?'Miễn phí':i.price.toLocaleString('vi-VN')+'đ'}</span></li>`; });
+            document.getElementById('cartTotalDisplay').innerText = cartTotalAmount.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('cartTotalCoinDisplay').innerText = (cartTotalAmount / 100).toLocaleString('vi-VN') + ' 🪙';
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+        function closeCartModal() { document.getElementById('cartModal').classList.add('hidden'); }
+        function processOrderPayment() { cart = []; cartTotalAmount = 0; document.getElementById('cartCount').innerText = '0'; document.getElementById('floatingCartBtn').classList.add('hidden'); document.getElementById('cartModal').classList.add('hidden'); alert('🎉 Runner đang mang đồ tới!'); }
+        function payWithCoins() {
+            let costCoins = cartTotalAmount / 100;
+            if(pomoCoins >= costCoins) { pomoCoins -= costCoins; updateCoinDisplay(); processOrderPayment(); alert('Đã thanh toán bằng Pomo-Coin thành công!'); }
+            else { alert('Opps! Bạn không đủ Coin. Hãy cày thêm Focus nhé!'); }
+        }
+        function updateCoinDisplay() {
+            document.getElementById('nav-coin-balance').innerText = pomoCoins; document.getElementById('walletBalance').innerHTML = `${pomoCoins} <span class="text-xl">🪙</span>`;
+        }
+
+        function openCheckoutModal() { document.getElementById('checkoutModal').classList.remove('hidden'); }
+        function processPayment() { document.getElementById('checkoutModal').classList.add('hidden'); document.getElementById('successModal').classList.remove('hidden'); }
+        function closeModals() { document.getElementById('checkoutModal').classList.add('hidden'); document.getElementById('successModal').classList.add('hidden'); }
+
+        // --- 4. APP ĐIỆN THOẠI & EARN TO SIT ---
+        let currentBlockIndex = 0; let timerInterval; let timeLeftInSeconds = 30 * 60;
+        setInterval(()=>{ document.getElementById('phoneTime').innerText = new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'}); }, 60000);
+
+        function startPhoneSimulation() {
+            document.getElementById('successModal').classList.add('hidden'); document.getElementById('main-landing').classList.add('hidden');
+            document.getElementById('phoneSimulatorArea').classList.remove('hidden'); document.getElementById('phoneSimulatorArea').classList.add('flex');
+            currentBlockIndex = 0; loadBlock(currentBlockIndex);
+        }
+        function exitPhoneSimulation() { document.getElementById('phoneSimulatorArea').classList.add('hidden'); document.getElementById('phoneSimulatorArea').classList.remove('flex'); document.getElementById('main-landing').classList.remove('hidden'); clearInterval(timerInterval); }
+        
+        function loadBlock(index) {
+            if (index >= scheduleData.length) { document.getElementById('appStateTitle').innerText = "Hoàn Thành"; document.getElementById('timerDisplay').innerText = "00:00"; clearInterval(timerInterval); return; }
+            const block = scheduleData[index]; const pb = document.getElementById('phoneBody');
+            document.getElementById('currentBlockLabel').innerText = `Khung giờ: ${blockTimes[index]}`; pb.classList.remove('bg-state-focus', 'bg-state-relax');
+            
+            if (block.type === 'focus') {
+                pb.classList.add('bg-state-focus'); document.getElementById('appStateTitle').innerText = "Trạng thái: Deep Focus";
+                if(index > 0) showNotification("💻", "Vào việc thôi!", `Quay lại Box ${currentFocusSeat} nào.`);
+            } else {
+                pb.classList.add('bg-state-relax'); document.getElementById('appStateTitle').innerText = "Trạng thái: Nghỉ Ngơi";
+                showNotification("🌿", "Đến giờ Relax rồi!", `Ghế ${currentRelaxSeat} tại Tầng 3 đã sẵn sàng.`);
+            }
+
+            const mt = document.getElementById('miniTimeline'); mt.innerHTML = '';
+            scheduleData.forEach((b, i) => { mt.innerHTML += `<div class="h-2 flex-1 rounded-full transition-all ${b.type==='relax'?'bg-emerald-400':'bg-blue-400'} ${i===index?'opacity-100 scale-125':(i<index?'opacity-30':'opacity-60')}"></div>`; });
+
+            timeLeftInSeconds = 30 * 60; updateTimerDisplay(); clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeftInSeconds--; updateTimerDisplay();
+                if (timeLeftInSeconds <= 0) {
+                    // Earn To Sit Logic
+                    if(block.type === 'focus') { pomoCoins += 10; updateCoinDisplay(); showNotification("🪙", "+10 Pomo-Coins!", "Thưởng cho sự tập trung xuất sắc."); setTimeout(() => { currentBlockIndex++; loadBlock(currentBlockIndex); }, 4000); }
+                    else { currentBlockIndex++; loadBlock(currentBlockIndex); }
+                }
+            }, 1000);
+        }
+        function updateTimerDisplay() { let m = Math.floor(timeLeftInSeconds/60); let s = timeLeftInSeconds%60; document.getElementById('timerDisplay').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`; }
+        function skipTimer() { if (timeLeftInSeconds > 3) timeLeftInSeconds = 3; }
+        function showNotification(icon, title, desc) {
+            const notif = document.getElementById('iosNotification'); document.getElementById('notifIcon').innerText = icon; document.getElementById('notifTitle').innerText = title; document.getElementById('notifDesc').innerText = desc;
+            document.getElementById('notifIcon').className = `w-10 h-10 rounded-lg flex items-center justify-center text-2xl ${icon==='🪙'?'bg-amber-100 text-amber-600':(icon==='🌿'?'bg-emerald-100':'bg-blue-100')}`;
+            notif.classList.add('show'); setTimeout(() => { notif.classList.remove('show'); }, 3500);
+        }
+
+        // --- 5. BOX NOTES LOGIC ---
+        function addStickyNote() {
+            const content = document.getElementById('newNoteContent').value;
+            if(!content) return alert('Hãy viết gì đó trước khi dán nhé!');
+            
+            const colors = ['bg-yellow-200 border-yellow-300 text-yellow-800', 'bg-blue-200 border-blue-300 text-blue-800', 'bg-pink-200 border-pink-300 text-pink-800'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const rotate = Math.random() > 0.5 ? 'rotate-2' : '-rotate-2';
+            
+            const newNote = document.createElement('div');
+            newNote.className = `sticky-note ${randomColor.split(' ')[0]} p-6 rounded-sm shadow-lg transform ${rotate} hover:rotate-0 flex flex-col justify-between min-h-[200px] border-t-8 ${randomColor.split(' ')[1]}`;
+            newNote.innerHTML = `
+                <p class="font-handwriting text-slate-800 text-xl leading-relaxed">"${content}"</p>
+                <p class="text-xs ${randomColor.split(' ')[2]} font-sans font-bold mt-4 uppercase tracking-widest text-right">- Box ${currentFocusSeat}, vừa xong</p>
+            `;
+            
+            const grid = document.getElementById('sticky-notes-grid');
+            grid.insertBefore(newNote, grid.firstChild); // Thêm lên đầu
+            document.getElementById('newNoteContent').value = ''; // Reset ô nhập
+        }
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', () => { renderSeats(); generateTimeline(); updateSeatLabels(); updateCoinDisplay(); });
+    </script>
+</body>
+</html>
