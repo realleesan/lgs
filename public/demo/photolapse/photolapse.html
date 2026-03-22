@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhotoLapse - Capture More In Less Time</title>
+    <title>FotoLapse - Capture More In Less Time</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -148,7 +148,9 @@
             background: rgba(255, 246, 240, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(232, 174, 183, 0.3);
-            padding: var(--spacing-sm) 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
             transition: var(--transition);
         }
 
@@ -160,9 +162,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 var(--spacing-lg);
         }
 
         .logo {
@@ -170,6 +173,13 @@
             font-size: 32px;
             color: var(--color-text);
             letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
         }
 
         .logo span { color: var(--color-secondary); }
@@ -1076,6 +1086,11 @@
             margin-bottom: var(--spacing-sm);
         }
 
+        .footer-brand .logo img {
+            width: 120px;
+            height: auto;
+        }
+
         .footer-brand p {
             font-size: 14px;
             color: var(--color-text-light);
@@ -1420,7 +1435,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Photo<span>Lapse</span></a>
+            <a href="#" class="logo"><img src="logo-Photoroom-cropped.svg" alt="FotoLapse"></a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#story">Câu chuyện</a></li>
                 <li><a href="#experience">Không gian</a></li>
@@ -1442,14 +1457,14 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Capture <span class="text-accent">More</span> In Less Time</h1>
-                <p>Trải nghiệm photobooth tối ưu thời gian và không gian. Chỉ 10 phút/lượt - Di chuyển nhanh - Không chờ đợi</p>
+                <p>Trải nghiệm FotoLapse tối ưu thời gian và không gian. Chỉ 10 phút/lượt - Di chuyển nhanh - Không chờ đợi</p>
                 <div class="hero-cta">
                     <a href="#pricing" class="btn btn-primary">Trải nghiệm ngay</a>
                     <a href="#contact" class="btn btn-secondary">Liên hệ</a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80" alt="PhotoLapse Photobooth">
+                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80" alt="FotoLapse Studio">
                 <div class="hero-badge">
                     <div class="hero-badge-icon">
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -1469,12 +1484,12 @@
             <div class="story-grid">
                 <div class="story-content">
                     <span class="section-label">Câu chuyện</span>
-                    <h2>Tại sao ra đời <span class="text-accent">PhotoLapse</span>?</h2>
-                    <p><strong>PhotoLapse</strong> được cấu thành từ "Photo" (lĩnh vực chụp ảnh) và "Lapse" (từ time-lapse - kỹ thuật ghi lại khoảnh khắc trong thời gian ngắn). Chúng tôi mang ý nghĩa: <em>Lưu giữ trọn vẹn khoảnh khắc trong khoảng thời gian ngắn</em>.</p>
-                    <p>Trong bối cảnh các cửa hàng photobooth ngày càng phổ biến, khách hàng thường gặp vấn đề: phải chờ đợi lâu, không gian đông đúc, trải nghiệm bị gián đoạn. PhotoLapse được xây dựng để giải quyết những vấn đề đó.</p>
+                    <h2>Tại sao ra đời <span class="text-accent">FotoLapse</span>?</h2>
+                    <p><strong>FotoLapse</strong> được cấu thành từ "Photo" (lĩnh vực chụp ảnh) và "Lapse" (từ time-lapse - kỹ thuật ghi lại khoảnh khắc trong thời gian ngắn). Chúng tôi mang ý nghĩa: <em>Lưu giữ trọn vẹn khoảnh khắc trong khoảng thời gian ngắn</em>.</p>
+                    <p>Trong bối cảnh các cửa hàng FotoLapse ngày càng phổ biến, khách hàng thường gặp vấn đề: phải chờ đợi lâu, không gian đông đúc, trải nghiệm bị gián đoạn. FotoLapse được xây dựng để giải quyết những vấn đề đó.</p>
                 </div>
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="PhotoLapse Studio">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="FotoLapse Studio">
                 </div>
             </div>
         </div>
@@ -1557,7 +1572,7 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Gói Cơ bản</h3>
-                    <div class="price">80.000<span>VNĐ</span></div>
+                    <div class="price">70.000<span>VNĐ</span></div>
                     <p class="price-desc">10 phút • 2-4 người/lượt</p>
                     <ul class="pricing-features">
                         <li>Chụp không giới hạn số ảnh</li>
@@ -1615,18 +1630,18 @@
         <div class="container">
             <div class="recruitment-content">
                 <span class="section-label">Tuyển dụng</span>
-                <h2>Gia nhập <span class="text-accent">PhotoLapse</span></h2>
+                <h2>Gia nhập <span class="text-accent">FotoLapse</span></h2>
                 <p>Tìm kiếm những bạn trẻ năng động, đam mê nhiếp ảnh và muốn gia nhập môi trường làm việc hiện đại.</p>
                 <div class="recruitment-grid">
                     <div class="recruitment-card">
-                        <h4>Nhân viên Part-time</h4>
-                        <p>Hướng dẫn khách sử dụng máy, hỗ trợ xử lý tình huống, giữ gìn vệ sinh. Yêu cầu giao tiếp tốt, thân thiện. Ưu tiên sinh viên.</p>
-                        <p class="salary">20.000 - 30.000 VNĐ/giờ</p>
+                        <h4>Nhân viên vận hành FotoLapse (04 người)</h4>
+                        <p>Hướng dẫn khách sử dụng máy, hỗ trợ xử lý tình huống, giữ gìn vệ sinh, quản lý lượt chụp. Yêu cầu giao tiếp tốt, thân thiện. Ưu tiên sinh viên năm 2-4.</p>
+                        <p class="salary">28.000 - 35.000 VNĐ/giờ</p>
                     </div>
                     <div class="recruitment-card">
-                        <h4>Quản lý cửa hàng</h4>
-                        <p>Quản lý hoạt động vận hành hàng ngày, sắp xếp ca làm, xử lý vấn đề phát sinh. Yêu cầu kinh nghiệm quản lý.</p>
-                        <p class="salary">8 - 12 triệu VNĐ/tháng</p>
+                        <h4>Cộng tác viên Content & Design (01 người)</h4>
+                        <p>Quảng bá hình ảnh trên mạng xã hội, thiết kế frame theo mùa, chụp ảnh/clip khách check-in. Yêu cầu sáng tạo, biết sử dụng Canva/CapCut/Photoshop.</p>
+                        <p class="salary">Theo sản phẩm (50k - 500k/post/video)</p>
                     </div>
                 </div>
                 <a href="#contact" class="btn btn-primary">Ứng tuyển ngay</a>
@@ -1647,7 +1662,7 @@
                             <div class="contact-item-icon">
                                 <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                             </div>
-                            <span>36 Đường Dương Khuê, Hà Nội</span>
+                            <span>Khu phố Dương Khuê, Hà Nội</span>
                         </div>
                         <div class="contact-item">
                             <div class="contact-item-icon">
@@ -1659,24 +1674,24 @@
                             <div class="contact-item-icon">
                                 <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                             </div>
-                            <span>hello@photolapse.vn</span>
+                            <span>fotolapse.dev@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>9:00 - 22:00</span>
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="TikTok">
-                            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        <a href="https://www.facebook.com/profile.php?id=61579454224284&locale=vi_VN" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                         </a>
                     </div>
                 </div>
                 <div class="contact-form-wrapper">
                     <h3>Gửi tin nhắn cho chúng tôi</h3>
-                    <form class="contact-form">
+                    <form class="contact-form" id="contactForm">
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Họ và tên" required>
                         </div>
@@ -1687,13 +1702,54 @@
                             <input type="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <select name="subject" required>
+                            <select name="subject" id="subjectSelect" required>
                                 <option value="">Chọn chủ đề</option>
                                 <option value="booking">Đặt chỗ</option>
                                 <option value="recruitment">Tuyển dụng</option>
                                 <option value="suggestion">Đề xuất</option>
                                 <option value="complaint">Khiếu nại</option>
                             </select>
+                        </div>
+                        <div class="form-group booking-fields" id="bookingFields" style="display: none;">
+                            <select name="booking_date" id="bookingDate">
+                                <option value="">Chọn ngày</option>
+                            </select>
+                        </div>
+                        <div class="form-group booking-fields" id="bookingTimeWrapper" style="display: none;">
+                            <select name="booking_time" id="bookingTime">
+                                <option value="">Chọn giờ</option>
+                            </select>
+                        </div>
+                        <div class="form-group booking-fields" id="bookingRoomWrapper" style="display: none;">
+                            <select name="booking_room" id="bookingRoom">
+                                <option value="">Chọn phòng</option>
+                                <option value="phong1">Phòng 1</option>
+                                <option value="phong2">Phòng 2</option>
+                                <option value="phong3">Phòng 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group booking-fields" id="bookingPeopleWrapper" style="display: none;">
+                            <select name="booking_people" id="bookingPeople">
+                                <option value="">Số người</option>
+                                <option value="1">1 người</option>
+                                <option value="2">2 người</option>
+                                <option value="3">3 người</option>
+                                <option value="4">4 người</option>
+                                <option value="5">5 người</option>
+                                <option value="6">6 người</option>
+                                <option value="7">7 người</option>
+                                <option value="8">8 người</option>
+                            </select>
+                        </div>
+                        <div class="form-group recruitment-fields" id="recruitmentFields" style="display: none;">
+                            <select name="recruitment_position" id="recruitmentPosition">
+                                <option value="">Chọn vị trí</option>
+                                <option value="nhanvien_vanhanh">Nhân viên vận hành</option>
+                                <option value="ctv_content_design">CTV Content & Design</option>
+                            </select>
+                        </div>
+                        <div class="form-group recruitment-fields" id="recruitmentCVWrapper" style="display: none;">
+                            <input type="url" name="cv_url" id="cvUrl" placeholder="Link CV Google Drive">
                         </div>
                         <div class="form-group">
                             <textarea name="message" placeholder="Nội dung tin nhắn..." rows="4" required></textarea>
@@ -1710,8 +1766,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">Photo<span>Lapse</span></a>
-                    <p>PhotoLapse – Capture more in less time</p>
+                    <a href="#" class="logo"><img src="logo-Photoroom-cropped.svg" alt="FotoLapse"></a>
+                    <p>FotoLapse – Capture more in less time</p>
                     <p class="footer-tagline">Lưu giữ nhiều khoảnh khắc hơn trong thời gian ngắn hơn</p>
                 </div>
                 <div class="footer-contact">
@@ -1719,7 +1775,7 @@
                     <ul>
                         <li>
                             <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
-                            <span>36 Đường Dương Khuê, Hà Nội</span>
+                            <span>Khu phố Dương Khuê, Hà Nội</span>
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" width="16" height="16"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/></svg>
@@ -1727,7 +1783,11 @@
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
-                            <span>hello@photolapse.vn</span>
+                            <span>fotolapse.dev@gmail.com</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/></svg>
+                            <span>9:00 - 22:00</span>
                         </li>
                     </ul>
                 </div>
@@ -1743,7 +1803,7 @@
                 </div>
                 <div class="footer-newsletter">
                     <h4>Đăng ký nhận tin</h4>
-                    <p>Nhận thông tin khuyến mãi và cập nhật mới nhất từ PhotoLapse</p>
+                    <p>Nhận thông tin khuyến mãi và cập nhật mới nhất từ FotoLapse</p>
                     <form class="newsletter-form" onsubmit="return false;">
                         <input type="email" placeholder="Nhập email của bạn">
                         <button type="submit" class="btn btn-primary">Đăng ký</button>
@@ -1751,12 +1811,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="footer-social">
-                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg></a>
-                    <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" fill="currentColor"/></svg></a>
-                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"/></svg></a>
-                </div>
-                <p>&copy; 2024 PhotoLapse. All rights reserved.</p>
+                <p>&copy; 2026 FotoLapse. All rights reserved. Powered by <a href = "https://www.mistydev.id.vn/">MISTY LGS</a></p>
             </div>
         </div>
     </footer>
@@ -1770,6 +1825,139 @@
     </div>
 
     <script>
+        // Booking form - show date/time/room/people fields when "Đặt chỗ" is selected
+        // Recruitment form - show position and CV URL when "Tuyển dụng" is selected
+        const subjectSelect = document.getElementById('subjectSelect');
+        const bookingFields = document.querySelectorAll('.booking-fields');
+        const recruitmentFields = document.querySelectorAll('.recruitment-fields');
+        const bookingDate = document.getElementById('bookingDate');
+        const bookingTime = document.getElementById('bookingTime');
+        const bookingRoom = document.getElementById('bookingRoom');
+        const bookingPeople = document.getElementById('bookingPeople');
+        const recruitmentPosition = document.getElementById('recruitmentPosition');
+        const cvUrl = document.getElementById('cvUrl');
+        
+        // Populate date options: today, tomorrow, day after tomorrow
+        function populateDates() {
+            const today = new Date();
+            const options = [
+                { value: 'today', label: 'Hôm nay' },
+                { value: 'tomorrow', label: 'Ngày mai' },
+                { value: 'day_after', label: 'Ngày kia' }
+            ];
+            
+            // Clear existing options except the first one
+            while (bookingDate.options.length > 1) {
+                bookingDate.remove(bookingDate.options.length - 1);
+            }
+            
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.label;
+                bookingDate.appendChild(option);
+            });
+        }
+        
+        // Populate time options: 10:00 to 20:00
+        function populateTimes() {
+            while (bookingTime.options.length > 1) {
+                bookingTime.remove(bookingTime.options.length - 1);
+            }
+            
+            for (let hour = 10; hour <= 20; hour++) {
+                const option = document.createElement('option');
+                option.value = `${hour.toString().padStart(2, '0')}:00`;
+                option.textContent = `${hour.toString().padStart(2, '0')}:00`;
+                bookingTime.appendChild(option);
+            }
+        }
+        
+        // Initialize date and time options
+        populateDates();
+        populateTimes();
+        
+        // Show/hide booking and recruitment fields based on subject selection
+        subjectSelect.addEventListener('change', function() {
+            // Hide all conditional fields first
+            bookingFields.forEach(field => field.style.display = 'none');
+            recruitmentFields.forEach(field => field.style.display = 'none');
+            
+            // Reset all values
+            bookingDate.value = '';
+            bookingTime.value = '';
+            bookingRoom.value = '';
+            bookingPeople.value = '';
+            recruitmentPosition.value = '';
+            cvUrl.value = '';
+            
+            // Show appropriate fields based on selection
+            if (this.value === 'booking') {
+                bookingFields.forEach(field => field.style.display = 'block');
+            } else if (this.value === 'recruitment') {
+                recruitmentFields.forEach(field => field.style.display = 'block');
+            }
+        });
+
+        // Google Apps Script URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzeUNFdyV_fohp3Ocucptq22dRqB2WCMbGfm96Ns96iUWcOYXiF6cKQYAXOF7htE6oF/exec';
+        
+        // Form submission handler - Gửi dữ liệu lên Google Sheets (không chuyển trang)
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Đang gửi...';
+            submitBtn.disabled = true;
+            
+            // Tạo iframe ẩn để gửi request (tránh chuyển trang)
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.name = 'hiddenIframe';
+            document.body.appendChild(iframe);
+            
+            // Tạo form ẩn để submit trong iframe
+            const hiddenForm = document.createElement('form');
+            hiddenForm.method = 'POST';
+            hiddenForm.action = SCRIPT_URL;
+            hiddenForm.target = 'hiddenIframe';
+            
+            // Thu thập dữ liệu từ form
+            const formData = new FormData(contactForm);
+            
+            for (let [key, value] of formData.entries()) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                hiddenForm.appendChild(input);
+            }
+            
+            document.body.appendChild(hiddenForm);
+            
+            // Submit form trong iframe
+            hiddenForm.submit();
+            
+            // Hiển thị thông báo sau 2 giây (đợi request hoàn thành)
+            setTimeout(() => {
+                alert('Gửi thành công! Chúng tôi sẽ phản hồi với bạn sớm nhất.');
+                
+                // Reset form
+                contactForm.reset();
+                bookingFields.forEach(field => field.style.display = 'none');
+                recruitmentFields.forEach(field => field.style.display = 'none');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Xóa iframe và form ẩn
+                document.body.removeChild(hiddenForm);
+                document.body.removeChild(iframe);
+            }, 2000);
+        });
+
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
